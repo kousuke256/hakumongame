@@ -5,19 +5,19 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 4f;
-    public float airMoveSpeed = 3f;
+    public float moveSpeed = 4f; //地上での移動速度
+    public float airMoveSpeed = 3f; //空中での移動速度
     public float jumpPower = 8f;
-    public float jumpCutMultiplier = 0.4f;
+    public float jumpCutMultiplier = 0.4f; //小ジャンプになるときの挙動の感じを決める変数
     private bool jumpPressed;
-    private bool jumpCut;
+    private bool canCutJump;
     private bool isGrounded;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
     private Rigidbody2D playerRb;
     private float move;
-    private float jumpBufferTime = 0.1f;
+    private float jumpBufferTime = 0.1f; //space入力の持続時間
     private float jumpBufferCounter;
    
     void Start()
@@ -27,25 +27,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {   
-        //横移動
+        //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
         if (Keyboard.current.dKey.isPressed)
         move = 1;
         if (Keyboard.current.aKey.isPressed)
         move = -1;
 
-        //接地判定
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
+
+        //接地判定, 下の1行はPlayerの子オブジェクトのGroundCheckの中心から半径0.2以内に、LayerがGroundのオブジェクトがあればisGroundがtrueになるというコード
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);//これは
+
 
         //ジャンプ判定を記憶
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            jumpBufferCounter = jumpBufferTime;
+            jumpBufferCounter = jumpBufferTime; //Spaceが押されてからしばらくの間Spaceが押された判定が続くことによってジャンプしやすくしてる
         }
         else
         {
             jumpBufferCounter -= Time.deltaTime;
         }
+
 
         //spaceKeyを押しているかどうか
         if (Keyboard.current.spaceKey.isPressed)
@@ -63,19 +66,21 @@ public class Player : MonoBehaviour
         //横移動
         playerRb.linearVelocity = new Vector2(move * (isGrounded ? moveSpeed : airMoveSpeed), playerRb.linearVelocity.y);
 
+
         //ジャンプ
         if (jumpBufferCounter > 0 && isGrounded)
         {
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x,jumpPower);
             jumpBufferCounter = 0;
-            jumpCut = true;
+            canCutJump = true; //敵キャラを踏むときにも変数canCutJump=trueの文をいれる感じにしたい
         }
 
-        //小ジャンプにする
-        if (playerRb.linearVelocity.y > 0 && !jumpPressed && jumpCut)
+
+        //spaceをジャンプの上昇中に離すと小ジャンプにする
+        if (playerRb.linearVelocity.y > 0 && !jumpPressed && canCutJump)
         {
-            jumpCut = false;
-            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, playerRb.linearVelocity.y * jumpCutMultiplier);
+            canCutJump = false;
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, playerRb.linearVelocity.y * jumpCutMultiplier);//y軸方向の速さをjumpCutMultiplier倍している
         }
     }
     /*private void OnDrawGizmosSelected()
