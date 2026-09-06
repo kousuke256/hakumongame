@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
     }
 
@@ -36,6 +36,6 @@ public class Enemy : MonoBehaviour
         {
             direction = -1;
         }
-        rb.linearVelocity = new Vector2(-direction*moveSpeed,rb.linearVelocity.y);
+        rb.velocity = new Vector2(-direction*moveSpeed,rb.velocity.y);
     }
 }
