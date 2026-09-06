@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        rigid.linearVelocity = new Vector2(Vector2.left.x*moveSpeed,rigid.linearVelocity.y);
+        //rigid.velocity = new Vector2(-moveSpeed,rigid.velocity.y);
+        rigid.linearVelocity = new Vector2(-moveSpeed, rigid.linearVelocity.y);
     }
 }
