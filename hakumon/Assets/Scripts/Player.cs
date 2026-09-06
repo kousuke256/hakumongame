@@ -83,6 +83,27 @@ public class Player : MonoBehaviour
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, playerRb.linearVelocity.y * jumpCutMultiplier);//y軸方向の速さをjumpCutMultiplier倍している
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Enemyタグにぶつかったとき
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // 接触面の向き
+            ContactPoint2D contact = collision.GetContact(0);
+            // 敵の上から踏んだ場合
+            if (contact.normal.y > 0.5f)
+            {
+                // 敵を倒す
+                Destroy(collision.gameObject);
+                // 踏みの反動
+                playerRb.linearVelocity =
+                    new Vector2(playerRb.linearVelocity.x, jumpPower);
+                // Spaceを離したとき小ジャンプ
+                canCutJump = true;
+            }
+        }
+    }
     /*private void OnDrawGizmosSelected()
     {
         if (groundCheck == null)
