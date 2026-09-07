@@ -181,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 116459015}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.79, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1523,6 +1523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 4
   airMoveSpeed: 3
+  groundAcceleration: 15
+  airAcceleration: 20
   jumpPower: 9
   jumpCutMultiplier: 0.4
   groundCheck: {fileID: 808598686}
@@ -1671,7 +1673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223886068}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8, y: -2, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2823,7 +2825,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 223886073}
-  - {fileID: 972885965}
   - {fileID: 1599050928}
   - {fileID: 1086250466}
+  - {fileID: 223886073}
+  - {fileID: 972885965}

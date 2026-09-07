@@ -339,6 +339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 4
   airMoveSpeed: 3
+  groundAcceleration: 15
+  airAcceleration: 20
   jumpPower: 9
   jumpCutMultiplier: 0.4
   groundCheck: {fileID: 692227152}
@@ -1132,7 +1134,6 @@ GameObject:
   - component: {fileID: 1172772461}
   - component: {fileID: 1172772460}
   - component: {fileID: 1172772459}
-  - component: {fileID: 1172772458}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1140,19 +1141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1172772458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172772457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c8d073f193065e4c873accfb638aefa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveSpeed: 2
 --- !u!61 &1172772459
 BoxCollider2D:
   m_ObjectHideFlags: 0
