@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed = 4f; //地上での移動速度
     public float airMoveSpeed = 3f; //空中での移動速度
+    public float groundAcceleration = 15f;
+    public float airAcceleration = 20f;
     public float jumpPower = 8f;
     public float jumpCutMultiplier = 0.4f; //小ジャンプになるときの挙動の感じを決める変数
     private bool jumpPressed;
@@ -63,8 +65,29 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        float targetSpeed;
+        float acceleration;
+        
+        if (isGrounded)
+        {
+            targetSpeed = move * moveSpeed;
+            acceleration = groundAcceleration;
+        }
+        else
+        {
+            targetSpeed = move * airMoveSpeed;
+            if(move == 0)
+            {
+                acceleration = 1f;
+            }
+            else
+            {
+                acceleration = airAcceleration;
+            }
+        }
         //横移動
-        playerRb.linearVelocity = new Vector2(move * (isGrounded ? moveSpeed : airMoveSpeed), playerRb.linearVelocity.y);
+        float newx = Mathf.MoveTowards(playerRb.linearVelocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
+        playerRb.linearVelocity = new Vector2(newx, playerRb.linearVelocity.y);
 
 
         //ジャンプ
