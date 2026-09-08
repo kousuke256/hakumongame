@@ -18,13 +18,18 @@ public class Player : MonoBehaviour
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
     private Rigidbody2D playerRb;
+    private SpriteRenderer sr;
     private float move;
     private float jumpBufferTime = 0.1f; //space入力の持続時間
     private float jumpBufferCounter;
+    private float gravitySign = 1f;
+    private Vector3 groundCheckOriginalPosition;
    
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        groundCheckOriginalPosition = groundCheck.localPosition;
     }
 
     void Update()
@@ -93,14 +98,14 @@ public class Player : MonoBehaviour
         //ジャンプ
         if (jumpBufferCounter > 0 && isGrounded)
         {
-            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x,jumpPower);
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x,jumpPower * gravitySign);
             jumpBufferCounter = 0;
             canCutJump = true; //敵キャラを踏むときにも変数canCutJump=trueの文をいれる感じにしたい
         }
 
 
         //spaceをジャンプの上昇中に離すと小ジャンプにする
-        if (playerRb.linearVelocity.y > 0 && !jumpPressed && canCutJump)
+        if (playerRb.linearVelocity.y * gravitySign > 0 && !jumpPressed && canCutJump)
         {
             canCutJump = false;
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, playerRb.linearVelocity.y * jumpCutMultiplier);//y軸方向の速さをjumpCutMultiplier倍している
@@ -126,7 +131,17 @@ public class Player : MonoBehaviour
                 canCutJump = true;
             }
         }
+
+        //重力反転ボタンを押したとき
+        if (collision.gameObject.CompareTag("gravityButtom"))
+        {
+            gravitySign *= -1;
+            playerRb.gravityScale *= -1;
+            sr.flipY = !sr.flipY;
+            groundCheck.localPosition = new Vector3(groundCheck.localPosition.x, -groundCheckOriginalPosition.y, groundCheck.localPosition.z);
+        }
     }
+
     /*private void OnDrawGizmosSelected()
     {
         if (groundCheck == null)
