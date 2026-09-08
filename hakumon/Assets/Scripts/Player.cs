@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField,Header("重力切り替えのクールタイム")]
-    private float gravityCoolTime = 1f;
+    /*[SerializeField,Header("重力切り替えのクールタイム")]
+    private float gravityCoolTime = 1f;*/
     public float moveSpeed = 4f; //地上での移動速度
     public float airMoveSpeed = 3f; //空中での移動速度
     public float groundAcceleration = 15f;
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private float jumpBufferCounter;
     private float gravitySign = 1f;
     private Vector3 groundCheckOriginalPosition;
-    float gravityCounter = 0f;
+    //float gravityCounter = 0f;
    
     void Start()
     {
@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {   
-        Debug.Log(gravityCounter);
         //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
         if (Keyboard.current.dKey.isPressed)
@@ -46,7 +45,7 @@ public class Player : MonoBehaviour
         move = -1;
 
         //重力操作
-        if(gravityCounter < 0)
+        /*if(gravityCounter < 0)
         {
             if (gravitySign > 0)
             {
@@ -66,6 +65,23 @@ public class Player : MonoBehaviour
         else
         {
             gravityCounter -= Time.deltaTime;
+        }*/
+        if(isGrounded)
+        {
+            if (gravitySign > 0)
+            {
+                if (Keyboard.current.wKey.wasPressedThisFrame)
+                {
+                    gravitychange();
+                }
+            }
+            else
+            {
+                if (Keyboard.current.sKey.wasPressedThisFrame)
+                {
+                    gravitychange();
+                }
+            }
         }
         
 
@@ -162,7 +178,7 @@ public class Player : MonoBehaviour
 
     private void gravitychange()
     {
-        gravityCounter = gravityCoolTime;
+        //gravityCounter = gravityCoolTime;
         gravitySign *= -1;
         playerRb.gravityScale *= -1;
         sr.flipY = !sr.flipY;
