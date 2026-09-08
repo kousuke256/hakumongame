@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
             gravitySign *= -1;
             playerRb.gravityScale *= -1;
             sr.flipY = !sr.flipY;
-            groundCheck.localPosition = new Vector3(groundCheck.localPosition.x, -groundCheckOriginalPosition.y, groundCheck.localPosition.z);
+            groundCheck.localPosition = new Vector3(groundCheck.localPosition.x, gravitySign * groundCheckOriginalPosition.y, groundCheck.localPosition.z);
         }
     }
 
