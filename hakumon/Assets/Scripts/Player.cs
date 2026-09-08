@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField,Header("重力切り替えのクールタイム")]
+    private float gravityCoolTime = 1f;
     public float moveSpeed = 4f; //地上での移動速度
     public float airMoveSpeed = 3f; //空中での移動速度
     public float groundAcceleration = 15f;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     private float jumpBufferCounter;
     private float gravitySign = 1f;
     private Vector3 groundCheckOriginalPosition;
+    float gravityCounter = 0f;
    
     void Start()
     {
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {   
+        Debug.Log(gravityCounter);
         //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
         if (Keyboard.current.dKey.isPressed)
@@ -41,6 +45,29 @@ public class Player : MonoBehaviour
         if (Keyboard.current.aKey.isPressed)
         move = -1;
 
+        //重力操作
+        if(gravityCounter < 0)
+        {
+            if (gravitySign > 0)
+            {
+                if (Keyboard.current.wKey.wasPressedThisFrame)
+                {
+                    gravitychange();
+                }
+            }
+            else
+            {
+                if (Keyboard.current.sKey.wasPressedThisFrame)
+                {
+                    gravitychange();
+                }
+            }
+        }
+        else
+        {
+            gravityCounter -= Time.deltaTime;
+        }
+        
 
         //接地判定, 下の1行はPlayerの子オブジェクトのGroundCheckの中心から半径0.2以内に、LayerがGroundのオブジェクトがあればisGroundがtrueになるというコード
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);//これは
@@ -131,15 +158,15 @@ public class Player : MonoBehaviour
                 canCutJump = true;
             }
         }
+    }
 
-        //重力反転ボタンを押したとき
-        if (collision.gameObject.CompareTag("gravityButtom"))
-        {
-            gravitySign *= -1;
-            playerRb.gravityScale *= -1;
-            sr.flipY = !sr.flipY;
-            groundCheck.localPosition = new Vector3(groundCheck.localPosition.x, gravitySign * groundCheckOriginalPosition.y, groundCheck.localPosition.z);
-        }
+    private void gravitychange()
+    {
+        gravityCounter = gravityCoolTime;
+        gravitySign *= -1;
+        playerRb.gravityScale *= -1;
+        sr.flipY = !sr.flipY;
+        groundCheck.localPosition = new Vector3(groundCheck.localPosition.x, gravitySign * groundCheckOriginalPosition.y, groundCheck.localPosition.z);
     }
 
     /*private void OnDrawGizmosSelected()
