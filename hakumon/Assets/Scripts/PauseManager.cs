@@ -6,9 +6,21 @@ public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu;
     private bool isPaused = false;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // 現在のシーンがTitleなら何もしない
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            return;
+        }
+
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             TogglePouse();
