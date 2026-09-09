@@ -6,9 +6,17 @@ public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu;
     private bool isPaused = false;
-
+    private static PauseManager instance;
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -16,7 +24,7 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         // 現在のシーンがTitleなら何もしない
-        if (SceneManager.GetActiveScene().name == "Title")
+        if (SceneManager.GetActiveScene().name == "Menu")
         {
             return;
         }
@@ -31,19 +39,14 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
-        if (isPaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+        Time.timeScale = isPaused ? 0f : 1f;
     }
 
     public void ReturnToTitle()
     {
         Time.timeScale = 1f;
+        isPaused = false;
+        pauseMenu.SetActive(false);
         SceneManager.LoadScene("Menu");
     }
 
