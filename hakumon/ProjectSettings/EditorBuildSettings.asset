@@ -17,5 +17,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Goal.unity
     guid: d2b80defa5bf70048b5f31b02f1d31f2
+  - enabled: 0
+    path: Assets/Scenes/takuto no si-nn.unity
+    guid: a7488fc15c6fd384e96340fe0e43d066
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 158840328d00e344bb8933e9f9ef4681
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
