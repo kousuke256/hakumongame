@@ -470,7 +470,6 @@ GameObject:
   - component: {fileID: 6779736882038134073}
   - component: {fileID: 8058009244581213332}
   - component: {fileID: 1287551851859678217}
-  - component: {fileID: 1637571098817028971}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -595,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8d073f193065e4c873accfb638aefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveSpeed: 4
+  moveSpeed: 3
 --- !u!61 &1287551851859678217
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -642,16 +641,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.97221154, y: 0.94442093}
   m_EdgeRadius: 0
---- !u!114 &1637571098817028971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6956274662941241399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c8d073f193065e4c873accfb638aefa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveSpeed: 1

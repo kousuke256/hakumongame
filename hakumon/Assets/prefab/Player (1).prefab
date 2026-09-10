@@ -216,10 +216,15 @@ MonoBehaviour:
   airMoveSpeed: 2
   groundAcceleration: 20
   airAcceleration: 10
-  jumpPower: 9
+  jumpPower: 9.3
   jumpCutMultiplier: 0.4
+  miriJumpTime: 0.14
+  smallJumpTime: 0.3
+  mediumJumpTime: 0.45
   groundCheck: {fileID: 4416539200891091974}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  groundCheckDistance: 0.45
+  gravityPower: 9.8
