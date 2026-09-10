@@ -5,14 +5,12 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    /*[SerializeField,Header("重力切り替えのクールタイム")]
-    private float gravityCoolTime = 1f;*/
     public float moveSpeed = 4f; //地上での移動速度
     public float airMoveSpeed = 3f; //空中での移動速度
-    public float groundAcceleration = 15f;
-    public float airAcceleration = 20f;
+    public float groundAcceleration = 20f;
+    public float airAcceleration = 10f;
     public float jumpPower = 8f;
-    public float jumpCutMultiplier = 0.4f; //小ジャンプになるときの挙動の感じを決める変数
+    public float jumpCutMultiplier = 0.5f; //小ジャンプになるときの挙動の感じを決める変数
     private bool jumpPressed;
     private bool canCutJump;
     private bool isGrounded;
@@ -26,7 +24,6 @@ public class Player : MonoBehaviour
     private float jumpBufferCounter;
     private float gravitySign = 1f;
     private Vector3 groundCheckOriginalPosition;
-    //float gravityCounter = 0f;
    
     void Start()
     {
@@ -45,27 +42,6 @@ public class Player : MonoBehaviour
         move = -1;
 
         //重力操作
-        /*if(gravityCounter < 0)
-        {
-            if (gravitySign > 0)
-            {
-                if (Keyboard.current.wKey.wasPressedThisFrame)
-                {
-                    gravitychange();
-                }
-            }
-            else
-            {
-                if (Keyboard.current.sKey.wasPressedThisFrame)
-                {
-                    gravitychange();
-                }
-            }
-        }
-        else
-        {
-            gravityCounter -= Time.deltaTime;
-        }*/
         if(isGrounded)
         {
             if (gravitySign > 0)
@@ -184,14 +160,4 @@ public class Player : MonoBehaviour
         sr.flipY = !sr.flipY;
         groundCheck.localPosition = new Vector3(groundCheck.localPosition.x, gravitySign * groundCheckOriginalPosition.y, groundCheck.localPosition.z);
     }
-
-    /*private void OnDrawGizmosSelected()
-    {
-        if (groundCheck == null)
-            return;
-    
-        Gizmos.color = Color.red;
-    
-        Gizmos.DrawWireSphere(groundCheck.position,groundCheckRadius);
-    }*/
 }
