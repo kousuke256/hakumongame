@@ -2290,7 +2290,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2342,6 +2343,14 @@ PrefabInstance:
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5188600653644662010, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: airMoveSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_Name

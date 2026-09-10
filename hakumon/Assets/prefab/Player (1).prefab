@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 4
-  airMoveSpeed: 3
-  groundAcceleration: 15
-  airAcceleration: 20
+  airMoveSpeed: 2
+  groundAcceleration: 20
+  airAcceleration: 10
   jumpPower: 9
   jumpCutMultiplier: 0.4
   groundCheck: {fileID: 4416539200891091974}
