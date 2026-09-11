@@ -233,5 +233,6 @@ public class Player : MonoBehaviour
     {
         sr.flipY = !sr.flipY;
         groundCheck.localPosition = gravityDirection * groundCheckDistance;
+        playerRb.AddForce(gravityDirection * 2f, ForceMode2D.Impulse);
     }
 }
