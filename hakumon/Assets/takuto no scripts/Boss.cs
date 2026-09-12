@@ -1,12 +1,16 @@
 using Unity.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
 
 public class Boss : MonoBehaviour
 {
+    public enemystate state;
     public Transform player;
-    public GameObject bulletPrefab;
+    public Player playerScript;
+    public GameObject bullet1Prefab;
+    public GameObject bullet2Prefab;
     public Transform firePoint;
     private float moveDirection;
     public float speed = 2.3f;
@@ -30,7 +34,8 @@ public class Boss : MonoBehaviour
     {
         walk,
         JumpAtack,
-        ShootAtack,
+        ShootAtack1,
+        ShootAtack2,
         GravityAtack,
         Freeze,
 
@@ -42,36 +47,15 @@ public class Boss : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         UpdateRotation();
-        moveDirection = directions[Random.Range(0, directions.Length)];
+        moveDirection = directions[UnityEngine.Random.Range(0, directions.Length)];
         Debug.Log(gravityDirection);
-        InvokeRepeating(nameof(Shoot), 1f, shootCoolTime);
+       // InvokeRepeating(nameof(ShootBullet1), 1f, shootCoolTime);
+        InvokeRepeating(nameof(ShootBullet2), 1.2f, shootCoolTime);
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*if (Keyboard.current.aKey.wasPressedThisFrame)
-        {
-            gravityDirection = Vector2.left;
-        }
-        if (Keyboard.current.dKey.wasPressedThisFrame)
-        {
-            gravityDirection = Vector2.right;
-        }
-        if (Keyboard.current.wKey.wasPressedThisFrame)
-        {
-            gravityDirection = Vector2.up;
-        }
-        if (Keyboard.current.sKey.wasPressedThisFrame)
-        {
-            gravityDirection = Vector2.down;
-        }*/
     }
 
     void FixedUpdate()
     {
-        //Debug.Log(moveDirection);
         rb.AddForce(gravityDirection * gravityPower);
         if (canWalk)
         {
@@ -81,20 +65,62 @@ public class Boss : MonoBehaviour
 
     void SetState()
     {
-        
+        if(state == enemystate.walk)
+        {
+            
+        }
     }
 
-    private void Shoot()
+    private void ShootBullet1()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
         Vector2 direction = player.position - firePoint.position;
-        bullet.GetComponent<Bullet>().ShootBullet(direction);
+        bullet.GetComponent<Bullet1>().ShootBullet(direction);
+    }
+
+    void ShootBullet2()
+    {
+        float maxBulletSpeed = 17f;
+        bool canNanameShoot = true;
+        float speed;
+        int bulletDirectionX = 1;
+        float playerGravityDirection = -playerScript.gravityDirection.y;
+        float differenceX = player.position.x - transform.position.x;
+        float differenceY = playerGravityDirection * (player.position.y - transform.position.y);
+        if(differenceX < 0)
+        {
+            differenceX *= -1f;
+            bulletDirectionX = -1;
+        }
+        if(differenceX < 8f)
+        {
+            maxBulletSpeed = 12f;
+        }
+        else if (differenceX < 12f)
+        {
+            maxBulletSpeed = 15f;
+        }
+        //めんどくさくて数字使っちゃったけど許して♡、要するに天井まで距離あったらっていうif文
+        if(playerGravityDirection * transform.position.y + 1.8f < 4.5f)
+        {
+            speed = differenceX * math.sqrt(10f /math.abs(differenceX - differenceY));
+        }
+        else
+        {
+            canNanameShoot = false;
+            speed = differenceX * math.sqrt(10f / math.abs(2f * differenceY) );
+        }
+        if(speed > maxBulletSpeed)
+        {
+        speed = maxBulletSpeed;
+        }
+        GameObject bullet = Instantiate(bullet2Prefab, transform.position, quaternion.identity);
+        bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, playerGravityDirection, speed, canNanameShoot);
     }
 
     void GravityChenge()
     {
         gravityDirection = new Vector2(-moveDirection * gravityDirection.y, moveDirection * gravityDirection.x);
-        Debug.Log(gravityDirection);
         UpdateRotation();
     }
      void UpdateRotation()
@@ -115,7 +141,7 @@ public class Boss : MonoBehaviour
 
     public void JumpOrTurn()
     {
-        if(Random.Range(0, 2) == 0 || turnCount == maxTrun)
+        if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTrun)
         {
             turnCount = 0;
             rb.linearVelocity = transform.up * jumpPower;

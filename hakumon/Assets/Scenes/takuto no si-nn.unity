@@ -580,8 +580,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 582708195}
-  - component: {fileID: 582708194}
   - component: {fileID: 582708193}
+  - component: {fileID: 582708194}
   - component: {fileID: 582708192}
   - component: {fileID: 582708191}
   m_Layer: 0
@@ -590,7 +590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &582708191
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -671,13 +671,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582708190}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6aaf759842da8f24aa753ee110d0002d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
+  state: 0
   player: {fileID: 865053519}
-  bulletPrefab: {fileID: 8465109816060701484, guid: 7f4683d36c59ff34fb351d9b1affae70, type: 3}
+  playerScript: {fileID: 865053520}
+  bullet1Prefab: {fileID: 8465109816060701484, guid: 7f4683d36c59ff34fb351d9b1affae70, type: 3}
+  bullet2Prefab: {fileID: 4379194192510411036, guid: b41d46a2ff65f6b43a890ddd12131b0b, type: 3}
   firePoint: {fileID: 1025578915}
   speed: 3
   jumpPower: 5.4
@@ -777,54 +780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c687daf80ba1cc34f94ed02649333479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
---- !u!1 &933330821
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 933330823}
-  - component: {fileID: 933330822}
-  m_Layer: 0
-  m_Name: BulletSponer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &933330822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933330821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 491bac1e1277a7e4086cf06f662c1af9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletSponer
-  playerScript: {fileID: 865053520}
-  player: {fileID: 865053519}
-  bulletExpPrefab: {fileID: 9074435935978647373, guid: 92a0c7cfac8a61f4eb1d9945065d5d1e, type: 3}
-  shootCoolTime: 1
---- !u!4 &933330823
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933330821}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: -4, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &943557314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2811,4 +2766,3 @@ SceneRoots:
   - {fileID: 1045134798}
   - {fileID: 7797922708932588562}
   - {fileID: 582708195}
-  - {fileID: 933330823}
