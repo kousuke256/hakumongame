@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     private float jumpBufferTime = 0.1f; //space入力の持続時間
     private float jumpBufferCounter;
     public float groundCheckDistance = 0.45f;
-    private Vector2 gravityDirection = Vector2.down;
+    public Vector2 gravityDirection = Vector2.down;
     [Header("重力")]
     public float gravityPower = 9.8f;
    
