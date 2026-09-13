@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour
     public GameObject bullet1Prefab;
     public GameObject bullet2Prefab;
     public Transform firePoint;
+    public float bulletMaxSpeed = 20f;
     private float moveDirection;
     public float speed = 2.3f;
     private bool canWalk = true;
@@ -77,11 +78,8 @@ public class Boss : MonoBehaviour
         Vector2 direction = player.position - firePoint.position;
         bullet.GetComponent<Bullet1>().ShootBullet(direction);
     }
-
     void ShootBullet2()
     {
-        float maxBulletSpeed = 17f;
-        bool canNanameShoot = true;
         float speed;
         int bulletDirectionX = 1;
         float playerGravityDirection = -playerScript.gravityDirection.y;
@@ -92,30 +90,29 @@ public class Boss : MonoBehaviour
             differenceX *= -1f;
             bulletDirectionX = -1;
         }
-        if(differenceX < 8f)
+        int i = 0;
+        float theta = Mathf.Atan((differenceY + Mathf.Sqrt(differenceX * differenceX + differenceY * differenceY)) / differenceX);
+        float tan = math.tan(theta);
+        float maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
+        while(transform.position.y * playerGravityDirection + maxHeight > 5f)
         {
-            maxBulletSpeed = 12f;
+            i++;
+            theta -= Mathf.Deg2Rad * 10f;
+            tan = math.tan(theta);
+            maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
         }
-        else if (differenceX < 12f)
+        if(i == 0)
         {
-            maxBulletSpeed = 15f;
-        }
-        //めんどくさくて数字使っちゃったけど許して♡、要するに天井まで距離あったらっていうif文
-        if(playerGravityDirection * transform.position.y + 1.8f < 4.5f)
-        {
-            speed = differenceX * math.sqrt(10f /math.abs(differenceX - differenceY));
+            speed = math.sqrt(10 * (differenceY + math.sqrt(differenceX * differenceX + differenceY * differenceY)));
         }
         else
         {
-            canNanameShoot = false;
-            speed = differenceX * math.sqrt(10f / math.abs(2f * differenceY) );
+            speed = (differenceX / math.cos(theta) * math.sqrt(5 / math.abs(differenceX * tan - differenceY)));
+            speed = bulletMaxSpeed < speed ? bulletMaxSpeed : speed;
         }
-        if(speed > maxBulletSpeed)
-        {
-        speed = maxBulletSpeed;
-        }
+
         GameObject bullet = Instantiate(bullet2Prefab, transform.position, quaternion.identity);
-        bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, playerGravityDirection, speed, canNanameShoot);
+        bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, playerGravityDirection, speed, theta);
     }
 
     void GravityChenge()

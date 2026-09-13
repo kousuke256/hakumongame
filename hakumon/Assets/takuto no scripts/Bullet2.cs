@@ -16,25 +16,21 @@ public class Bullet2 : MonoBehaviour
         rb.AddForce(Vector2.down * gravityPower * bulletDirecitonY);
     }
 
-    public void Shoot(int bulletDirecitonX, float playerGravityDirection, float speed, bool canNanameShoot)
+    public void Shoot(int bulletDirecitonX, float playerGravityDirection, float speed, float theta)
     {
-        Debug.Log(speed);
+        //Debug.Log(angle);
         bulletDirecitonY = playerGravityDirection;
-        if (canNanameShoot)
-        {
-            rb.linearVelocity = new Vector2(bulletDirecitonX * speed / 1.42f, bulletDirecitonY * speed / 1.42f);//1.42fはルート2の近似
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(bulletDirecitonX * speed , 0);
-        }
+        rb.linearVelocity = new Vector2(bulletDirecitonX * speed * math.cos(theta), bulletDirecitonY * speed * math.sin(theta));
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Ground"))
         {
-            Destroy(gameObject);
+            if (transform.position.y * bulletDirecitonY < 4.5f)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
