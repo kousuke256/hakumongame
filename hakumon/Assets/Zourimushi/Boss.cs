@@ -30,11 +30,9 @@ public class Boss : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    int[] directions =
-    {
-        1,
-        -1,
-    };
+    int[] rand = {0, 5, -5};
+
+    int[] directions = {1, -1};
 
     public enum enemystate
     {
@@ -55,8 +53,8 @@ public class Boss : MonoBehaviour
         UpdateRotation();
         moveDirection = directions[UnityEngine.Random.Range(0, directions.Length)];
         Debug.Log(gravityDirection);
-        InvokeRepeating(nameof(ShootBullet1), 0.5f, shootCoolTime1);
-        //InvokeRepeating(nameof(ShootBullet2), 0.9f, shootCoolTime2);
+        //InvokeRepeating(nameof(ShootBullet1), 0.5f, shootCoolTime1);
+        InvokeRepeating(nameof(ShootBullet2), 0.9f, shootCoolTime2);
         
     }
 
@@ -80,7 +78,7 @@ public class Boss : MonoBehaviour
     private void ShootBullet1()
     {
             GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
-            Vector2 direction = new Vector2(player.position.x - firePoint.position.x + UnityEngine.Random.Range(-1f,1f), player.position.y - firePoint.position.y);
+            Vector2 direction = new Vector2(player.position.x - firePoint.position.x + UnityEngine.Random.Range(-5f,5f), player.position.y - firePoint.position.y + UnityEngine.Random.Range(-1.5f,1.5f));
             bullet.GetComponent<Bullet1>().ShootBullet(direction);
     }
     void ShootBullet2()
