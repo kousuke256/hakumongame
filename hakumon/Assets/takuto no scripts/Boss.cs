@@ -13,6 +13,10 @@ public class Boss : MonoBehaviour
     public GameObject bullet2Prefab;
     public Transform firePoint;
     public float bulletMaxSpeed = 20f;
+    private int creatBulletCounter = 0;
+    private int kirikae = 1;
+    public int kirikaeCounter = 5;
+    public float ceiling = 5.1f;
     private float moveDirection;
     public float speed = 2.3f;
     private bool canWalk = true;
@@ -50,8 +54,8 @@ public class Boss : MonoBehaviour
         UpdateRotation();
         moveDirection = directions[UnityEngine.Random.Range(0, directions.Length)];
         Debug.Log(gravityDirection);
-       // InvokeRepeating(nameof(ShootBullet1), 1f, shootCoolTime);
-        InvokeRepeating(nameof(ShootBullet2), 1.2f, shootCoolTime);
+        //InvokeRepeating(nameof(ShootBullet1), 0.5f, shootCoolTime);
+        InvokeRepeating(nameof(ShootBullet2), 0.9f, shootCoolTime);
         
     }
 
@@ -80,24 +84,38 @@ public class Boss : MonoBehaviour
     }
     void ShootBullet2()
     {
+        creatBulletCounter++;
         float speed;
         int bulletDirectionX = 1;
-        float playerGravityDirection = -playerScript.gravityDirection.y;
-        float differenceX = player.position.x - transform.position.x;
-        float differenceY = playerGravityDirection * (player.position.y - transform.position.y);
+        float playerGravityDirection = 1; //= -playerScript.gravityDirection.y;
+
+        //銃弾の重力が順番に切り替わるようにするために後から追加してみたやつ
+        
+        if(creatBulletCounter % (kirikaeCounter + 1) == 0)
+        {
+            kirikae *= -1;
+            return;
+        }
+        playerGravityDirection *= kirikae;
+        
+
+        float differenceX = player.position.x - firePoint.position.x;
+        float differenceY = playerGravityDirection * (player.position.y - firePoint.position.y);
+
         if(differenceX < 0)
         {
             differenceX *= -1f;
             bulletDirectionX = -1;
         }
+        //変数名考えるのめんどくさかったから許して、そもそもintじゃなくてboolにしとけばよかったと後悔してる
         int i = 0;
         float theta = Mathf.Atan((differenceY + Mathf.Sqrt(differenceX * differenceX + differenceY * differenceY)) / differenceX);
         float tan = math.tan(theta);
         float maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
-        while(transform.position.y * playerGravityDirection + maxHeight > 5f)
+        while(firePoint.position.y * playerGravityDirection + maxHeight > ceiling)
         {
             i++;
-            theta -= Mathf.Deg2Rad * 10f;
+            theta -= Mathf.Deg2Rad * 3f;
             tan = math.tan(theta);
             maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
         }
@@ -111,7 +129,7 @@ public class Boss : MonoBehaviour
             speed = bulletMaxSpeed < speed ? bulletMaxSpeed : speed;
         }
 
-        GameObject bullet = Instantiate(bullet2Prefab, transform.position, quaternion.identity);
+        GameObject bullet = Instantiate(bullet2Prefab, firePoint.position, quaternion.identity);
         bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, playerGravityDirection, speed, theta);
     }
 
