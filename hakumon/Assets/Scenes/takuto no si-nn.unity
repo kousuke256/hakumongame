@@ -685,11 +685,12 @@ MonoBehaviour:
   bulletMaxSpeed: 17
   kirikaeCounter: 5
   ceiling: 5
-  speed: 3
+  speed: 3.5
   jumpPower: 5.4
   maxTrun: 3
   gravityPower: 9.8
-  shootCoolTime: 0.3
+  shootCoolTime1: 0.3
+  shootCoolTime2: 0.6
 --- !u!212 &582708194
 SpriteRenderer:
   serializedVersion: 3
