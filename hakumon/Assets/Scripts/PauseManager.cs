@@ -9,6 +9,7 @@ public class PauseManager : MonoBehaviour
     private static PauseManager instance;
     void Awake()
     {
+        // PauseManagerのオブジェクトが既にあるなら削除する（pauseManagerが何個も作られないようにする対策）
         if (instance != null)
         {
             Destroy(gameObject);
@@ -17,18 +18,19 @@ public class PauseManager : MonoBehaviour
 
         instance = this;
 
+        // sceneが切り替わってもオブジェクトを消さないメゾット
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // 現在のシーンがTitleなら何もしない
+        // 現在のシーンがTitleならPauseManuを表示しない
         if (SceneManager.GetActiveScene().name == "Menu")
         {
             return;
         }
 
+        //escapeKeyが押されたらpauseMenuを開く
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             TogglePouse();
@@ -39,8 +41,11 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
+
+        //時間の流れを止める
         Time.timeScale = isPaused ? 0f : 1f;
     }
+    //pauseMenuにボタンを追加するのならここに新しいメゾットを作って、ボタンを押したときにここのメゾットを実行させること
 
     public void ReturnToTitle()
     {

@@ -6,11 +6,16 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private Rigidbody2D playerRb;
+    private SpriteRenderer sr;
+    
     [Header("移動")]
-    public float moveSpeed = 4f; //地上での移動速度
-    public float airMoveSpeed = 3f; //空中での移動速度
+    public float moveSpeed = 4f;
+    public float airMoveSpeed = 3f;
     public float groundAcceleration = 20f;
     public float airAcceleration = 10f;
+    private float move;
+
     [Header("ジャンプ")]
     public float jumpPower = 9.3f;
     public float jumpCutMultiplier = 0.4f; //小ジャンプになるときの挙動の感じを決める変数
@@ -22,20 +27,21 @@ public class Player : MonoBehaviour
     private float jumpCountUp = 0f;
     private bool jumpPressed;
     private bool canCutJump;
+    private float jumpBufferTime = 0.1f; // space入力の持続時間
+    private float jumpBufferCounter;
+
     [Header("設置判定")]
     private bool isGrounded;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-    private Rigidbody2D playerRb;
-    private SpriteRenderer sr;
-    private float move;
-    private float jumpBufferTime = 0.1f; //space入力の持続時間
-    private float jumpBufferCounter;
-    public float groundCheckDistance = 0.45f;
-    public Vector2 gravityDirection = Vector2.down;
+    
     [Header("重力")]
     public float gravityPower = 9.8f;
+    public Vector2 gravityDirection = Vector2.down;
+
+    // groundCheckのlocalPositionをいじる変数。いつか重力の向きが変わったらスクリプトの向きを変えるプログラムを作るから将来なくなる変数
+    public float groundCheckDistance = 0.45f;
    
     void Start()
     {
