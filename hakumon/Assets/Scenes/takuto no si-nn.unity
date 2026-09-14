@@ -678,6 +678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   state: 0
   player: {fileID: 865053519}
+  playerRb: {fileID: 865053522}
   playerScript: {fileID: 865053520}
   bullet1Prefab: {fileID: 8465109816060701484, guid: 7f4683d36c59ff34fb351d9b1affae70, type: 3}
   bullet2Prefab: {fileID: 4379194192510411036, guid: b41d46a2ff65f6b43a890ddd12131b0b, type: 3}
@@ -690,7 +691,7 @@ MonoBehaviour:
   maxTrun: 3
   gravityPower: 9.8
   shootCoolTime1: 0.3
-  shootCoolTime2: 0.6
+  shootCoolTime2: 0.3
 --- !u!212 &582708194
 SpriteRenderer:
   serializedVersion: 3
@@ -784,6 +785,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c687daf80ba1cc34f94ed02649333479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+--- !u!50 &865053522 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5188600653644662010, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+  m_PrefabInstance: {fileID: 1869458894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &943557314
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Boss : MonoBehaviour
 {
     public enemystate state;
     public Transform player;
+    public Rigidbody2D playerRb;
     public Player playerScript;
     public GameObject bullet1Prefab;
     public GameObject bullet2Prefab;
@@ -41,6 +43,7 @@ public class Boss : MonoBehaviour
         ShootAtack1,
         ShootAtack2,
         GravityAtack,
+        Break,
         Freeze,
 
     }
@@ -53,8 +56,8 @@ public class Boss : MonoBehaviour
         UpdateRotation();
         moveDirection = directions[UnityEngine.Random.Range(0, directions.Length)];
         Debug.Log(gravityDirection);
-        //InvokeRepeating(nameof(ShootBullet1), 0.5f, shootCoolTime1);
-        InvokeRepeating(nameof(ShootBullet2), 0.9f, shootCoolTime2);
+        InvokeRepeating(nameof(ShootBullet1), 0.5f, shootCoolTime1);
+        //InvokeRepeating(nameof(ShootBullet2), 0.5f, shootCoolTime2);
         
     }
 
@@ -77,9 +80,13 @@ public class Boss : MonoBehaviour
 
     private void ShootBullet1()
     {
-            GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
-            Vector2 direction = new Vector2(player.position.x - firePoint.position.x + UnityEngine.Random.Range(-5f,5f), player.position.y - firePoint.position.y + UnityEngine.Random.Range(-1.5f,1.5f));
-            bullet.GetComponent<Bullet1>().ShootBullet(direction);
+        float distance = Vector2.Distance(player.position, firePoint.position);
+        Vector2 guessPlayerPosition = (distance / 8) * playerRb.linearVelocity;
+        
+        Vector2 direction = (Vector2)player.position - (Vector2)firePoint.position + guessPlayerPosition;
+        //new Vector2(player.position.x - firePoint.position.x , player.position.y - firePoint.position.y + UnityEngine.Random.Range(-1.5f,1.5f));
+        GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet1>().ShootBullet(direction);
     }
     void ShootBullet2()
     {
