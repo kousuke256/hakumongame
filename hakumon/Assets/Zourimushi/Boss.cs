@@ -1,6 +1,7 @@
 
 using Unity.Collections;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
@@ -49,8 +50,6 @@ public class Boss : MonoBehaviour
 
     }
 
-    
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,8 +62,8 @@ public class Boss : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        Debug.Log(math.dot(playerRb.linearVelocity, playerScript.gravityDirection));
+    {   
+        Debug.Log(player.position);
         rb.AddForce(gravityDirection * gravityPower);
         if (canWalk)
         {
@@ -96,8 +95,9 @@ public class Boss : MonoBehaviour
         GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
         bullet.GetComponent<Bullet1>().ShootBullet(bullet1Speed, theta, bulletDirectionX);
     }*/
-    private void ShootBullet1()
+    private void ShootBullet1()// -4.58カラ-0.26までジャンプした
     {
+        int a = 0;
         //　playerの速度より弾速を速くしないとだめ
         Vector2 distance = player.position - firePoint.position;
         Vector2 playerVelocity = playerRb.linearVelocity;
@@ -113,18 +113,25 @@ public class Boss : MonoBehaviour
             time = (-B - sqrtDiscriminant) / A;
             
         Vector2 targetPosition = (Vector2)player.position + playerVelocity * time;
-        if(targetPosition.y > 4.6f)
+        float playerGravityDirection = playerScript.gravityDirection.y;
+        if(targetPosition.y * playerGravityDirection > ceiling)// 0.3fはplayerの大きさを何となく加味した数字（本当は0.4fにすべきなんだろうが）
         {
-            float y = targetPosition.y - 4.6f;
-
+            time = Mathf.Abs((player.position.y - (ceiling - 0.3f) * playerGravityDirection) / playerRb.linearVelocity.y);
+            targetPosition = new Vector2(player.position.x + playerRb.linearVelocity.x * time, 4.7f * playerGravityDirection);
         }
-        else if(targetPosition.y < -4.6f)
+        else if(math.dot(playerScript.gravityDirection.y, playerRb.linearVelocity) < -2f && targetPosition.y > -0.6f && playerGravityDirection == -1)
         {
-            targetPosition.y = -4.6f;
+            a= 1;
+            targetPosition.y = -0.7f;
+        }
+        else if(math.dot(playerScript.gravityDirection.y, playerRb.linearVelocity) < -2f && targetPosition.y < 0.6f && playerGravityDirection == 1)
+        {
+            a=1;
+            targetPosition.y = 0.7f;
         }
         Vector2 direction = targetPosition - (Vector2)firePoint.position;
         GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<Bullet1>().ShootBullet(bullet1Speed, direction);
+        bullet.GetComponent<Bullet1>().ShootBullet(bullet1Speed, direction, a);
     }
 
 
