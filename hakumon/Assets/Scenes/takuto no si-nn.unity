@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 582708194}
   - component: {fileID: 582708192}
   - component: {fileID: 582708191}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,9 +685,11 @@ MonoBehaviour:
   firePoint: {fileID: 1025578915}
   bullet1Speed: 15
   bulletMaxSpeed: 17
-  kirikaeCounter: 5
+  kirikaeCounter: 3
   ceiling: 5
   speed: 3.5
+  chaseSpeed: 6
+  chaseAcceleration: 1
   jumpPower: 5.4
   maxTrun: 3
   gravityPower: 9.8
@@ -1492,6 +1494,10 @@ PrefabInstance:
     - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
