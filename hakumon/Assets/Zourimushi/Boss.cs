@@ -1,4 +1,5 @@
 
+using System.Runtime.InteropServices;
 using Unity.Collections;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -8,7 +9,7 @@ using UnityEngine.InputSystem;
 
 public class Boss : MonoBehaviour
 {
-    public enemystate state;
+    public bossState state = bossState.walk;
     public Transform player;
     public Rigidbody2D playerRb;
     public Player playerScript;
@@ -21,27 +22,30 @@ public class Boss : MonoBehaviour
     private int kirikae = 1;
     public int kirikaeCounter = 5;
     public float ceiling = 5.1f;
-    private float moveDirection;
-    public float speed = 2.3f;
+    private int moveDirection = 1;
+    public float speed = 3.5f;
+    public float chaseSpeed = 6f;
+    public float chaseAcceleration = 1f;
     private bool canWalk = true;
     public float jumpPower = 5.4f;
-    public int maxTrun = 3;
+    public int maxTrun = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
     public float gravityPower = 9.8f;
     public  float shootCoolTime1 = 0.6f;
     public  float shootCoolTime2 = 0.6f;
     private Vector2 gravityDirection = Vector2.right;
+    private float patternTimer = 0f;
+    private float shootTimer = 0f;
+    private float patternChangeTime;
+    private bossState previousState = bossState.Freeze;
 
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
-    int[] rand = {0, 5, -5};
-
-    int[] directions = {1, -1};
-
-    public enum enemystate
+    public enum bossState
     {
         walk,
-        JumpAtack,
+        chase,
         ShootAtack1,
         ShootAtack2,
         GravityAtack,
@@ -50,50 +54,109 @@ public class Boss : MonoBehaviour
 
     }
 
+    void SetState()// 変数名考えるのめんどい
+    {
+        switch (state)
+        {
+            case bossState.walk :
+                shootTimer = 0f;
+                patternChangeTime = 15f;
+                do
+                {
+                    state = (bossState)UnityEngine.Random.Range(2, 4);
+                }
+                while(state != previousState);
+                previousState = state;
+                break;
+
+
+            case bossState.ShootAtack1 : 
+            case bossState.ShootAtack2 :
+                shootTimer = 0f;
+                goto case bossState.chase;
+
+            case bossState.chase : 
+                patternChangeTime = 1.5f;
+                state = bossState.walk;
+                break;
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         UpdateRotation();
-        moveDirection = directions[UnityEngine.Random.Range(0, directions.Length)];
-        Debug.Log(gravityDirection);
-        InvokeRepeating(nameof(ShootBullet1), 0.5f, shootCoolTime1);
-        //InvokeRepeating(nameof(ShootBullet2), 0.5f, shootCoolTime2);
+
+        //state = bossState.chase;        
+    }
+
+    void Update()
+    {
+        patternTimer += Time.deltaTime;
         
+        if(patternTimer > patternChangeTime)
+        {
+            patternTimer = 0f;
+            SetState();
+        }
+        // stateを変えるときshoottimer=0にすること waserennnayo
+        if(state == bossState.ShootAtack1)
+        {
+            shootTimer += Time.deltaTime;
+            if(shootTimer > shootCoolTime1)
+            {
+                shootTimer = 0f;
+                ShootBullet1();
+            }
+        }
+        else if(state == bossState.ShootAtack2)
+        {
+            shootTimer += Time.deltaTime;
+            if(shootTimer > shootCoolTime2)
+            {
+                shootTimer = 0f;
+                ShootBullet2();
+            }
+        }
+
+
     }
 
     void FixedUpdate()
     {   
+        Debug.Log(state);
+        Debug.Log(patternTimer);
         rb.AddForce(gravityDirection * gravityPower);
         if (canWalk)
         {
             Walk();
         }
+        else if(state == bossState.chase)
+        {
+            chase();
+        }
     }
 
-    void SetState()
+    void chase()
     {
-        if(state == enemystate.walk)
+        maxTrun = 0;
+        if(gravityDirection.y == 0)
         {
+            Debug.Log("a");
+            Walk();
+        }
+        else
+        {
+            float targetSpeed = player.position.x - transform.position.x > 0 ? chaseSpeed : -chaseSpeed;
+            float newx = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
+            rb.linearVelocity = new Vector2(newx, rb.linearVelocity.y);
             
         }
+        
+
     }
 
-    /*private void ShootBullet1()
-    {
-        int bulletDirectionX = 1;
-        float distanceX = player.position.x - firePoint.position.x;
-        float distanceY = player.position.y - firePoint.position.y;
-        if(distanceX < 0)
-        {
-            distanceX *= -1f;
-            bulletDirectionX = -1;
-        }
-        float theta = Mathf.Atan(distanceY / distanceX) + Mathf.Asin((distanceX * playerRb.linearVelocity.y - distanceY * playerRb.linearVelocity.x) / (bullet1Speed * Mathf.Sqrt(distanceX * distanceX + distanceY * distanceY)));
-
-        //new Vector2(player.position.x - firePoint.position.x , player.position.y - firePoint.position.y + UnityEngine.Random.Range(-1.5f,1.5f));
-        GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<Bullet1>().ShootBullet(bullet1Speed, theta, bulletDirectionX);
-    }*/
     private void ShootBullet1()// -4.58カラ-0.26までジャンプした
     {
         int a = 0;
@@ -143,10 +206,9 @@ public class Boss : MonoBehaviour
 
         //銃弾の重力が順番に切り替わるようにするために後から追加してみたやつ
         
-        if(creatBulletCounter % (kirikaeCounter + 1) == 0)
+        if(creatBulletCounter == kirikaeCounter)
         {
             kirikae *= -1;
-            return;
         }
         playerGravityDirection *= kirikae;
         
@@ -219,10 +281,5 @@ public class Boss : MonoBehaviour
             moveDirection *= -1;
             turnCount++;
         }
-    }
-
-    void CantWalk()
-    {
-        canWalk = false;
     }
 }
