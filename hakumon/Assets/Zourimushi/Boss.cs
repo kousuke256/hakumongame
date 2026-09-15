@@ -63,7 +63,6 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {   
-        Debug.Log(player.position);
         rb.AddForce(gravityDirection * gravityPower);
         if (canWalk)
         {
