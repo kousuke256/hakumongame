@@ -1,12 +1,11 @@
+using System;
 using UnityEngine;
 
 public class Bullet1 : MonoBehaviour
 {
-    public float speed = 8f;
-
-    public void ShootBullet(Vector2 direction)
+    public void ShootBullet(float speed, Vector2 direction)
     {
-        GetComponent<Rigidbody2D>().linearVelocity = direction.normalized * speed;
+        GetComponent<Rigidbody2D>().linearVelocity =  direction.normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

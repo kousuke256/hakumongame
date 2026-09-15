@@ -14,6 +14,7 @@ public class Boss : MonoBehaviour
     public GameObject bullet1Prefab;
     public GameObject bullet2Prefab;
     public Transform firePoint;
+    public float bullet1Speed = 8f; //　playerの速度より弾速を速くしないとだめ
     public float bulletMaxSpeed = 20f;
     private int creatBulletCounter = 0;
     private int kirikae = 1;
@@ -63,6 +64,7 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(math.dot(playerRb.linearVelocity, playerScript.gravityDirection));
         rb.AddForce(gravityDirection * gravityPower);
         if (canWalk)
         {
@@ -78,16 +80,54 @@ public class Boss : MonoBehaviour
         }
     }
 
-    private void ShootBullet1()
+    /*private void ShootBullet1()
     {
-        float distance = Vector2.Distance(player.position, firePoint.position);
-        Vector2 guessPlayerPosition = (distance / 8) * playerRb.linearVelocity;
-        
-        Vector2 direction = (Vector2)player.position - (Vector2)firePoint.position + guessPlayerPosition;
+        int bulletDirectionX = 1;
+        float distanceX = player.position.x - firePoint.position.x;
+        float distanceY = player.position.y - firePoint.position.y;
+        if(distanceX < 0)
+        {
+            distanceX *= -1f;
+            bulletDirectionX = -1;
+        }
+        float theta = Mathf.Atan(distanceY / distanceX) + Mathf.Asin((distanceX * playerRb.linearVelocity.y - distanceY * playerRb.linearVelocity.x) / (bullet1Speed * Mathf.Sqrt(distanceX * distanceX + distanceY * distanceY)));
+
         //new Vector2(player.position.x - firePoint.position.x , player.position.y - firePoint.position.y + UnityEngine.Random.Range(-1.5f,1.5f));
         GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<Bullet1>().ShootBullet(direction);
+        bullet.GetComponent<Bullet1>().ShootBullet(bullet1Speed, theta, bulletDirectionX);
+    }*/
+    private void ShootBullet1()
+    {
+        //　playerの速度より弾速を速くしないとだめ
+        Vector2 distance = player.position - firePoint.position;
+        Vector2 playerVelocity = playerRb.linearVelocity;
+
+        // 二次方程式
+        float A = playerVelocity.sqrMagnitude - bullet1Speed * bullet1Speed;
+        float B = Vector2.Dot(distance, playerVelocity);
+        float C = distance.sqrMagnitude;
+        float sqrtDiscriminant = Mathf.Sqrt(B * B - A * C);
+
+        float time = (-B + sqrtDiscriminant) / A;
+        if (time < 0f)
+            time = (-B - sqrtDiscriminant) / A;
+            
+        Vector2 targetPosition = (Vector2)player.position + playerVelocity * time;
+        if(targetPosition.y > 4.6f)
+        {
+            float y = targetPosition.y - 4.6f;
+
+        }
+        else if(targetPosition.y < -4.6f)
+        {
+            targetPosition.y = -4.6f;
+        }
+        Vector2 direction = targetPosition - (Vector2)firePoint.position;
+        GameObject bullet = Instantiate(bullet1Prefab, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet1>().ShootBullet(bullet1Speed, direction);
     }
+
+
     void ShootBullet2()
     {
         creatBulletCounter++;
