@@ -27,7 +27,6 @@ public class Boss : MonoBehaviour
     public float speed = 3.5f;
     public float chaseSpeed = 6f;
     public float chaseAcceleration = 1f;
-    private bool canWalk = false;
     public float jumpPower = 5.4f;
     public int maxTrun = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
@@ -77,7 +76,7 @@ public class Boss : MonoBehaviour
 
             case bossState.chase : 
                 patternChangeTime = 1.5f;
-                state = bossState.walk;
+                state = bossState.walk;////////////////////////////////////////////////////
                 break;
 
                 case bossState.Freeze : 
@@ -91,13 +90,12 @@ public class Boss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         UpdateRotation();
-
         SetState();
+        //jumpPower = 10f;
     }
 
     void Update()
     {
-        /*
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
@@ -124,7 +122,7 @@ public class Boss : MonoBehaviour
                 ShootBullet2();
             }
         }
-*/
+
 
     }
 
@@ -132,21 +130,22 @@ public class Boss : MonoBehaviour
     {
         rb.AddForce(gravityDirection * gravityPower);
         
-        if (canWalk)
-        {
-            Walk();
-        }
-        else //if(state == bossState.chase)
+        if (state == bossState.chase)
         {
             chase();
+        }
+        else
+        {
+            Walk();
         }
     }
 
     void chase()
     {
+        
         if (gravityDirection.y == 0)
         {
-        // 重力が左右 → 上下に追跡
+            // 重力が左右
 
             float targetSpeed = playerScript.gravityDirection.y > 0 ? chaseSpeed : -chaseSpeed;
             float newY = Mathf.MoveTowards(rb.linearVelocity.y, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
@@ -154,14 +153,11 @@ public class Boss : MonoBehaviour
         }
         else
         {
-        // 重力が上下 → 左右に追跡
+            // 重力が上下
             float targetSpeed = player.position.x > transform.position.x ? chaseSpeed : -chaseSpeed;
-    
             float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
-
             rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
         }
-        Debug.Log(rb.linearVelocity);
     }
 
     private void ShootBullet1()// -4.58カラ-0.26までジャンプした
@@ -278,6 +274,9 @@ public class Boss : MonoBehaviour
 
     public void JumpOrTurn()
     {
+        if(state == bossState.chase)
+        return;
+
         if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTrun)
         {
             turnCount = 0;

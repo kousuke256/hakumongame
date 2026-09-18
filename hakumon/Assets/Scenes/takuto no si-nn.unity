@@ -689,7 +689,7 @@ MonoBehaviour:
   ceiling: 5
   speed: 3.5
   chaseSpeed: 6
-  chaseAcceleration: 8
+  chaseAcceleration: 10
   jumpPower: 5.4
   maxTrun: 3
   gravityPower: 9.8
@@ -1296,7 +1296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1765165431
 Transform:
   m_ObjectHideFlags: 0
