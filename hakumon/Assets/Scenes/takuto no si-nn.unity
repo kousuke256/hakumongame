@@ -693,8 +693,8 @@ MonoBehaviour:
   jumpPower: 5.4
   maxTrun: 3
   gravityPower: 9.8
-  shootCoolTime1: 0.5
-  shootCoolTime2: 0.4
+  shootCoolTime1: 0.4
+  shootCoolTime2: 0.3
 --- !u!212 &582708194
 SpriteRenderer:
   serializedVersion: 3

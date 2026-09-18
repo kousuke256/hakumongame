@@ -34,7 +34,7 @@ public class Boss : MonoBehaviour
     public  float shootCoolTime1 = 0.6f;
     public  float shootCoolTime2 = 0.6f;
     private Vector2 gravityDirection = Vector2.right;
-    private float patternTimer = 0f;
+    private float patternTimer = 100f;
     private float shootTimer = 0f;
     private float patternChangeTime;
     private bossState previousState = bossState.Freeze;
@@ -60,25 +60,28 @@ public class Boss : MonoBehaviour
         {
             case bossState.walk :
                 shootTimer = 0f;
-                patternChangeTime = 15f;
-                //do
-                //{
+                patternChangeTime = 12.5f;
+                do
+                {
                     state = (bossState)UnityEngine.Random.Range(2, 4);
-                //}
-                //while(state != previousState);
+                }
+                while(state == previousState);
                 previousState = state;
                 break;
 
 
             case bossState.ShootAtack1 : 
             case bossState.ShootAtack2 :
-                shootTimer = 0f;
                 goto case bossState.chase;
 
             case bossState.chase : 
                 patternChangeTime = 1.5f;
                 state = bossState.walk;
                 break;
+
+                case bossState.Freeze : 
+                break;
+
         }
     }
 
@@ -88,8 +91,7 @@ public class Boss : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         UpdateRotation();
 
-        state = bossState.walk;        
-        patternChangeTime = 1f;
+        SetState();
     }
 
     void Update()
@@ -101,7 +103,7 @@ public class Boss : MonoBehaviour
             patternTimer = 0f;
             SetState();
         }
-        // stateを変えるときshoottimer=0にすること waserennnayo
+
         if(state == bossState.ShootAtack1)
         {
             shootTimer += Time.deltaTime;
@@ -159,7 +161,7 @@ public class Boss : MonoBehaviour
 
     private void ShootBullet1()// -4.58カラ-0.26までジャンプした
     {
-        int a = 0;
+        int a = 0;// aで色変えれる.bullet1の
         //　playerの速度より弾速を速くしないとだめ
         Vector2 distance = player.position - firePoint.position;
         Vector2 playerVelocity = playerRb.linearVelocity;
@@ -206,10 +208,11 @@ public class Boss : MonoBehaviour
 
         //銃弾の重力が順番に切り替わるようにするために後から追加してみたやつ
         
-        if(creatBulletCounter == kirikaeCounter)
+        if(creatBulletCounter > kirikaeCounter)
         {
             creatBulletCounter = 0;
             kirikae *= -1;
+            return;
         }
         playerGravityDirection *= kirikae;
         
