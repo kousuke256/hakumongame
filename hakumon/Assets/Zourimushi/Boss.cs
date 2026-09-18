@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 
 public class Boss : MonoBehaviour
 {
+    // canWalkをtrueにFixedUpdateのコメント消す
     public bossState state = bossState.walk;
     public Transform player;
     public Rigidbody2D playerRb;
@@ -26,7 +27,7 @@ public class Boss : MonoBehaviour
     public float speed = 3.5f;
     public float chaseSpeed = 6f;
     public float chaseAcceleration = 1f;
-    private bool canWalk = true;
+    private bool canWalk = false;
     public float jumpPower = 5.4f;
     public int maxTrun = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
@@ -96,6 +97,7 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
+        /*
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
@@ -122,19 +124,19 @@ public class Boss : MonoBehaviour
                 ShootBullet2();
             }
         }
-
+*/
 
     }
 
     void FixedUpdate()
-    {   
-        
+    {
         rb.AddForce(gravityDirection * gravityPower);
+        
         if (canWalk)
         {
             Walk();
         }
-        else if(state == bossState.chase)
+        else //if(state == bossState.chase)
         {
             chase();
         }
@@ -142,21 +144,24 @@ public class Boss : MonoBehaviour
 
     void chase()
     {
-        maxTrun = 0;
-        if(gravityDirection.y == 0)
+        if (gravityDirection.y == 0)
         {
-            Debug.Log("a");
-            Walk();
+        // 重力が左右 → 上下に追跡
+
+            float targetSpeed = playerScript.gravityDirection.y > 0 ? chaseSpeed : -chaseSpeed;
+            float newY = Mathf.MoveTowards(rb.linearVelocity.y, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
         }
         else
         {
-            float targetSpeed = player.position.x - transform.position.x > 0 ? chaseSpeed : -chaseSpeed;
-            float newx = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
-            rb.linearVelocity = new Vector2(newx, rb.linearVelocity.y);
-            
-        }
-        
+        // 重力が上下 → 左右に追跡
+            float targetSpeed = player.position.x > transform.position.x ? chaseSpeed : -chaseSpeed;
+    
+            float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
 
+            rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+        }
+        Debug.Log(rb.linearVelocity);
     }
 
     private void ShootBullet1()// -4.58カラ-0.26までジャンプした
@@ -264,9 +269,8 @@ public class Boss : MonoBehaviour
 
     void Walk()
     {
-        Vector2 velocity = rb.linearVelocity;
         Vector2 moveVelocity = transform.right * moveDirection * speed;
-        float gravitySpeed = Vector2.Dot(velocity, gravityDirection);
+        float gravitySpeed = Vector2.Dot(rb.linearVelocity, gravityDirection);
         Vector2 gravityVelosity = gravitySpeed * gravityDirection;
         rb.linearVelocity = gravityVelosity + moveVelocity;
         
@@ -278,7 +282,7 @@ public class Boss : MonoBehaviour
         {
             turnCount = 0;
             rb.linearVelocity = transform.up * jumpPower;
-            Invoke(nameof(GravityChenge), 0.4f);
+            GravityChenge();
         }
         else
         {
