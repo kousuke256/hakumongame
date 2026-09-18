@@ -683,9 +683,9 @@ MonoBehaviour:
   bullet1Prefab: {fileID: 8465109816060701484, guid: 7f4683d36c59ff34fb351d9b1affae70, type: 3}
   bullet2Prefab: {fileID: 4379194192510411036, guid: b41d46a2ff65f6b43a890ddd12131b0b, type: 3}
   firePoint: {fileID: 1025578915}
-  bullet1Speed: 12
+  bullet1Speed: 15
   bulletMaxSpeed: 17
-  kirikaeCounter: 5
+  kirikaeCounter: 3
   ceiling: 5
   speed: 3.5
   chaseSpeed: 6
@@ -694,7 +694,7 @@ MonoBehaviour:
   maxTrun: 3
   gravityPower: 9.8
   shootCoolTime1: 0.5
-  shootCoolTime2: 0.4
+  shootCoolTime2: 0.3
 --- !u!212 &582708194
 SpriteRenderer:
   serializedVersion: 3

@@ -61,11 +61,11 @@ public class Boss : MonoBehaviour
             case bossState.walk :
                 shootTimer = 0f;
                 patternChangeTime = 15f;
-                do
-                {
+                //do
+                //{
                     state = (bossState)UnityEngine.Random.Range(2, 4);
-                }
-                while(state != previousState);
+                //}
+                //while(state != previousState);
                 previousState = state;
                 break;
 
@@ -88,7 +88,8 @@ public class Boss : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         UpdateRotation();
 
-        //state = bossState.chase;        
+        state = bossState.walk;        
+        patternChangeTime = 1f;
     }
 
     void Update()
@@ -125,8 +126,7 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {   
-        Debug.Log(state);
-        Debug.Log(patternTimer);
+        
         rb.AddForce(gravityDirection * gravityPower);
         if (canWalk)
         {
@@ -208,6 +208,7 @@ public class Boss : MonoBehaviour
         
         if(creatBulletCounter == kirikaeCounter)
         {
+            creatBulletCounter = 0;
             kirikae *= -1;
         }
         playerGravityDirection *= kirikae;

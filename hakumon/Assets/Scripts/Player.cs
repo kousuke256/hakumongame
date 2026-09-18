@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
 
     // groundCheckのlocalPositionをいじる変数。いつか重力の向きが変わったらスクリプトの向きを変えるプログラムを作るから将来なくなる変数
     public float groundCheckDistance = 0.45f;
+
+    int i = 0;
    
     void Start()
     {
@@ -196,17 +198,17 @@ public class Player : MonoBehaviour
                 {
                     if (jumpHoldTime < miriJumpTime)
                     {
-                        Debug.Log("ミリジャンプ");
+                        //Debug.Log("ミリジャンプ");
                         jumpCutTime = miriJumpTime;
                     }
                     else if (jumpHoldTime < smallJumpTime)
                     {
-                        Debug.Log("小ジャンプ");
+                        //Debug.Log("小ジャンプ");
                         jumpCutTime = smallJumpTime;
                     }
                     else if (jumpHoldTime < mediumJumpTime)
                     {
-                        Debug.Log("中ジャンプ");
+                        //Debug.Log("中ジャンプ");
                         jumpCutTime = mediumJumpTime;
                     }
 
@@ -214,7 +216,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Debug.Log("大ジャンプ");
+                //Debug.Log("大ジャンプ");
                 canCutJump = false;
                 jumpCountUp = 0f;
                 jumpHoldTime = 0f;
@@ -240,5 +242,15 @@ public class Player : MonoBehaviour
         sr.flipY = !sr.flipY;
         groundCheck.localPosition = gravityDirection * groundCheckDistance;
         playerRb.AddForce(gravityDirection * 2f, ForceMode2D.Impulse);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Bullet"))
+        {
+            i++;
+            Debug.Log("ぶつかった！");
+             Debug.Log(i);
+        }
     }
 }
