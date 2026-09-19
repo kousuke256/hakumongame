@@ -28,7 +28,7 @@ public class Boss : MonoBehaviour
     public float chaseSpeed = 6f;
     public float chaseAcceleration = 1f;
     public float jumpPower = 5.4f;
-    public int maxTrun = 3;// walk状態は3, chase状態は0に
+    public int maxTurn = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
     public float gravityPower = 9.8f;
     public  float shootCoolTime1 = 0.6f;
@@ -60,13 +60,13 @@ public class Boss : MonoBehaviour
         {
             case bossState.walk :
                 shootTimer = 0f;
-                patternChangeTime = 12.5f;
+                patternChangeTime = 50f;//12.5f;
                 do
                 {
-                    state = (bossState)UnityEngine.Random.Range(2, 4);
+                    state = (bossState)UnityEngine.Random.Range(1,2);
                 }
                 while(state == previousState);
-                previousState = state;
+                //previousState = state;
                 break;
 
 
@@ -91,7 +91,7 @@ public class Boss : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         UpdateRotation();
         SetState();
-        //jumpPower = 10f;
+        maxTurn = 0;
     }
 
     void Update()
@@ -128,6 +128,7 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(state);
         rb.AddForce(gravityDirection * gravityPower);
         
         if (state == bossState.chase)
@@ -277,7 +278,7 @@ public class Boss : MonoBehaviour
         if(state == bossState.chase)
         return;
 
-        if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTrun)
+        if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTurn)
         {
             turnCount = 0;
             rb.linearVelocity = transform.up * jumpPower;
