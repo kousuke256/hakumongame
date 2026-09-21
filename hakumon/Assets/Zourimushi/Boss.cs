@@ -27,6 +27,7 @@ public class Boss : MonoBehaviour
     public float speed = 3.5f;
     public float chaseSpeed = 6f;
     public float chaseAcceleration = 1f;
+    public float chaseJumpPower = 8f;
     public float jumpPower = 5.4f;
     public int maxTurn = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
@@ -37,10 +38,17 @@ public class Boss : MonoBehaviour
     private float patternTimer = 100f;
     private float shootTimer = 0f;
     private float patternChangeTime;
+
+    [Header("設置判定")]
+    private bool isGrounded;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer;
     private bossState previousState = bossState.Freeze;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    float time;
 
     public enum bossState
     {
@@ -92,10 +100,18 @@ public class Boss : MonoBehaviour
         UpdateRotation();
         SetState();
         maxTurn = 0;
+        
     }
 
     void Update()
     {
+        if (isGrounded)
+        {
+            time=0;
+        }
+        time+=Time.deltaTime;
+
+
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
@@ -128,7 +144,11 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(state);
+        Debug.Log(time);
+
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
+
+
         rb.AddForce(gravityDirection * gravityPower);
         
         if (state == bossState.chase)
@@ -158,6 +178,15 @@ public class Boss : MonoBehaviour
             float targetSpeed = player.position.x > transform.position.x ? chaseSpeed : -chaseSpeed;
             float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
             rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+            if(player.position.x - transform.position.x < rb.linearVelocity.x * 4f + playerRb.linearVelocity.x * 4f)
+            {
+                if(!isGrounded)
+                return;
+                
+                rb.AddForce(-gravityDirection *  chaseJumpPower, ForceMode2D.Impulse);
+                gravityDirection *= -1;
+                UpdateRotation();
+            }
         }
     }
 

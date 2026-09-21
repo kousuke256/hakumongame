@@ -434,6 +434,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &529920930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 529920931}
+  m_Layer: 0
+  m_Name: BossGroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &529920931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529920930}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 582708195}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576797434
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,11 +721,17 @@ MonoBehaviour:
   speed: 3.5
   chaseSpeed: 6
   chaseAcceleration: 10
+  chaseJumpPower: 8
   jumpPower: 5.4
   maxTurn: 3
   gravityPower: 9.8
   shootCoolTime1: 0.4
   shootCoolTime2: 0.3
+  groundCheck: {fileID: 529920931}
+  groundCheckRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!212 &582708194
 SpriteRenderer:
   serializedVersion: 3
@@ -770,6 +807,7 @@ Transform:
   m_Children:
   - {fileID: 1025578915}
   - {fileID: 1765165431}
+  - {fileID: 529920931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &865053519 stripped
