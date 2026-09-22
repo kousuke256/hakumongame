@@ -707,14 +707,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aaf759842da8f24aa753ee110d0002d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
-  state: 0
+  state: 1
   player: {fileID: 865053519}
   playerRb: {fileID: 865053522}
   playerScript: {fileID: 865053520}
   bullet1Prefab: {fileID: 8465109816060701484, guid: 7f4683d36c59ff34fb351d9b1affae70, type: 3}
   bullet2Prefab: {fileID: 4379194192510411036, guid: b41d46a2ff65f6b43a890ddd12131b0b, type: 3}
   firePoint: {fileID: 1025578915}
-  bullet1Speed: 12
+  bullet1Speed: 13
   bulletMaxSpeed: 17
   kirikaeCounter: 5
   ceiling: 5

@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 
 public class Boss : MonoBehaviour
 {
-    // canWalkをtrueにFixedUpdateのコメント消す
     public bossState state = bossState.walk;
     public Transform player;
     public Rigidbody2D playerRb;
@@ -28,6 +27,7 @@ public class Boss : MonoBehaviour
     public float chaseSpeed = 6f;
     public float chaseAcceleration = 1f;
     public float chaseJumpPower = 8f;
+    private bool canChaseJump;
     public float jumpPower = 5.4f;
     public int maxTurn = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
@@ -68,13 +68,13 @@ public class Boss : MonoBehaviour
         {
             case bossState.walk :
                 shootTimer = 0f;
-                patternChangeTime = 50f;//12.5f;
+                patternChangeTime = 12.5f;
                 do
                 {
-                    state = (bossState)UnityEngine.Random.Range(1,2);
+                    state = (bossState)UnityEngine.Random.Range(2,4);
                 }
                 while(state == previousState);
-                //previousState = state;
+                previousState = state;
                 break;
 
 
@@ -84,7 +84,7 @@ public class Boss : MonoBehaviour
 
             case bossState.chase : 
                 patternChangeTime = 1.5f;
-                state = bossState.walk;////////////////////////////////////////////////////
+                //state = bossState.walk;////////////////////////////////////////////////////
                 break;
 
                 case bossState.Freeze : 
@@ -144,7 +144,6 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(time);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
 
@@ -182,9 +181,9 @@ public class Boss : MonoBehaviour
             {
                 if(!isGrounded)
                 return;
-                
-                rb.AddForce(-gravityDirection *  chaseJumpPower, ForceMode2D.Impulse);
+
                 gravityDirection *= -1;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
                 UpdateRotation();
             }
         }
@@ -235,7 +234,7 @@ public class Boss : MonoBehaviour
         creatBulletCounter++;
         float speed;
         int bulletDirectionX = 1;
-        float playerGravityDirection = 1; //= -playerScript.gravityDirection.y;
+        float playerGravityDirection = 1;
 
         //銃弾の重力が順番に切り替わるようにするために後から追加してみたやつ
         
