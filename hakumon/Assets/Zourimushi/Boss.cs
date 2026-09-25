@@ -28,7 +28,7 @@ public class Boss : MonoBehaviour
     public float chaseAcceleration = 1f;
     public float chaseJumpPower = 8f;
     private bool canChaseJump;
-    public float jumpPower = 5.4f;
+    public float walkJumpPower = 5.4f;
     public int maxTurn = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
     public float gravityPower = 9.8f;
@@ -144,10 +144,10 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        // 接地判定
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
 
-
+        // 重力, rigidbodyのgravityScale=0だから
         rb.AddForce(gravityDirection * gravityPower);
         
         if (state == bossState.chase)
@@ -160,14 +160,60 @@ public class Boss : MonoBehaviour
         }
     }
 
+    void GravityChengeLeftOrRight()
+    {
+        gravityDirection = new Vector2(-moveDirection * gravityDirection.y, moveDirection * gravityDirection.x);
+        UpdateRotation();
+    }
+     void UpdateRotation()
+    {
+        Vector2 upDirection = -gravityDirection;
+        transform.up = upDirection;
+    }
+
+    void Walk()
+    {
+        Vector2 moveVelocity = transform.right * moveDirection * speed;
+        float gravitySpeed = Vector2.Dot(rb.linearVelocity, gravityDirection);
+        Vector2 gravityVelosity = gravitySpeed * gravityDirection;
+        rb.linearVelocity = gravityVelosity + moveVelocity;
+        
+    }
+
+    public void JumpOrTurn()
+    {
+        if(state == bossState.chase)
+        return;
+
+        if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTurn)
+        {
+            turnCount = 0;
+            rb.linearVelocity = transform.up * walkJumpPower;
+            GravityChengeLeftOrRight();
+        }
+        else
+        {
+            moveDirection *= -1;
+            turnCount++;
+        }
+    }
+
     void chase()
     {
         
         if (gravityDirection.y == 0)
         {
-            // 重力が左右
+            // 重力が左右, task : move ugokasu, jump tuluru////////////////////////////////////////////////////////////////
 
-            float targetSpeed = playerScript.gravityDirection.y > 0 ? chaseSpeed : -chaseSpeed;
+            if (isGrounded)
+            {
+                GravityChengeLeftOrRight();
+                Vector2 moveVelocity = new Vector2(0f, rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
+                UpdateRotation();
+            }
+            float targetSpeed = rb.linearVelocity.y > 0 ? chaseSpeed : -chaseSpeed;
+            //float targetSpeed = playerScript.gravityDirection.y > 0 ? chaseSpeed : -chaseSpeed;
             float newY = Mathf.MoveTowards(rb.linearVelocity.y, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
         }
@@ -279,43 +325,5 @@ public class Boss : MonoBehaviour
 
         GameObject bullet = Instantiate(bullet2Prefab, firePoint.position, quaternion.identity);
         bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, playerGravityDirection, speed, theta);
-    }
-
-    void GravityChenge()
-    {
-        gravityDirection = new Vector2(-moveDirection * gravityDirection.y, moveDirection * gravityDirection.x);
-        UpdateRotation();
-    }
-     void UpdateRotation()
-    {
-        Vector2 upDirection = -gravityDirection;
-        transform.up = upDirection;
-    }
-
-    void Walk()
-    {
-        Vector2 moveVelocity = transform.right * moveDirection * speed;
-        float gravitySpeed = Vector2.Dot(rb.linearVelocity, gravityDirection);
-        Vector2 gravityVelosity = gravitySpeed * gravityDirection;
-        rb.linearVelocity = gravityVelosity + moveVelocity;
-        
-    }
-
-    public void JumpOrTurn()
-    {
-        if(state == bossState.chase)
-        return;
-
-        if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTurn)
-        {
-            turnCount = 0;
-            rb.linearVelocity = transform.up * jumpPower;
-            GravityChenge();
-        }
-        else
-        {
-            moveDirection *= -1;
-            turnCount++;
-        }
     }
 }
