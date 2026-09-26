@@ -721,8 +721,8 @@ MonoBehaviour:
   speed: 3.5
   chaseSpeed: 6
   chaseAcceleration: 10
-  chaseJumpPower: 8
-  jumpPower: 5.4
+  chaseJumpPower: 7
+  walkJumpPower: 5.4
   maxTurn: 3
   gravityPower: 9.8
   shootCoolTime1: 0.4

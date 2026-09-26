@@ -1,4 +1,5 @@
 
+
 using System.Runtime.InteropServices;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -27,7 +28,7 @@ public class Boss : MonoBehaviour
     public float chaseSpeed = 6f;
     public float chaseAcceleration = 1f;
     public float chaseJumpPower = 8f;
-    private bool canChaseJump;
+    private bool canChaseJump = true;
     public float walkJumpPower = 5.4f;
     public int maxTurn = 3;// walk状態は3, chase状態は0に
     private int turnCount = 0;
@@ -203,19 +204,20 @@ public class Boss : MonoBehaviour
         
         if (gravityDirection.y == 0)
         {
-            // 重力が左右, task : move ugokasu, jump tuluru////////////////////////////////////////////////////////////////
+            // 重力が左右, task : move ugokasu,  booltukuru////////////////////////////////////////////////////////////////
 
             if (isGrounded)
             {
+                rb.linearVelocity = new Vector2(-gravityDirection.x * chaseJumpPower, rb.linearVelocity.y);
                 GravityChengeLeftOrRight();
-                Vector2 moveVelocity = new Vector2(0f, rb.linearVelocity.y);
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
                 UpdateRotation();
             }
-            float targetSpeed = rb.linearVelocity.y > 0 ? chaseSpeed : -chaseSpeed;
-            //float targetSpeed = playerScript.gravityDirection.y > 0 ? chaseSpeed : -chaseSpeed;
-            float newY = Mathf.MoveTowards(rb.linearVelocity.y, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
+            else
+            {
+                float newY = Mathf.MoveTowards(rb.linearVelocity.y, moveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
+            }
+            
         }
         else
         {
