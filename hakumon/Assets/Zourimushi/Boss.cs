@@ -30,7 +30,7 @@ public class Boss : MonoBehaviour
     public float chaseJumpPower = 8f;
     private bool canChaseJump = true;
     public float walkJumpPower = 5.4f;
-    public int maxTurn = 3;// walk状態は3, chase状態は0に
+    public int maxTurn = 3;
     private int turnCount = 0;
     public float gravityPower = 9.8f;
     public  float shootCoolTime1 = 0.6f;
@@ -145,6 +145,8 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        Debug.Log(time);
         // 接地判定
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
 
@@ -222,18 +224,23 @@ public class Boss : MonoBehaviour
         else
         {
             // 重力が上下
-            float targetSpeed = player.position.x > transform.position.x ? chaseSpeed : -chaseSpeed;
-            float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
-            rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
-            if(player.position.x - transform.position.x < rb.linearVelocity.x * 4f + playerRb.linearVelocity.x * 4f)
+            if (isGrounded)
             {
-                if(!isGrounded)
-                return;
+                float targetSpeed = player.position.x > transform.position.x ? chaseSpeed : -chaseSpeed;
+                float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
+                rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+                if(player.position.x - transform.position.x < rb.linearVelocity.x * 0.78f + playerRb.linearVelocity.x * 0.78f)
+                {
+                    if(!canChaseJump)
+                    return;
 
-                gravityDirection *= -1;
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
-                UpdateRotation();
+                    canChaseJump = false;
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
+                    gravityDirection *= -1;
+                    UpdateRotation();
+                }
             }
+            
         }
     }
 
