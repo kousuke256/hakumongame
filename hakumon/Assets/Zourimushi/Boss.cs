@@ -100,8 +100,6 @@ public class Boss : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         UpdateRotation();
         SetState();
-        maxTurn = 0;
-        
     }
 
     void Update()
@@ -226,21 +224,32 @@ public class Boss : MonoBehaviour
             // 重力が上下
             if (isGrounded)
             {
-                float targetSpeed = player.position.x > transform.position.x ? chaseSpeed : -chaseSpeed;
-                float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, chaseAcceleration * Time.fixedDeltaTime);
-                rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
-                if(player.position.x - transform.position.x < rb.linearVelocity.x * 0.78f + playerRb.linearVelocity.x * 0.78f)
+                if (canChaseJump)
                 {
-                    if(!canChaseJump)
-                    return;
+                    moveDirection = player.position.x > transform.position.x ? 1 : -1;
+                    float newX = Mathf.MoveTowards(rb.linearVelocity.x, moveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
+                    rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
 
-                    canChaseJump = false;
-                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
-                    gravityDirection *= -1;
-                    UpdateRotation();
+                    // 0.78fはBossの落下時間
+                    float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.78f;
+                    float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.78f;
+                    if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
+                    {
+                        if(gravityDirection == playerScript.gravityDirection)
+                        return;
+
+                        canChaseJump = false;
+                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
+                        gravityDirection *= -1;
+                        UpdateRotation();
+                    }
                 }
+                else
+                {
+                    rb.linearVelocity = new Vector2(moveDirection * chaseSpeed, rb.linearVelocity.y);
+                }
+                
             }
-            
         }
     }
 
