@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class BossWallChecker : MonoBehaviour
 {
-    public GameObject boss;
-    void OnTriggerEnter2D(Collider2D collider)
+    public Boss bossScript;
+    void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.CompareTag("Ground"))
-        {
-            gameObject.SetActive(false);
-            Invoke(nameof(InactiveWallchecker), 0.8f);
-            boss.GetComponent<Boss>().JumpOrTurn();
-        }
+        if(!bossScript.isGrounded)
+        return;
+
+        if (!collider.gameObject.CompareTag("Ground"))
+        return;
+
+        gameObject.SetActive(false);
+        Invoke(nameof(InactiveWallchecker), 0.7f);
+        bossScript.JumpOrTurn();
     }
 
     void InactiveWallchecker()

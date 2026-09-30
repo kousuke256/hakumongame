@@ -35,13 +35,14 @@ public class Boss : MonoBehaviour
     public float gravityPower = 9.8f;
     public  float shootCoolTime1 = 0.6f;
     public  float shootCoolTime2 = 0.6f;
-    private Vector2 gravityDirection = Vector2.right;
+    public Vector2 gravityDirection;
     private float patternTimer = 100f;
     private float shootTimer = 0f;
     private float patternChangeTime;
 
     [Header("設置判定")]
-    private bool isGrounded;
+
+    public bool isGrounded;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
@@ -49,7 +50,6 @@ public class Boss : MonoBehaviour
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    float time;
 
     public enum bossState
     {
@@ -63,7 +63,7 @@ public class Boss : MonoBehaviour
 
     }
 
-    void SetState()// 変数名考えるのめんどい
+    void SetState()
     {
         switch (state)
         {
@@ -85,7 +85,7 @@ public class Boss : MonoBehaviour
 
             case bossState.chase : 
                 patternChangeTime = 1.5f;
-                //state = bossState.walk;////////////////////////////////////////////////////
+                // state = bossState.walk;////////////////////////////////////////////////////
                 break;
 
                 case bossState.Freeze : 
@@ -96,6 +96,7 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        gravityDirection = Vector2.right;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         UpdateRotation();
@@ -104,12 +105,6 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        if (isGrounded)
-        {
-            time=0;
-        }
-        time+=Time.deltaTime;
-
 
         patternTimer += Time.deltaTime;
         
@@ -143,8 +138,6 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        Debug.Log(time);
         // 接地判定
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
 
@@ -166,6 +159,7 @@ public class Boss : MonoBehaviour
         gravityDirection = new Vector2(-moveDirection * gravityDirection.y, moveDirection * gravityDirection.x);
         UpdateRotation();
     }
+
      void UpdateRotation()
     {
         Vector2 upDirection = -gravityDirection;
@@ -184,12 +178,17 @@ public class Boss : MonoBehaviour
     public void JumpOrTurn()
     {
         if(state == bossState.chase)
-        return;
+        {   
+            if(gravityDirection.y == 0)
+            return;
 
-        if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTurn)
+            rb.linearVelocity = transform.up * chaseJumpPower;
+            GravityChengeLeftOrRight();
+        }
+        else if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTurn)
         {
             turnCount = 0;
-            rb.linearVelocity = transform.up * walkJumpPower;
+            rb.linearVelocity = transform.up * chaseJumpPower;
             GravityChengeLeftOrRight();
         }
         else
@@ -348,10 +347,12 @@ public class Boss : MonoBehaviour
 
     void OnCollider2D(Collider2D collider)
     {
-        if (collider.CompareTag("Ground"))
-        {
-            // Task, bossがgroundにぶつかったときの設置の場所をはんていするif文を作る
-            // moveDirection *= -1;
-        }
+        if(isGrounded)
+        return;
+
+        if(!collider.gameObject.CompareTag("Ground"))
+        return;
+
+        moveDirection *= -1;
     }
 }
