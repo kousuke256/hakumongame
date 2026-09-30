@@ -344,4 +344,14 @@ public class Boss : MonoBehaviour
         GameObject bullet = Instantiate(bullet2Prefab, firePoint.position, quaternion.identity);
         bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, playerGravityDirection, speed, theta);
     }
+
+
+    void OnCollider2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Ground"))
+        {
+            // Task, bossがgroundにぶつかったときの設置の場所をはんていするif文を作る
+            // moveDirection *= -1;
+        }
+    }
 }
