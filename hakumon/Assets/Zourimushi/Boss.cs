@@ -24,7 +24,7 @@ public class Boss : MonoBehaviour
     public int kirikaeCounter = 5;
     public float ceiling = 5.1f;
     private int moveDirection = 1;
-    public float speed = 3.5f;
+    public float walkSpeed = 3.5f;
     public float chaseSpeed = 6f;
     public float chaseAcceleration = 1f;
     public float chaseJumpPower = 8f;
@@ -47,7 +47,6 @@ public class Boss : MonoBehaviour
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
     private bossState previousState = bossState.Freeze;
-
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
@@ -99,17 +98,19 @@ public class Boss : MonoBehaviour
         gravityDirection = Vector2.right;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        UpdateRotation();
         SetState();
     }
 
     void Update()
     {
 
+        Debug.Log(moveDirection);
+
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
         {
+            // patternTimerがpatternChangetimeになったらbossStateをかえる
             patternTimer = 0f;
             SetState();
         }
@@ -150,49 +151,60 @@ public class Boss : MonoBehaviour
         }
         else
         {
-            Walk();
+            Walk(walkSpeed);
         }
     }
 
     void GravityChengeLeftOrRight()
     {
+        // 現在進んでいる方向が重力の方向になり、オブジェクトの上を重力と逆向きにする
         gravityDirection = new Vector2(-moveDirection * gravityDirection.y, moveDirection * gravityDirection.x);
-        UpdateRotation();
+        transform.up = -gravityDirection;
     }
 
-     void UpdateRotation()
+    void Walk(float speed)
     {
-        Vector2 upDirection = -gravityDirection;
-        transform.up = upDirection;
-    }
+        // moveDirectioが1なら重力方向の右に、-1なら左に進む
 
-    void Walk()
-    {
         Vector2 moveVelocity = transform.right * moveDirection * speed;
+
+        // 重力方向のbossのずぴーどを取得してmoveVelocityと合成
         float gravitySpeed = Vector2.Dot(rb.linearVelocity, gravityDirection);
         Vector2 gravityVelosity = gravitySpeed * gravityDirection;
         rb.linearVelocity = gravityVelosity + moveVelocity;
         
     }
 
+    void Jump(float jumpPower)
+    {
+        Vector2 velocity = rb.linearVelocity;
+
+        // 重力方向の速度を取得
+        float gravityVelocity = Vector2.Dot(velocity, gravityDirection);
+    
+        // 重力方向の速度を取り除き、ジャンプの力を加える
+        velocity -= gravityDirection * gravityVelocity;
+        velocity += -gravityDirection * jumpPower;
+
+        rb.linearVelocity = velocity;
+    }
+
+    // wallCheckerが壁にぶつかると実行される
     public void JumpOrTurn()
     {
         if(state == bossState.chase)
-        {   
-            if(gravityDirection.y == 0)
-            return;
-
-            rb.linearVelocity = transform.up * chaseJumpPower;
-            GravityChengeLeftOrRight();
-        }
-        else if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTurn)
+        return;
+        
+        // 1/2の確率でジャンプする
+        if(UnityEngine.Random.Range(0, 2) == 0 || turnCount == maxTurn)
         {
             turnCount = 0;
-            rb.linearVelocity = transform.up * chaseJumpPower;
+            Jump(walkJumpPower);
             GravityChengeLeftOrRight();
         }
         else
         {
+            // 移動方向を反転させる。　連続のturn回数がmaxTurnになると行動パターンが絶対jumpになる
             moveDirection *= -1;
             turnCount++;
         }
@@ -203,13 +215,12 @@ public class Boss : MonoBehaviour
         
         if (gravityDirection.y == 0)
         {
-            // 重力が左右, task : move ugokasu,  booltukuru////////////////////////////////////////////////////////////////
-
+            // 重力が左右
+            canChaseJump = true;
             if (isGrounded)
             {
-                rb.linearVelocity = new Vector2(-gravityDirection.x * chaseJumpPower, rb.linearVelocity.y);
+                Jump(chaseJumpPower);
                 GravityChengeLeftOrRight();
-                UpdateRotation();
             }
             else
             {
@@ -225,11 +236,13 @@ public class Boss : MonoBehaviour
             {
                 if (canChaseJump)
                 {
-                    moveDirection = player.position.x > transform.position.x ? 1 : -1;
-                    float newX = Mathf.MoveTowards(rb.linearVelocity.x, moveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
+                    int wowowoMoveDirection = player.position.x > transform.position.x ? 1 : -1;
+                    float newX = Mathf.MoveTowards(rb.linearVelocity.x, wowowoMoveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
                     rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+                    moveDirection = gravityDirection.y == -1 ? wowowoMoveDirection : -wowowoMoveDirection; 
 
-                    // 0.78fはBossの落下時間
+
+                    // 0.78fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
                     float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.78f;
                     float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.78f;
                     if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
@@ -237,15 +250,16 @@ public class Boss : MonoBehaviour
                         if(gravityDirection == playerScript.gravityDirection)
                         return;
 
+                        moveDirection *= -1;
                         canChaseJump = false;
-                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, -gravityDirection.y * chaseJumpPower);
+                        Jump(chaseJumpPower);
                         gravityDirection *= -1;
-                        UpdateRotation();
+                        transform.up = -gravityDirection;
                     }
                 }
                 else
                 {
-                    rb.linearVelocity = new Vector2(moveDirection * chaseSpeed, rb.linearVelocity.y);
+                    Walk(chaseSpeed);
                 }
                 
             }

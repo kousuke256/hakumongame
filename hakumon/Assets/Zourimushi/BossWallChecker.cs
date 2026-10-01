@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossWallChecker : MonoBehaviour
 {
     public Boss bossScript;
-    void OnTriggerStay2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         if(!bossScript.isGrounded)
         return;
@@ -12,7 +12,7 @@ public class BossWallChecker : MonoBehaviour
         return;
 
         gameObject.SetActive(false);
-        Invoke(nameof(InactiveWallchecker), 0.7f);
+        Invoke(nameof(InactiveWallchecker), 0.1f);
         bossScript.JumpOrTurn();
     }
 
