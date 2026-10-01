@@ -720,7 +720,7 @@ MonoBehaviour:
   ceiling: 5
   walkSpeed: 3.5
   chaseSpeed: 6
-  chaseAcceleration: 15
+  chaseAcceleration: 14
   chaseJumpPower: 7
   walkJumpPower: 5.4
   maxTurn: 3
@@ -804,7 +804,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 9.2, y: 0.9, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1025578915}

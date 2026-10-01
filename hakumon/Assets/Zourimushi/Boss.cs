@@ -103,9 +103,6 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-
-        Debug.Log(moveDirection);
-
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
@@ -153,13 +150,6 @@ public class Boss : MonoBehaviour
         {
             Walk(walkSpeed);
         }
-    }
-
-    void GravityChengeLeftOrRight()
-    {
-        // 現在進んでいる方向が重力の方向になり、オブジェクトの上を重力と逆向きにする
-        gravityDirection = new Vector2(-moveDirection * gravityDirection.y, moveDirection * gravityDirection.x);
-        transform.up = -gravityDirection;
     }
 
     void Walk(float speed)
@@ -210,12 +200,18 @@ public class Boss : MonoBehaviour
         }
     }
 
+    void GravityChengeLeftOrRight()
+    {
+        // 現在進んでいる方向が重力の方向になり、オブジェクトの上を重力と逆向きにする
+        gravityDirection = new Vector2(-moveDirection * gravityDirection.y, moveDirection * gravityDirection.x);
+        transform.up = -gravityDirection;
+    }
+
     void chase()
     {
-        
+        // 重力が左右だったら
         if (gravityDirection.y == 0)
         {
-            // 重力が左右
             canChaseJump = true;
             if (isGrounded)
             {
@@ -227,41 +223,47 @@ public class Boss : MonoBehaviour
                 float newY = Mathf.MoveTowards(rb.linearVelocity.y, moveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
             }
-            
         }
         else
         {
             // 重力が上下
             if (isGrounded)
             {
-                if (canChaseJump)
+                if(gravityDirection != playerScript.gravityDirection && !canChaseJump)
                 {
-                    int wowowoMoveDirection = player.position.x > transform.position.x ? 1 : -1;
-                    float newX = Mathf.MoveTowards(rb.linearVelocity.x, wowowoMoveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
-                    rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
-                    moveDirection = gravityDirection.y == -1 ? wowowoMoveDirection : -wowowoMoveDirection; 
+                    Walk(chaseJumpPower);
 
+                    // playerと地面との距離が5超過の場合returnを実行してジャンプできないようにしている
+                    if(5 - playerScript.gravityDirection.y * player.position.y > 5f)
+                    return;
 
-                    // 0.78fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
-                    float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.78f;
-                    float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.78f;
-                    if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
-                    {
-                        if(gravityDirection == playerScript.gravityDirection)
-                        return;
-
-                        moveDirection *= -1;
-                        canChaseJump = false;
-                        Jump(chaseJumpPower);
-                        gravityDirection *= -1;
-                        transform.up = -gravityDirection;
-                    }
+                    Jump(chaseJumpPower);
+                    GravityChengeLeftOrRight();
+                    return;
                 }
-                else
+                // 慣性のある移動をしながらプレイヤーを追う
+                int wowowoMoveDirection = player.position.x > transform.position.x ? 1 : -1;
+                float newX = Mathf.MoveTowards(rb.linearVelocity.x, wowowoMoveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
+                rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+                moveDirection = gravityDirection.y == -1 ? wowowoMoveDirection : -wowowoMoveDirection;
+
+                if(!canChaseJump)
+                return;
+
+                if(gravityDirection == playerScript.gravityDirection)
+                return;
+
+                // 0.78fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
+                float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.78f;
+                float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.78f;
+                if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
                 {
-                    Walk(chaseSpeed);
+                    Jump(chaseJumpPower);
+                    gravityDirection *= -1;
+                    transform.up = -gravityDirection;
+                    moveDirection *= -1;
+                    canChaseJump = false;
                 }
-                
             }
         }
     }
@@ -356,17 +358,5 @@ public class Boss : MonoBehaviour
 
         GameObject bullet = Instantiate(bullet2Prefab, firePoint.position, quaternion.identity);
         bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, playerGravityDirection, speed, theta);
-    }
-
-
-    void OnCollider2D(Collider2D collider)
-    {
-        if(isGrounded)
-        return;
-
-        if(!collider.gameObject.CompareTag("Ground"))
-        return;
-
-        moveDirection *= -1;
     }
 }
