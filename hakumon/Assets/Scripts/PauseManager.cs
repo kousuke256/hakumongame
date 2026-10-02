@@ -13,6 +13,7 @@ public class PauseManager : MonoBehaviour
         if (instance != null)
         {
             Destroy(gameObject);
+            Destroy(pauseMenu);
             return;
         }
 
@@ -20,6 +21,8 @@ public class PauseManager : MonoBehaviour
 
         // sceneが切り替わってもオブジェクトを消さないメゾット
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(pauseMenu);
+
     }
 
     void Update()
