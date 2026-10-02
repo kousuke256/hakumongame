@@ -55,10 +55,10 @@ public class Boss : MonoBehaviour
     {
         walk,
         chase,
+        chaseStun,
         ShootAtack1,
         ShootAtack2,
         GravityAtack,
-        Break,
         Freeze,
 
     }
@@ -78,17 +78,23 @@ public class Boss : MonoBehaviour
                 previousState = state;
                 break;
 
-
             case bossState.ShootAtack1 : 
             case bossState.ShootAtack2 :
                 goto case bossState.chase;
 
             case bossState.chase : 
                 patternChangeTime = 1.5f;
-                // state = bossState.walk;////////////////////////////////////////////////////
+                state = bossState.walk;
                 break;
 
-                case bossState.Freeze : 
+            case bossState.chaseStun :
+                patternChangeTime = 1.5f;
+                state = bossState.chase;
+                break;
+
+            case bossState.Freeze : 
+                patternChangeTime = 1.5f;
+                state = bossState.walk;
                 break;
 
         }
@@ -142,6 +148,12 @@ public class Boss : MonoBehaviour
 
         // 重力, rigidbodyのgravityScale=0だから
         rb.AddForce(gravityDirection * gravityPower);
+
+        if(state == bossState.Freeze)
+        return;
+
+        if(state == bossState.chase)
+        return;
         
         if (state == bossState.chase)
         {
@@ -274,9 +286,9 @@ public class Boss : MonoBehaviour
 
                 
 
-                // 0.78fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
-                float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.78f;
-                float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.78f;
+                // 0.7fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
+                float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.7f;
+                float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.7f;
                 if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
                 {
                     // 進んでいる方向にある壁からの距離に比例してジャンプ力が高くなる
