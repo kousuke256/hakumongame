@@ -16,6 +16,7 @@ public class Test : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(gameObject.name);
         // 左
         if (Input.GetKey(KeyCode.W))
         {

@@ -662,7 +662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aaf759842da8f24aa753ee110d0002d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
-  state: 1
   player: {fileID: 865053519}
   playerRb: {fileID: 865053522}
   playerScript: {fileID: 865053520}
@@ -680,8 +679,8 @@ MonoBehaviour:
   walkJumpPower: 4.5
   maxTurn: 3
   gravityPower: 9.8
-  shootCoolTime1: 0.4
-  shootCoolTime2: 0.3
+  shootCoolTime1: 0.6
+  shootCoolTime2: 0.5
   gravityDirection: {x: 1, y: 0}
   isGrounded: 0
   groundCheck: {fileID: 529920931}
