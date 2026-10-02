@@ -37,7 +37,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    void TogglePouse()
+    public void TogglePouse()
     {
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
