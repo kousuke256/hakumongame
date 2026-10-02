@@ -1,5 +1,6 @@
 
 
+using System;
 using System.Runtime.InteropServices;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -212,17 +213,27 @@ public class Boss : MonoBehaviour
         // 重力が左右だったら
         if (gravityDirection.y == 0)
         {
+            // moveDirectionの方向に慣性のある移動をする
+            float newY = Mathf.MoveTowards(rb.linearVelocity.y, moveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
+
+            // 落下攻撃を可能にする
             canChaseJump = true;
-            if (isGrounded)
-            {
-                Jump(chaseJumpPower);
-                GravityChengeLeftOrRight();
-            }
-            else
-            {
-                float newY = Mathf.MoveTowards(rb.linearVelocity.y, moveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
-            }
+
+            if(!isGrounded)
+            return;
+
+            // bossが張り付いている壁とplayerの距離が近いのにもかかわらずbossが高いところにいたらジャンプできないようにするif文
+            float wallPlayerDistance = 10 - gravityDirection.x * player.position.x;
+            float groundBossDistance = 5 - gravityDirection.y * transform.position.y;
+            float distanceRatio = groundBossDistance / wallPlayerDistance;
+            if(distanceRatio > 0.9f)
+            return;
+
+            // bossが高いところからジャンプするほどジャンプ力が高くなる
+            // groundBossDistanceに1を足しているのはどれだけ地面からの距離が近くてもある程度ジャンプさせるため
+            Jump(chaseJumpPower * (groundBossDistance + 1f) / 4f);
+            GravityChengeLeftOrRight();
         }
         else
         {
@@ -231,16 +242,24 @@ public class Boss : MonoBehaviour
             {
                 if(gravityDirection != playerScript.gravityDirection && !canChaseJump)
                 {
-                    Walk(chaseJumpPower);
+                    Walk(chaseSpeed);
+
+                    // 進んでいる方向にある壁からの距離が6より大きかった場合return;
+                    float wallBossDistance = transform.position.x + 10 * moveDirection * gravityDirection.y;
+                    if(wallBossDistance > 6f)
+                    return;
 
                     // playerと地面との距離が5超過の場合returnを実行してジャンプできないようにしている
                     if(5 - playerScript.gravityDirection.y * player.position.y > 5f)
                     return;
 
-                    Jump(chaseJumpPower);
+                    // 進んでいる方向にある壁からの距離に比例してジャンプ力が高くなる
+                    // wallBossDistanceに1を足しているのはどれだけ壁からの距離が近くてもある程度ジャンプさせるため
+                    Jump(chaseJumpPower * (wallBossDistance + 1f) / 4f);
                     GravityChengeLeftOrRight();
                     return;
                 }
+
                 // 慣性のある移動をしながらプレイヤーを追う
                 int wowowoMoveDirection = player.position.x > transform.position.x ? 1 : -1;
                 float newX = Mathf.MoveTowards(rb.linearVelocity.x, wowowoMoveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
@@ -253,11 +272,15 @@ public class Boss : MonoBehaviour
                 if(gravityDirection == playerScript.gravityDirection)
                 return;
 
+                
+
                 // 0.78fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
                 float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.78f;
                 float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.78f;
                 if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
                 {
+                    // 進んでいる方向にある壁からの距離に比例してジャンプ力が高くなる
+                    // wallBossDistanceに1を足しているのはどれだけ壁からの距離が近くてもある程度ジャンプさせるため
                     Jump(chaseJumpPower);
                     gravityDirection *= -1;
                     transform.up = -gravityDirection;

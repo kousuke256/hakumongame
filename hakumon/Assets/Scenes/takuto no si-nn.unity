@@ -202,7 +202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 143375997}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -389,51 +389,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142216224}
   m_CullTransparentMesh: 1
---- !u!1 &143375996
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 143375998}
-  - component: {fileID: 143375997}
-  m_Layer: 0
-  m_Name: PauseManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &143375997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143375996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5762f6143a32ea4782609927ab2aa87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
-  pauseMenu: {fileID: 1045134794}
---- !u!4 &143375998
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143375996}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.04018, y: -0.02879, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &529920930
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,8 +676,8 @@ MonoBehaviour:
   walkSpeed: 3.5
   chaseSpeed: 6
   chaseAcceleration: 14
-  chaseJumpPower: 7
-  walkJumpPower: 5.4
+  chaseJumpPower: 6.5
+  walkJumpPower: 4.5
   maxTurn: 3
   gravityPower: 9.8
   shootCoolTime1: 0.4
@@ -1268,7 +1223,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 143375997}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: ReturnToTitle
         m_Mode: 1
@@ -1347,7 +1302,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 0.3, z: 1}
+  m_LocalScale: {x: 3.5, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 582708195}
@@ -2604,7 +2559,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 983049282}
   - {fileID: 943557317}
-  - {fileID: 143375998}
   - {fileID: 1869458894}
   - {fileID: 1045134798}
   - {fileID: 7797922708932588562}
