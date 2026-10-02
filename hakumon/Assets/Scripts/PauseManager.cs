@@ -26,9 +26,7 @@ public class PauseManager : MonoBehaviour
     {
         // 現在のシーンがTitleならPauseManuを表示しない
         if (SceneManager.GetActiveScene().name == "Menu")
-        {
-            return;
-        }
+        return;
 
         //escapeKeyが押されたらpauseMenuを開く
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -46,6 +44,12 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = isPaused ? 0f : 1f;
     }
     //pauseMenuにボタンを追加するのならここに新しいメゾットを作って、ボタンを押したときにここのメゾットを実行させること
+
+    public void Retry()
+    {
+        SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+    }
 
     public void ReturnToTitle()
     {
