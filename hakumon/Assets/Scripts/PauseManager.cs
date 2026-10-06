@@ -20,6 +20,7 @@ public class PauseManager : MonoBehaviour
 
         // sceneが切り替わってもオブジェクトを消さないメゾット
         DontDestroyOnLoad(gameObject);
+
     }
 
     void Update()
@@ -48,6 +49,7 @@ public class PauseManager : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
 

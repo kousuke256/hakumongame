@@ -18,19 +18,18 @@ public class Bullet2 : MonoBehaviour
 
     public void Shoot(int bulletDirecitonX, float playerGravityDirection, float speed, float theta)
     {
-        //Debug.Log(angle);
         bulletDirecitonY = playerGravityDirection;
         rb.linearVelocity = new Vector2(bulletDirecitonX * speed * math.cos(theta), bulletDirecitonY * speed * math.sin(theta));
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Ground"))
+        if (!collider.CompareTag("Ground"))
+        return;
+        
+        if (transform.position.y * bulletDirecitonY < 4.5f)
         {
-            if (transform.position.y * bulletDirecitonY < 4.5f)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
     }
 }
