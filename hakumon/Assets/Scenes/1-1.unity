@@ -409,7 +409,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1200842175}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1005814629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1432,7 +1432,8 @@ Transform:
   m_LocalPosition: {x: -0.26771, y: 0.35265, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 96695772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105446828
@@ -3631,7 +3632,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c93ec96e9698344932d4934f862c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameover
-  lifeManager: {fileID: 0}
 --- !u!50 &8363820556109067872
 Rigidbody2D:
   serializedVersion: 5
@@ -3671,4 +3671,3 @@ SceneRoots:
   - {fileID: 7797922708030562920}
   - {fileID: 693912311}
   - {fileID: 1005814629}
-  - {fileID: 96695772}
