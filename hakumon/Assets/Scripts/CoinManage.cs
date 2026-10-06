@@ -3,8 +3,8 @@ using TMPro;
 
 public class CoinManage : MonoBehaviour
 {
-    public int CoinCount = 0;
-    public TextMeshProUGUI CoinText;
+    public int coinCount = 0;
+    public TextMeshProUGUI coinText;
     void Start()
     {
         UpdateCoinText();
@@ -12,7 +12,7 @@ public class CoinManage : MonoBehaviour
 
     public void AddCoin()
     {
-        CoinCount++;
+        coinCount++;
 
         UpdateCoinText();
     }
@@ -20,6 +20,6 @@ public class CoinManage : MonoBehaviour
     // Update is called once per frame
     void UpdateCoinText()
     {
-        CoinText.text = "Coins: " + CoinCount;
+        coinText.text = "Coins: " + coinCount;
     }
 }
