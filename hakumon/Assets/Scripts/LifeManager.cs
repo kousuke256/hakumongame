@@ -55,4 +55,21 @@ public class LifeManager : MonoBehaviour
     {
         lifeText.gameObject.SetActive(true);
     }
+    // 残機表示を「Zankiシーン用」にする
+    public void ZankiLife()
+    {
+        // 画面の真ん中に移動
+        lifeText.rectTransform.anchoredPosition = Vector2.zero;
+        // 文字を大きくする
+        lifeText.fontSize = 150;
+    }
+
+    // 残機表示を通常の状態に戻す
+    public void NormalLife()
+    {
+        // 左上に戻す
+        lifeText.rectTransform.anchoredPosition = new Vector2(-200, 250);
+        // 文字サイズを元に戻す
+        lifeText.fontSize = 36;
+    }
 }

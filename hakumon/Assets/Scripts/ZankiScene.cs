@@ -9,12 +9,14 @@ public class SceneTimer : MonoBehaviour
     // このSceneが始まったときに1回だけ実行される
     void Start()
     {
+        LifeManager.Instance.ZankiLife();
         // waitTime秒後にChangeSceneを実行する
         Invoke("ChangeScene", waitTime);
     }
     // Sceneを切り替える処理
     void ChangeScene()
     {
+        LifeManager.Instance.NormalLife();
         // nextSceneNameで指定したSceneへ移動
         SceneManager.LoadScene(nextSceneName);
     }
