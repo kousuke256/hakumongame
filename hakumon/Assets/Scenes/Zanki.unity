@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8701e9f92fc9eb240beea425fc8c1d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTimer
-  waitTime: 3
+  waitTime: 2
   nextSceneName: Start
 --- !u!4 &1266128084
 Transform:
