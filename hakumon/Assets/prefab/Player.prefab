@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 4
-  airMoveSpeed: 2
+  airMoveSpeed: 3
   groundAcceleration: 20
   airAcceleration: 10
   jumpPower: 9.3

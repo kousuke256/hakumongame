@@ -34,6 +34,7 @@ public class PlayerSoundsAndEffects : MonoBehaviour
 
     void PlayGravityEffect()
     {
+        Vector3 effectPosition;
         // カメラの中心
         Vector3 cameraPosition = mainCamera.transform.position;
         // カメラの高さ
@@ -43,16 +44,16 @@ public class PlayerSoundsAndEffects : MonoBehaviour
         if (oldPlayerGravitydirection == Vector2.down)
         {
             // 画面上端
-            gravityEffect.transform.position = cameraPosition + new Vector3(0, cameraHeight / 2f, 0);
+            effectPosition = cameraPosition + new Vector3(0, cameraHeight / 2f, 0);
         }
         else
         {
             // 画面下端
-            gravityEffect.transform.position = cameraPosition + new Vector3(0, -cameraHeight / 2f, 0);
+            effectPosition = cameraPosition + new Vector3(0, -cameraHeight / 2f, 0);
         }
-        Debug.Log(gravityEffect.transform.position);
-
-        gravityEffect.transform.up = oldPlayerGravitydirection;
-        gravityEffect.Play();
+        ParticleSystem effect = Instantiate(gravityEffect, effectPosition, Quaternion.identity);
+        effect.transform.up = oldPlayerGravitydirection;
+        effect.Play();
+        Destroy(effect.gameObject, 1.5f);
     }
 }

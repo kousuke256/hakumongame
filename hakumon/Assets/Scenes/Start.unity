@@ -146,11 +146,10 @@ Transform:
   m_GameObject: {fileID: 98327215}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 429421934}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &98327217
@@ -572,11 +571,11 @@ Transform:
   m_GameObject: {fileID: 429421933}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9299998, y: -9.43, z: -15}
-  m_LocalScale: {x: 1.5, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -15}
+  m_LocalScale: {x: 1.2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 98327216}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &429421935
 ParticleSystemRenderer:
@@ -673,7 +672,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -741,7 +740,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -794,7 +793,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1295,7 +1294,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: -6}
+    m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 18, y: 1, z: 2}
     placementMode: 0
@@ -2231,7 +2230,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5600,6 +5599,10 @@ PrefabInstance:
       propertyPath: gravityEffect
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: airMoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -8437,5 +8440,5 @@ SceneRoots:
   - {fileID: 306530816}
   - {fileID: 512841234}
   - {fileID: 1496312728}
-  - {fileID: 1401614749}
   - {fileID: 98327216}
+  - {fileID: 429421934}
