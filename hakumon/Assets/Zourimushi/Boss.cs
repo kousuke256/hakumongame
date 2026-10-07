@@ -112,7 +112,6 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        Debug.Log( "move:" + moveDirection);
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
@@ -146,6 +145,7 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         // 接地判定
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
 
@@ -241,7 +241,10 @@ public class Boss : MonoBehaviour
             // bossが張り付いている壁とplayerの距離が近いのにもかかわらずbossが高いところにいたらジャンプできないようにするif文
             wallPlayerDistance = 10 - gravityDirection.x * player.position.x;
             groundBossDistance = 5 - gravityDirection.x * moveDirection * transform.position.y;
-            if(wallPlayerDistance - groundBossDistance < 1f)
+            if(wallPlayerDistance - groundBossDistance < 1.2f)
+            return;
+
+            if(groundBossDistance > 6f)
             return;
 
             // bossが高いところからジャンプするほどジャンプ力が高くなる
@@ -258,11 +261,12 @@ public class Boss : MonoBehaviour
                 if(gravityDirection != playerScript.gravityDirection && !canChaseJump)
                 {
                     // 慣性なしの移動、変数moveDirectionによって進む向きが決まる
-                    Walk(chaseSpeed);
+                    float newX = Mathf.MoveTowards(rb.linearVelocity.x, moveDirection * chaseSpeed * transform.right.x, chaseAcceleration * Time.fixedDeltaTime);
+                    rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
 
-                    // 進んでいる方向にある壁からの距離が5.5より大きかった場合return;
-                    float wallBossDistance = transform.position.x + 10 * moveDirection * gravityDirection.y;
-                    if(wallBossDistance > 5.5f)
+                    // 進んでいる方向にある壁からの距離が7より大きかった場合return;
+                    float wallBossDistance = 10 + transform.position.x * moveDirection * gravityDirection.y;
+                    if(wallBossDistance > 7f)
                     return;
 
                     // playerと地面との距離が5超過の場合returnを実行してジャンプできないようにしている
