@@ -3,27 +3,55 @@ using Unity.Mathematics;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
+    [Header("弾の情報")]
+    public float shootStartDelay;
+    public float shootCoolTime;
+    public float bulletMaxSpeed = 20f;
+    public int bulletGravityDirection;
+    public float ceiling;
     public Transform player;
     public Transform firePoint;
     public GameObject bullet2Prefab;
-    public int bulletGravityDirection;
-    public float ceiling;
+    private bool canMove;
 
-    public float bulletMaxSpeed = 20f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        
+        InvokeRepeating(nameof(Throw), shootStartDelay, shootCoolTime);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(!canMove)
+        return;
+
+        if (player.position.x > transform.position.x)
+        {
+            // Playerが右にいる
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            // Playerが左にいる
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    void OnBecameVisible()
+    {
+        canMove = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        canMove = false;
     }
 
     void Throw()
     {
+        if(!canMove)
+        return;
+
         float speed;
         int bulletDirectionX = 1;
 
@@ -35,19 +63,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
             differenceX *= -1f;
             bulletDirectionX = -1;
         }
-        //変数名考えるのめんどくさかったから許して、そもそもintじゃなくてboolにしとけばよかったと後悔してる
-        int i = 0;
+        bool a = true;
         float theta = Mathf.Atan((differenceY + Mathf.Sqrt(differenceX * differenceX + differenceY * differenceY)) / differenceX);
         float tan = math.tan(theta);
         float maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
         while(firePoint.position.y * bulletGravityDirection + maxHeight > ceiling)
         {
-            i++;
+            a = false;
             theta -= Mathf.Deg2Rad * 3f;
             tan = math.tan(theta);
             maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
         }
-        if(i == 0)
+        if(a)
         {
             speed = math.sqrt(10 * (differenceY + math.sqrt(differenceX * differenceX + differenceY * differenceY)));
         }

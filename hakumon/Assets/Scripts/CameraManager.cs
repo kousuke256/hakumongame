@@ -14,7 +14,7 @@ public class CameraManager : MonoBehaviour
     {
         if (player == null) return;
 
-        float targetX = Mathf.Clamp(player.position.x, 0f, limitX);
+        float targetX = Mathf.Clamp(player.position.x+2f, 0f, limitX);
         Vector3 targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
 
         // 遅れて追従する
