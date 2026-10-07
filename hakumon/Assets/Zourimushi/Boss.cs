@@ -229,7 +229,7 @@ public class Boss : MonoBehaviour
         if (gravityDirection.y == 0)
         {
             // moveDirectionの方向に慣性のある移動をする
-            float newY = Mathf.MoveTowards(rb.linearVelocity.y, moveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
+            float newY = Mathf.MoveTowards(rb.linearVelocity.y, moveDirection * chaseSpeed * transform.right.y, chaseAcceleration * Time.fixedDeltaTime);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, newY);
 
             // 落下攻撃を可能にする
