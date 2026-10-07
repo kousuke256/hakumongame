@@ -10,6 +10,19 @@ public class PlayerSoundsAndEffects : MonoBehaviour
     public ParticleSystem gravityEffect;
     public Player playerScript;
     public Camera mainCamera;
+    private static PlayerSoundsAndEffects instance;
+    void Awake()
+    {
+        //  シングルトンというらしい、わからなかったらぐぐれ
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+    }
 
     void Start()
     {
@@ -18,6 +31,9 @@ public class PlayerSoundsAndEffects : MonoBehaviour
 
     void Update()
     {
+        if (playerScript == null)
+        return;
+        
         // 重力が変わったら
         if(oldPlayerGravitydirection != playerScript.gravityDirection)
         {
@@ -35,25 +51,23 @@ public class PlayerSoundsAndEffects : MonoBehaviour
     void PlayGravityEffect()
     {
         Vector3 effectPosition;
-        // カメラの中心
         Vector3 cameraPosition = mainCamera.transform.position;
-        // カメラの高さ
         float cameraHeight = mainCamera.orthographicSize * 2f;
 
         // 重力方向によって出す場所を変更
         if (oldPlayerGravitydirection == Vector2.down)
         {
             // 画面上端
-            effectPosition = cameraPosition + new Vector3(0, cameraHeight / 2f, 0);
+            effectPosition = cameraPosition + new Vector3(0, cameraHeight / 2f, 15);
         }
         else
         {
             // 画面下端
-            effectPosition = cameraPosition + new Vector3(0, -cameraHeight / 2f, 0);
+            effectPosition = cameraPosition + new Vector3(0, -cameraHeight / 2f, 15);
         }
         ParticleSystem effect = Instantiate(gravityEffect, effectPosition, Quaternion.identity);
         effect.transform.up = oldPlayerGravitydirection;
         effect.Play();
-        Destroy(effect.gameObject, 1.5f);
+        Destroy(effect.gameObject, 2f);
     }
 }
