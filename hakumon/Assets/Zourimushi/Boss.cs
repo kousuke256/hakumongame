@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 public class Boss : MonoBehaviour
 {
-    public bossState state = bossState.Freeze;
+    public bossState state;
     public Transform player;
     public Rigidbody2D playerRb;
     public Player playerScript;
@@ -49,23 +49,21 @@ public class Boss : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-    private bossState previousState = bossState.Freeze;
+    private bossState previousState = bossState.Start;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-
-    
-float wallPlayerDistance;
+    float wallPlayerDistance;
     float groundBossDistance;
 
     public enum bossState
     {
+        Start,
         walk,
         chase,
         chaseStun,
         ShootAtack1,
         ShootAtack2,
         GravityAtack,
-        Freeze,
 
     }
 
@@ -74,6 +72,11 @@ float wallPlayerDistance;
     {
         switch (state)
         {
+            case bossState.Start : 
+                patternChangeTime = 2f;
+                state = bossState.walk;
+                break;
+
             case bossState.walk :
                 shootTimer = 0f;
                 patternChangeTime = 12.5f;
@@ -97,12 +100,6 @@ float wallPlayerDistance;
                 patternChangeTime = 100f;
                 state = bossState.chase;
                 break;
-
-            case bossState.Freeze : 
-                patternChangeTime = 0.5f;
-                state = bossState.walk;
-                break;
-
         }
     }
 
@@ -155,7 +152,10 @@ float wallPlayerDistance;
         // 重力, rigidbodyのgravityScale=0だから
         rb.AddForce(gravityDirection * gravityPower);
 
-        if(state == bossState.Freeze)
+        if(state == bossState.Start)
+        return;
+
+        if(state == bossState.chaseStun)
         return;
         
         if (state == bossState.chase)
@@ -254,13 +254,15 @@ float wallPlayerDistance;
             // 重力が上下
             if (isGrounded)
             {
+                // bossとplayerの重力の向きが違いかつ、落下攻撃ができない場合
                 if(gravityDirection != playerScript.gravityDirection && !canChaseJump)
                 {
+                    // 慣性なしの移動、変数moveDirectionによって進む向きが決まる
                     Walk(chaseSpeed);
 
-                    // 進んでいる方向にある壁からの距離が6より大きかった場合return;
+                    // 進んでいる方向にある壁からの距離が5.5より大きかった場合return;
                     float wallBossDistance = transform.position.x + 10 * moveDirection * gravityDirection.y;
-                    if(wallBossDistance > 6f)
+                    if(wallBossDistance > 5.5f)
                     return;
 
                     // playerと地面との距離が5超過の場合returnを実行してジャンプできないようにしている
@@ -273,33 +275,37 @@ float wallPlayerDistance;
                     GravityChengeLeftOrRight();
                     return;
                 }
-
-                // 慣性のある移動をしながらプレイヤーを追う
-                int wowowoMoveDirection = player.position.x > transform.position.x ? 1 : -1;
-                float newX = Mathf.MoveTowards(rb.linearVelocity.x, wowowoMoveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
-                rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
-                moveDirection = gravityDirection.y == -1 ? wowowoMoveDirection : -wowowoMoveDirection;
-
-                if(!canChaseJump)
-                return;
-
-                if(gravityDirection == playerScript.gravityDirection)
-                return;
-
-                
-
-                // 0.7fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
-                float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.7f;
-                float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.7f;
-                if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
+                else
                 {
-                    // 進んでいる方向にある壁からの距離に比例してジャンプ力が高くなる
-                    // wallBossDistanceに1を足しているのはどれだけ壁からの距離が近くてもある程度ジャンプさせるため
-                    Jump(chaseJumpPower);
-                    gravityDirection *= -1;
-                    transform.up = -gravityDirection;
-                    moveDirection *= -1;
-                    canChaseJump = false;
+                    // 慣性のある移動をしながらプレイヤーを追う
+                    int wowowoMoveDirection = player.position.x > transform.position.x ? 1 : -1;
+                    float newX = Mathf.MoveTowards(rb.linearVelocity.x, wowowoMoveDirection * chaseSpeed, chaseAcceleration * Time.fixedDeltaTime);
+                    rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+                    moveDirection = gravityDirection.y == -1 ? wowowoMoveDirection : -wowowoMoveDirection;
+
+                    if(!canChaseJump)
+                    return;
+
+                    if(gravityDirection == playerScript.gravityDirection)
+                    return;
+
+                    // playerが重力を変更した直後にbossが落下攻撃するのを防ぐための処理
+                    // playerと地面との距離が5超過の場合returnを実行してジャンプできないようにしている
+                    if(5 - playerScript.gravityDirection.y * player.position.y > 5f)
+                    return;
+
+                    // 0.7fはBossの落下時間, playerの位置を予測してbossが天井から落ちてくるプログラム
+                    float playerFuturePosiition = player.position.x + playerRb.linearVelocity.x * 0.7f;
+                    float bossFuturePosiition = transform.position.x + rb.linearVelocity.x * 0.7f;
+                    if(Mathf.Abs(playerFuturePosiition - bossFuturePosiition) < 0.3f)
+                    {
+                        // ジャンプしてbossの重力をマ反対にする
+                        Jump(chaseJumpPower);
+                        gravityDirection *= -1;
+                        transform.up = -gravityDirection;
+                        moveDirection *= -1;
+                        canChaseJump = false;
+                    }
                 }
             }
         }
