@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {   
+        Debug.Log(isGrounded);
         //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
         if (Keyboard.current.dKey.isPressed)
