@@ -37,6 +37,7 @@ public class PlayerSoundsAndEffects : MonoBehaviour
         // 重力が変わったら
         if(oldPlayerGravitydirection != playerScript.gravityDirection)
         {
+
             oldPlayerGravitydirection = playerScript.gravityDirection;
             audioSource.PlayOneShot(GravitySound);
             
@@ -58,16 +59,57 @@ public class PlayerSoundsAndEffects : MonoBehaviour
         if (oldPlayerGravitydirection == Vector2.down)
         {
             // 画面上端
-            effectPosition = cameraPosition + new Vector3(0, cameraHeight / 2f, 15);
+            effectPosition = cameraPosition + new Vector3(-10.5f, cameraHeight / 2f, 15);
         }
         else
         {
             // 画面下端
-            effectPosition = cameraPosition + new Vector3(0, -cameraHeight / 2f, 15);
+            effectPosition = cameraPosition + new Vector3(-10.5f, -cameraHeight / 2f, 15);
         }
-        ParticleSystem effect = Instantiate(gravityEffect, effectPosition, Quaternion.identity);
-        effect.transform.up = oldPlayerGravitydirection;
-        effect.Play();
-        Destroy(effect.gameObject, 2f);
+        // 横幅28マスからエフェクトを出す(横幅7のParticleSystemを4か所から出しているから)
+        // エフェクトがなるべく均等にかつ、ランダムに出るようにこのプログラムを実装してみた
+        for(int i = 1; i <= 4; i++)
+        {
+            ParticleSystem effect = Instantiate(gravityEffect, effectPosition , Quaternion.identity);
+            effect.transform.up = oldPlayerGravitydirection;
+            effect.Play();
+            Destroy(effect.gameObject, 1.5f);
+            effectPosition.x += 7f; 
+        }
+        
+        
+        //StartCoroutine(FadeOutEffect(effect));
+
     }
+
+    /*IEnumerator FadeOutEffect(ParticleSystem effect)
+    {
+        // 2秒待つ
+        yield return new WaitForSeconds(0.2f);
+
+        ParticleSystemRenderer renderer =effect.GetComponent<ParticleSystemRenderer>();
+        Material material = renderer.material;
+        Color color = material.color;
+        float startAlpha = color.a;
+
+        // 1秒かけて透明にする
+        float fadeTime = 1f;
+        float timer = 0f;
+        while (timer < fadeTime)
+        {
+            timer += Time.deltaTime;
+
+            float alpha = Mathf.Lerp(startAlpha, 0f, timer / fadeTime);
+
+            color.a = alpha;
+            material.color = color;
+
+            yield return null;
+        }
+        // 完全に透明にする
+        color.a = 0f;
+        material.color = color;
+
+        Destroy(effect.gameObject);
+    }*/
 }
