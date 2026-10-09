@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - gravityButtom
   - Bullet
+  - BackGround
   layers:
   - Default
   - TransparentFX
