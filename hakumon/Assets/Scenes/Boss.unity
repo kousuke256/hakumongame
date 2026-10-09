@@ -675,7 +675,7 @@ MonoBehaviour:
   ceiling: 5
   walkSpeed: 3.5
   chaseSpeed: 6
-  chaseAcceleration: 14
+  chaseAcceleration: 13
   chaseJumpPower: 6.5
   walkJumpPower: 4.5
   maxTurn: 3
