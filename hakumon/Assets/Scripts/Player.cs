@@ -57,9 +57,19 @@ public class Player : MonoBehaviour
         //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
         if (Keyboard.current.dKey.isPressed)
-        move = 1;
+        {
+           move = 1;
+           sr.flipX = false ;
+        }
+        
+
         if (Keyboard.current.aKey.isPressed)
-        move = -1;
+        {
+            move = -1;
+            sr.flipX = true ;
+        }
+        
+
 
         //重力操作
         if(isGrounded)
@@ -67,11 +77,13 @@ public class Player : MonoBehaviour
             if (Keyboard.current.wKey.wasPressedThisFrame)
             {
                 gravityDirection = Vector2.up;
+                sr.flipY = true;
                 gravitychange();
             }
             if (Keyboard.current.sKey.wasPressedThisFrame)
             {
                 gravityDirection = Vector2.down;
+                sr.flipY = false;
                 gravitychange();
             }
         }
@@ -239,7 +251,6 @@ public class Player : MonoBehaviour
 
     private void gravitychange()
     {
-        sr.flipY = !sr.flipY;
         groundCheck.localPosition = gravityDirection * groundCheckDistance;
         playerRb.AddForce(gravityDirection * 2f, ForceMode2D.Impulse);
     }
