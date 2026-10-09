@@ -1,9 +1,11 @@
 using UnityEngine;
 
+//カメラの子オブジェクトでTagがBackGroundのオブジェクトに重なっていない場合は動かないように修正
 public class Enemy : MonoBehaviour
 {
     [SerializeField,Header("移動速度")]
     private float moveSpeed;
+    private bool canMove=false;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -13,15 +15,30 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        EnemyMove();
+        if(canMove) EnemyMove();
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // カメラ範囲に入ったら動く
+        if (other.CompareTag("BackGround"))
+        {
+            canMove = true;
+        }
     }
 
+    void OnTriggerExit2D(Collider2D other)
+    {
+        // カメラ範囲から出たら止まる
+        if (other.CompareTag("BackGround"))
+        {
+            canMove = false;
+        }
+    }
     private void EnemyMove()
     {
         //移動方向を示す変数
@@ -38,4 +55,5 @@ public class Enemy : MonoBehaviour
         }
         rb.linearVelocity = new Vector2(-direction*moveSpeed,rb.linearVelocity.y);
     }
+    
 }

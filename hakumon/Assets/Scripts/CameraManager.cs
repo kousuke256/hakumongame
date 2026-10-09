@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//注意！：シリアライズフィールドのPlaterでPlayerを選択
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Transform player;
