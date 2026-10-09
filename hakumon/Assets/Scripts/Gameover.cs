@@ -27,8 +27,8 @@ public class Gameover : MonoBehaviour
         }
         else
         {
-            // まだ残機があるならZankiへ
-            SceneManager.LoadScene("Zanki");
+            // まだ残機があるなら現在のステージを最初から再開
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
