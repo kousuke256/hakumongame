@@ -196,55 +196,50 @@ public class Player : MonoBehaviour
     private void CutJump()
     {
         if (canCutJump)
-        {
-            //小ジャンプ、中ジャンプがおきる時間を決める
-            if(jumpCountUp < mediumJumpTime)
-            {
-                jumpCountUp += Time.fixedDeltaTime;
-                
-                if (jumpPressed)
-                {
-                    jumpHoldTime += Time.fixedDeltaTime;
-                }
-                else
-                {
-                    if (jumpHoldTime < miriJumpTime)
-                    {
-                        //Debug.Log("ミリジャンプ");
-                        jumpCutTime = miriJumpTime;
-                    }
-                    else if (jumpHoldTime < smallJumpTime)
-                    {
-                        //Debug.Log("小ジャンプ");
-                        jumpCutTime = smallJumpTime;
-                    }
-                    else if (jumpHoldTime < mediumJumpTime)
-                    {
-                        //Debug.Log("中ジャンプ");
-                        jumpCutTime = mediumJumpTime;
-                    }
+        return;
 
-                }
+        //小ジャンプ、中ジャンプがおきる時間を決める
+        if(jumpCountUp < mediumJumpTime)
+        {
+            jumpCountUp += Time.fixedDeltaTime;
+            
+            if (jumpPressed)
+            {
+                jumpHoldTime += Time.fixedDeltaTime;
             }
             else
             {
-                //Debug.Log("大ジャンプ");
-                canCutJump = false;
+                if (jumpHoldTime < smallJumpTime)
+                {
+                    //Debug.Log("小ジャンプ");
+                    jumpCutTime = smallJumpTime;
+                }
+                else if (jumpHoldTime < mediumJumpTime)
+                {
+                    //Debug.Log("中ジャンプ");
+                    jumpCutTime = mediumJumpTime;
+                }
+
+            }
+        }
+        else
+        {
+            //Debug.Log("大ジャンプ");
+            canCutJump = false;
+            jumpCountUp = 0f;
+            jumpHoldTime = 0f;
+        }
+
+        //大ジャンプ以外の処理
+        if (jumpCountUp > jumpCutTime)
+        {
+            if (Vector2.Dot(playerRb.linearVelocity, gravityDirection) < 0 )
+            {
                 jumpCountUp = 0f;
                 jumpHoldTime = 0f;
-            }
-
-            //大ジャンプ以外の処理
-            if (jumpCountUp > jumpCutTime)
-            {
-                if (Vector2.Dot(playerRb.linearVelocity, gravityDirection) < 0 )
-                {
-                    jumpCountUp = 0f;
-                    jumpHoldTime = 0f;
-                    jumpCutTime = 100f;
-                    canCutJump = false;//現在の重力方向への速度をjumpCutMultiplier倍している
-                    playerRb.linearVelocity -= gravityDirection * Vector2.Dot(playerRb.linearVelocity, gravityDirection) * (1 - jumpCutMultiplier);
-                }
+                jumpCutTime = 100f;
+                canCutJump = false;//現在の重力方向への速度をjumpCutMultiplier倍している
+                playerRb.linearVelocity -= gravityDirection * Vector2.Dot(playerRb.linearVelocity, gravityDirection) * (1 - jumpCutMultiplier);
             }
         }
     }
