@@ -281,8 +281,8 @@ Transform:
   m_GameObject: {fileID: 229567990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.11, y: -0.53, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 9.4965, y: -2.4945, z: 0}
+  m_LocalScale: {x: 0.9369957, y: 0.96469134, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -299,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9f5c0e725fb9149a4b6c813f4f99ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Patapata
-  speed: 2
-  moveDistance: 2
+  jumpPower: 30
+  coolTime: 0.5
 --- !u!1 &283511920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,11 +2231,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.68762
+      value: -1.82
       objectReference: {fileID: 0}
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.44567
+      value: -2.31
       objectReference: {fileID: 0}
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2613,7 +2613,7 @@ Transform:
   m_GameObject: {fileID: 1230460928}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.5, y: 0, z: 0}
+  m_LocalPosition: {x: 15.33, y: -0.15, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
