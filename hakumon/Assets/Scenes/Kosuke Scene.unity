@@ -4006,6 +4006,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: airMoveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: airAcceleration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: groundAcceleration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5753,8 +5769,8 @@ Transform:
   m_GameObject: {fileID: 1680199341}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 30, y: 50, z: 1}
+  m_LocalPosition: {x: 0.0398, y: 0, z: 10}
+  m_LocalScale: {x: 47.286583, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 356019428}
