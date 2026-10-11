@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
                 sr.flipY = true;
                 gravitychange();
             }
-            if (Keyboard.current.sKey.wasPressedThisFrame)
+            else if (Keyboard.current.sKey.wasPressedThisFrame)
             {
                 gravityDirection = Vector2.down;
                 sr.flipY = false;
@@ -240,7 +240,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void gravitychange()
+    public void gravitychange()
     {
         groundCheck.localPosition = gravityDirection * groundCheckDistance;
         playerRb.AddForce(gravityDirection * 2f, ForceMode2D.Impulse);

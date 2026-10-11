@@ -139,7 +139,7 @@ public class Boss : MonoBehaviour
     {
         if (state == bossState.chase)
         return;
-        
+
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
@@ -203,7 +203,31 @@ public class Boss : MonoBehaviour
         float gravitySpeed = Vector2.Dot(rb.linearVelocity, gravityDirection);
         Vector2 gravityVelosity = gravitySpeed * gravityDirection;
         rb.linearVelocity = gravityVelosity + moveVelocity;
-        
+
+        // bossとplayerの距離が2未満かつ、重力方向が同じかつ、playerがbossのy座標の2.2未満のところにいるかつ、playerが落ちているとき重力っ反転
+        if(Vector2.Distance(transform.position, player.position) > 4f)
+        return;
+
+        if(playerScript.gravityDirection != gravityDirection)
+        return;
+
+        if(gravityDirection.y * (transform.position.y - player.position.y) > 3f)
+        return;
+
+       // if(playerRb.linearVelocity.y * playerScript.gravityDirection.y < 0)
+        //return;
+
+        if(gravityDirection.y == -1)
+        {
+            player.GetComponent<SpriteRenderer>().flipY = true;
+        }
+        else
+        {
+            player.GetComponent<SpriteRenderer>().flipY = false;
+        }
+        playerScript.gravityDirection.y *= -1;
+        playerScript.gravitychange();
+        playerRb.linearVelocity = new Vector2(0, 0);
     }
 
     void Jump(float jumpPower)
