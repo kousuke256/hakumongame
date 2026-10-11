@@ -58,17 +58,16 @@ public class Boss : MonoBehaviour
     private bool chaseAction = false;
     private float oldPlayerGravityDirection = 0f;
     private float oldVelocityX = 0f;
+    private int bossAction = 0;
+    private int u;
 
     public enum bossState
     {
         Start,
         walk,
         chase,
-        chaseStun,
         ShootAtack1,
         ShootAtack2,
-        GravityAtack,
-
     }
 
     // paternChangeTimeで次の行動が何秒続くかを決め、stateを変えている
@@ -83,26 +82,45 @@ public class Boss : MonoBehaviour
 
             case bossState.walk :
                 shootTimer = 0f;
-                patternChangeTime = 12.5f;
-                // bossの攻撃をShootAtack1かShootAtack2にする。同じ行動が連続で出ないようにしてある
-                do{
-                    state = (bossState)UnityEngine.Random.Range(3,5);
-                }while(state == previousState);
-                previousState = state;
+                patternChangeTime = 15f;
+                
+                if(bossAction == 0)
+                {
+                    if(u == 0)
+                    {
+                        state = bossState.ShootAtack1;
+                    }
+                    else
+                    {
+                        state = bossState.ShootAtack2;
+                    }
+                    bossAction++;
+                }
+                else if(bossAction == 1)
+                {
+                    if(u == 0)
+                    {
+                        state = bossState.ShootAtack2;
+                    }
+                    else
+                    {
+                        state = bossState.ShootAtack1;
+                    }
+                    bossAction++;
+                }
+                else
+                {
+                    state = bossState.chase;
+                }
                 break;
 
             case bossState.ShootAtack1 : 
             case bossState.ShootAtack2 :
-                goto case bossState.chase;
-
-            case bossState.chase : 
                 patternChangeTime = 1f;
                 state = bossState.walk;
                 break;
 
-            case bossState.chaseStun :
-                patternChangeTime = 100f;
-                state = bossState.chase;
+            case bossState.chase :
                 break;
         }
     }
@@ -113,10 +131,15 @@ public class Boss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerRb = player.GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        u = UnityEngine.Random.Range(0, 2);
     }
 
     void Update()
     {
+        if (state == bossState.chase)
+        return;
+        
         patternTimer += Time.deltaTime;
         
         if(patternTimer > patternChangeTime)
@@ -158,9 +181,6 @@ public class Boss : MonoBehaviour
         rb.AddForce(gravityDirection * gravityPower);
 
         if(state == bossState.Start)
-        return;
-
-        if(state == bossState.chaseStun)
         return;
         
         if (state == bossState.chase)
