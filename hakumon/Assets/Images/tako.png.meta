@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a2e916d653c684949b94712c63b33729
+guid: a54b07efe399952438163b5fad154ce8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 148461689928566452
-    second: human1_0
+      213: 5267910599364223841
+    second: tako_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: human1_0
+      name: tako_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 7
         y: 0
-        width: 30
-        height: 31
+        width: 114
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b642f2de117f0200800000000000000
-      internalID: 148461689928566452
+      spriteID: 163ae9f87c06b1940800000000000000
+      internalID: 5267910599364223841
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      human1_0: 148461689928566452
+      tako_0: 5267910599364223841
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
