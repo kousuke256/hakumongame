@@ -4265,6 +4265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Patapata
   jumpPower: 30
+  coolTime: 0
 --- !u!1001 &1063993701
 PrefabInstance:
   m_ObjectHideFlags: 0
