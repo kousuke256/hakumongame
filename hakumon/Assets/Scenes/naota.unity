@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 229567991}
   - component: {fileID: 229567995}
   m_Layer: 0
-  m_Name: patapata
+  m_Name: Patapata
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229567990}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -196,7 +196,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -281,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 229567990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.4965, y: -2.4945, z: 0}
+  m_LocalPosition: {x: -2.48, y: -2.47, z: 0}
   m_LocalScale: {x: 0.9369957, y: 0.96469134, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -299,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9f5c0e725fb9149a4b6c813f4f99ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Patapata
-  jumpPower: 30
-  coolTime: 0.5
+  jumpPower: 7
+  moveSpeed: 2
 --- !u!1 &283511920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,11 +1715,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.72
+      value: 12.37
       objectReference: {fileID: 0}
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.27
+      value: -1.32
       objectReference: {fileID: 0}
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2231,11 +2231,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.82
+      value: 12.17
       objectReference: {fileID: 0}
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.31
+      value: -2.44
       objectReference: {fileID: 0}
     - target: {fileID: 5198411449992901566, guid: 3d702838b2f72d241afac7645c288378, type: 3}
       propertyPath: m_LocalPosition.z
