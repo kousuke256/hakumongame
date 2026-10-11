@@ -680,7 +680,7 @@ MonoBehaviour:
   walkJumpPower: 4.5
   maxTurn: 3
   gravityPower: 9.8
-  shootCoolTime1: 0.6
+  shootCoolTime1: 1
   shootCoolTime2: 0.5
   gravityDirection: {x: 1, y: 0}
   isGrounded: 0
