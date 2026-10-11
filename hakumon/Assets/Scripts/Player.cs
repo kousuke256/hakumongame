@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     [Header("ジャンプ")]
     public float jumpPower = 9.3f;
     public float jumpCutMultiplier = 0.4f; //小ジャンプになるときの挙動の感じを決める変数
-    public float miriJumpTime = 0.14f;
     public float smallJumpTime = 0.3f;
     public float mediumJumpTime = 0.45f;
     private float jumpHoldTime = 0f;
@@ -195,7 +194,7 @@ public class Player : MonoBehaviour
 
     private void CutJump()
     {
-        if (canCutJump)
+        if (!canCutJump)
         return;
 
         //小ジャンプ、中ジャンプがおきる時間を決める
@@ -211,12 +210,10 @@ public class Player : MonoBehaviour
             {
                 if (jumpHoldTime < smallJumpTime)
                 {
-                    //Debug.Log("小ジャンプ");
                     jumpCutTime = smallJumpTime;
                 }
                 else if (jumpHoldTime < mediumJumpTime)
                 {
-                    //Debug.Log("中ジャンプ");
                     jumpCutTime = mediumJumpTime;
                 }
 
@@ -224,7 +221,6 @@ public class Player : MonoBehaviour
         }
         else
         {
-            //Debug.Log("大ジャンプ");
             canCutJump = false;
             jumpCountUp = 0f;
             jumpHoldTime = 0f;
