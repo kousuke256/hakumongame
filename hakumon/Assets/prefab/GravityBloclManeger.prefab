@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 772666740938621350}
+  - component: {fileID: 4277777517486198389}
   - component: {fileID: 7295854827571934194}
   - component: {fileID: 4667761780939598804}
   - component: {fileID: 325157302192792150}
   - component: {fileID: 876407004820658141}
   - component: {fileID: 1542302131481533109}
-  - component: {fileID: 4277777517486198389}
   m_Layer: 3
   m_Name: GravityBlock
   m_TagString: Ground
@@ -31,12 +31,27 @@ Transform:
   m_GameObject: {fileID: 1571160471309304806}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: -1}
+  m_LocalPosition: {x: 0, y: -2, z: -0.5}
   m_LocalScale: {x: 4, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1714048145636375332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4277777517486198389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571160471309304806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444f7fbf7d2369446b4a22bbf579fa8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GravityBlock
+  playerScript: {fileID: 0}
+  rail: {fileID: 714544219622501376}
+  moveSpeed: 5
 --- !u!1839735485 &7295854827571934194
 Tilemap:
   m_ObjectHideFlags: 0
@@ -299,21 +314,6 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 1571160471309304806}
---- !u!114 &4277777517486198389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1571160471309304806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 444f7fbf7d2369446b4a22bbf579fa8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GravityBlock
-  playerScript: {fileID: 0}
-  rail: {fileID: 714544219622501376}
-  moveSpeed: 5
 --- !u!1 &3447298506504330364
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,8 +343,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 772666740938621350}
   - {fileID: 714544219622501376}
+  - {fileID: 772666740938621350}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7133385042492800126
@@ -373,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 7133385042492800126}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.25, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

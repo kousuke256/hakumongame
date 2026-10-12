@@ -72,7 +72,7 @@ public class BulletHoming : MonoBehaviour
         }
         playerScript.gravityDirection.y *= -1;
         playerScript.gravitychange();
-        playerScript.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, 0);
+        playerScript.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(playerScript.GetComponent<Rigidbody2D>().linearVelocity.x, 0);
 
         Destroy(gameObject);
     }
