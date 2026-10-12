@@ -57,7 +57,7 @@ public class CreateHoming : MonoBehaviour
 
         // 弾を生成する
         GameObject bullet = Instantiate(homingBullet, transform.position, Quaternion.identity);
-        bullet.GetComponent<HomingBullet>().player = player;
-        bullet.GetComponent<HomingBullet>().playerScript = playerScript;
+        bullet.GetComponent<BulletHoming>().player = player;
+        bullet.GetComponent<BulletHoming>().playerScript = playerScript;
     }
 }

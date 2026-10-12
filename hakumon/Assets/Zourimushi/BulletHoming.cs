@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HomingBullet : MonoBehaviour
+public class BulletHoming : MonoBehaviour
 {
     
     [Header("弾の設定")]
