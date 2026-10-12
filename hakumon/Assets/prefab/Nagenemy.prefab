@@ -49,11 +49,11 @@ MonoBehaviour:
   shootStartDelay: 1
   shootCoolTime: 2
   bulletMaxSpeed: 20
+  bulletGravityDirection: 1
   ceiling: 4
-  player: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+  player: {fileID: 0}
   firePoint: {fileID: 11491459643926593}
   bullet2Prefab: {fileID: 4379194192510411036, guid: b41d46a2ff65f6b43a890ddd12131b0b, type: 3}
-  bulletGravityDirection: 1
 --- !u!212 &5423587802227058632
 SpriteRenderer:
   serializedVersion: 3

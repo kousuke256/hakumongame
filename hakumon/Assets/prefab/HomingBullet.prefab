@@ -170,10 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b07c074e68256342ac674ed81209d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomingBullet
-  player: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
-  speed: 4
+  player: {fileID: 0}
+  speed: 3
   turnSpeed: 70
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  playerScript: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+  playerScript: {fileID: 0}

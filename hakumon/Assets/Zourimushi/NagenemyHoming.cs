@@ -8,6 +8,7 @@ public class NagenemyHoming : MonoBehaviour
     public float shootCoolTime;
 
     public Transform player;
+    public Player playerScript;
     public Transform firePoint;
     public GameObject homingBullet;
     private bool canMove;
@@ -50,5 +51,7 @@ public class NagenemyHoming : MonoBehaviour
     {
         // 弾を生成する
         GameObject bullet = Instantiate(homingBullet, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<HomingBullet>().player = player;
+        bullet.GetComponent<HomingBullet>().playerScript = playerScript;
     }
 }
