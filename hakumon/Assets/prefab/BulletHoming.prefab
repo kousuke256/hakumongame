@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8944155850104153738}
   - component: {fileID: 8740783829516630037}
   m_Layer: 0
-  m_Name: HomingBullet
+  m_Name: BulletHoming
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5566076430621321598}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.0375, y: 0.43848, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170,10 +170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b07c074e68256342ac674ed81209d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomingBullet
-  player: {fileID: 0}
   speed: 3
-  turnSpeed: 70
+  lifeTime: 7
+  turnSpeed: 75
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   playerScript: {fileID: 0}
+  player: {fileID: 0}
