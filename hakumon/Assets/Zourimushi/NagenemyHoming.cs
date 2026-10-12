@@ -47,19 +47,8 @@ public class NagenemyHoming : MonoBehaviour
     }
 
     void Throw()
-{
-    // 弾を生成する
-    GameObject bullet = Instantiate(
-        homingBullet,
-        firePoint.position,
-        Quaternion.identity
-    );
-
-    // 弾のスクリプトを取得する
-    HomingBullet homingBulletScript =
-        bullet.GetComponent<HomingBullet>();
-
-    // Playerの情報を渡して、弾を初期化する
-    homingBulletScript.Initialize(player);
-}
+    {
+        // 弾を生成する
+        GameObject bullet = Instantiate(homingBullet, firePoint.position, Quaternion.identity);
+    }
 }
