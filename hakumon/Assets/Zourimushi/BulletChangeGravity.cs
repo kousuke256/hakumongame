@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletChangeGravity : MonoBehaviour
 {
-    private float lifeTime = 8f;
+    public float lifeTime = 8f;
     private float timer = 0f;
     private Rigidbody2D rb;
     private float groundCheckRadius = 0.3f;

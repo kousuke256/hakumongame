@@ -7,7 +7,7 @@ public class Title : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SceneManager.LoadScene("Start");
+            SceneManager.LoadScene("Tutorial");
         }
     }
 }
