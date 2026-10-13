@@ -1996,13 +1996,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 4
   airMoveSpeed: 3
+  groundAcceleration: 20
+  airAcceleration: 10
   jumpPower: 8
   jumpCutMultiplier: 0.4
+  smallJumpTime: 0.3
+  mediumJumpTime: 0.45
   groundCheck: {fileID: 295150096}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  gravityPower: 9.8
+  gravityDirection: {x: 0, y: -1}
+  groundCheckDistance: 0.45
 --- !u!61 &2060346368
 BoxCollider2D:
   m_ObjectHideFlags: 0
