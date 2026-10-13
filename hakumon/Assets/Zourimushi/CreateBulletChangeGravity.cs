@@ -36,14 +36,14 @@ public class CreateBulletChangeGravity : MonoBehaviour
     // 画面内にこいつがいる場合は動作を可能にして、画面外にいる場合は動作を不能にする
     void OnBecameVisible()
     {
-        if(!canMoveWhenInvisible)
+        if(canMoveWhenInvisible)
         return;
 
         canMove = true;
     }
     void OnBecameInvisible()
     {
-        if(!canMoveWhenInvisible)
+        if(canMoveWhenInvisible)
         return;
         
         canMove = false;
