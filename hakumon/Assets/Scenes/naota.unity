@@ -2552,8 +2552,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   player: {fileID: 0}
-  limitX: 7
   smoothTime: 0.3
+  offsetX: 4
 --- !u!20 &1200996864
 Camera:
   m_ObjectHideFlags: 0
@@ -2634,8 +2634,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   player: {fileID: 1356238053}
-  limitX: 100
   smoothTime: 0.3
+  offsetX: 4
 --- !u!1 &1230460928
 GameObject:
   m_ObjectHideFlags: 0

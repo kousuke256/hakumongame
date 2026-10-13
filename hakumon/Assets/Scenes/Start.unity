@@ -947,8 +947,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   player: {fileID: 512841235}
-  limitX: 7
   smoothTime: 0.3
+  offsetX: 4
 --- !u!1001 &512841234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4316,10 +4316,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 292048569}
   - {fileID: 604797576}
+  - {fileID: 98327216}
   - {fileID: 5686702150569068099}
   - {fileID: 8876867790743412407}
   - {fileID: 940558953}
   - {fileID: 512841234}
   - {fileID: 1496312728}
-  - {fileID: 98327216}
   - {fileID: 1622573824}
