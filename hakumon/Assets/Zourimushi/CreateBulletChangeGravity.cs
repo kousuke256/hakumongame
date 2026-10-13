@@ -9,9 +9,11 @@ public class CreateBulletChangeGravity : MonoBehaviour
     public Vector2 BulletDirection;
     public float speed;
     public float effectDuration;
+    public bool canMoveWhenInvisible = false;
     public GameObject BulletChangeGravity;
     public ParticleSystem createEffect;
     private float timer = 0f;
+    private bool canMove;
     public Transform player;
     public Player playerScript;
 
@@ -22,8 +24,27 @@ public class CreateBulletChangeGravity : MonoBehaviour
         timer = shootCoolTime - shootStartDelay;
     }
 
+    // 画面内にこいつがいる場合は動作を可能にして、画面外にいる場合は動作を不能にする
+    void OnBecameVisible()
+    {
+        if(!canMoveWhenInvisible)
+        return;
+
+        canMove = true;
+    }
+    void OnBecameInvisible()
+    {
+        if(!canMoveWhenInvisible)
+        return;
+        
+        canMove = false;
+    }
+
     void Update()
     {
+        if(!canMove)
+        return;
+
         timer += Time.deltaTime;
         if(timer >= shootCoolTime)
         {
