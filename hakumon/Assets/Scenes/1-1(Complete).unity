@@ -693,14 +693,6 @@ CompositeCollider2D:
         Y: -40000000
       - X: 950000000
         Y: -40000000
-    - - X: 1240000000
-        Y: -40000000
-      - X: 1240000000
-        Y: -30000000
-      - X: 1250000000
-        Y: -30000000
-      - X: 1250000000
-        Y: -40000000
     - - X: 1010000000
         Y: -30000000
       - X: 980000000
@@ -751,6 +743,10 @@ CompositeCollider2D:
       - {x: 32.00003, y: 1}
       - {x: 34, y: 0.9999706}
       - {x: 34.00003, y: 0}
+    - - {x: 100.99997, y: 6}
+      - {x: 100.99997, y: 7}
+      - {x: 98, y: 6.9999704}
+      - {x: 98.00003, y: 6}
     - - {x: 94.99997, y: 6}
       - {x: 94.99997, y: 7}
       - {x: 92, y: 6.9999704}
@@ -781,10 +777,6 @@ CompositeCollider2D:
       - {x: 110.00003, y: -9}
       - {x: 115, y: -9.00003}
       - {x: 115.00003, y: -10}
-    - - {x: 100.99997, y: 6}
-      - {x: 100.99997, y: 7}
-      - {x: 98, y: 6.9999704}
-      - {x: 98.00003, y: 6}
     - - {x: 20.999971, y: 3}
       - {x: 20.999971, y: 4}
       - {x: 20, y: 3.999971}
@@ -829,10 +821,6 @@ CompositeCollider2D:
       - {x: 50.999973, y: -2}
       - {x: 33, y: -2.0000293}
       - {x: 33.00003, y: -8}
-    - - {x: 125, y: -3.9999704}
-      - {x: 124, y: -3.9999704}
-      - {x: 124.00003, y: -3}
-      - {x: 125, y: -3.0000293}
     - - {x: 100.99997, y: -4}
       - {x: 100.99997, y: -3}
       - {x: 98, y: -3.0000293}
@@ -4748,6 +4736,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: 123, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 124, y: -4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 3
@@ -11489,7 +11487,7 @@ Tilemap:
     m_RefCount: 2
     m_Data: {fileID: 481701301}
   - serializedVersion: 2
-    m_RefCount: 976
+    m_RefCount: 977
     m_Data: {fileID: 11400000, guid: 5233e940b2d0b3043991ad48f8ec315f, type: 2}
   - serializedVersion: 2
     m_RefCount: 0
@@ -11499,14 +11497,14 @@ Tilemap:
     m_RefCount: 53
     m_Data: {fileID: -2708583396551306362, guid: b8a1910ac02340b4491b59c0de26cc66, type: 3}
   - serializedVersion: 2
-    m_RefCount: 976
+    m_RefCount: 977
     m_Data: {fileID: -5356574185940491189, guid: 13197f5b5b8461848a718e905fb72a56, type: 3}
   - serializedVersion: 2
     m_RefCount: 2
     m_Data: {fileID: 1489803965}
   m_TileMatrixArray:
   - serializedVersion: 2
-    m_RefCount: 1049
+    m_RefCount: 1050
     m_Data:
       e00: 1
       e01: 0
@@ -11526,7 +11524,7 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - serializedVersion: 2
-    m_RefCount: 1047
+    m_RefCount: 1048
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - serializedVersion: 2
     m_RefCount: 2
@@ -11783,6 +11781,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8820794597199319053, guid: 86003c595f140d849b86c42f0a584983, type: 3}
       propertyPath: BulletDirection.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820794597199319053, guid: 86003c595f140d849b86c42f0a584983, type: 3}
+      propertyPath: canMoveWhenInvisible
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12125,6 +12127,18 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1240830801}
+    - target: {fileID: 8820794597199319053, guid: 86003c595f140d849b86c42f0a584983, type: 3}
+      propertyPath: effectDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820794597199319053, guid: 86003c595f140d849b86c42f0a584983, type: 3}
+      propertyPath: shootStartDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820794597199319053, guid: 86003c595f140d849b86c42f0a584983, type: 3}
+      propertyPath: canMoveWhenInvisible
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13129,8 +13143,6 @@ Transform:
   - {fileID: 304307645}
   - {fileID: 2063202211}
   - {fileID: 1618911241}
-  - {fileID: 782549412}
-  - {fileID: 544627026}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367733332
