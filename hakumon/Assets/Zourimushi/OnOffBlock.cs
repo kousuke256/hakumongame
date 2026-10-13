@@ -39,11 +39,15 @@ public class OnOffBlock : MonoBehaviour
         if (OnOff)
         {
             col.isTrigger = false;
+            gameObject.layer = LayerMask.NameToLayer("Ground");
+            gameObject.tag = "Ground";
         }
         else
         {
             tilemap.color = usu;
             col.isTrigger = true;
+            gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.tag = "Default";
         }
     }
 
@@ -62,12 +66,14 @@ public class OnOffBlock : MonoBehaviour
                 tilemap.color = koi;
                 col.isTrigger = false;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
+                gameObject.tag = "Ground";
             }
             else
             {
                 tilemap.color = usu;
                 col.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
+                gameObject.tag = "Default";
             }
         
 
@@ -80,12 +86,14 @@ public class OnOffBlock : MonoBehaviour
                 tilemap.color = usu;
                 col.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
+                gameObject.tag = "Default";
             }
             else
             {
                 tilemap.color = koi;
                 col.isTrigger = false;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
+                gameObject.tag = "Ground";
             }
         }
     }
