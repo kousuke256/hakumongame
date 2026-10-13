@@ -11,19 +11,6 @@ public class PlayerSoundsAndEffects : MonoBehaviour
     public Player playerScript;
     public Camera mainCamera;
     private static PlayerSoundsAndEffects instance;
-    void Awake()
-    {
-        //  シングルトンというらしい、わからなかったらぐぐれ
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-
-    }
-
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -37,7 +24,6 @@ public class PlayerSoundsAndEffects : MonoBehaviour
         // 重力が変わったら
         if(oldPlayerGravitydirection != playerScript.gravityDirection)
         {
-
             oldPlayerGravitydirection = playerScript.gravityDirection;
             audioSource.PlayOneShot(GravitySound);
             

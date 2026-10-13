@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     private bool isGrounded;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
+
     public LayerMask groundLayer;
     
     [Header("重力")]
@@ -41,8 +43,7 @@ public class Player : MonoBehaviour
 
     // groundCheckのlocalPositionをいじる変数。いつか重力の向きが変わったらスクリプトの向きを変えるプログラムを作るから将来なくなる変数
     public float groundCheckDistance = 0.45f;
-
-    int i = 0;
+    private bool isDead = false;
    
     void Start()
     {
@@ -248,11 +249,27 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Bullet"))
-        {
-            i++;
-            Debug.Log("ぶつかった！");
-             Debug.Log(i);
-        }
+        if (!collider.CompareTag("Bullet"))
+        return;
+
+        Deth();
+    }
+
+    void Deth()
+    {
+        if(isDead)
+        return;
+        
+        isDead = true;
+        LifeManager.Instance.LoseLife();
+
+            if (LifeManager.Instance.lifeCount <= 0)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
     }
 }

@@ -4,35 +4,27 @@ using UnityEngine.Tilemaps;
 public class OnOffBlock : MonoBehaviour
 {
     public bool OnOff;
-    public float ToumeiDo;
     public Player PlayerScript;
     public TileBase On;
     public TileBase Off;
     private float oldGravityDirectionY = -1f;
     private Tilemap tilemap;
-    private Color usu;
-    private Color koi;
     private TilemapCollider2D col;
-
-
+    private CompositeCollider2D compositeCol;
 
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
         col = GetComponent<TilemapCollider2D>();
+        compositeCol = GetComponent<CompositeCollider2D>();
 
-        // 元の色を保存する
-        koi = tilemap.color;
-        usu = tilemap.color;
-    
-        // 薄い色の透明度を設定
-        usu.a = ToumeiDo;
 
         // 初期状態を設定する
         if (OnOff)
         {
             ChangeAllTiles(On);
             col.isTrigger = false;
+            compositeCol.isTrigger = false;
             gameObject.layer = LayerMask.NameToLayer("Ground");
             gameObject.tag = "Ground";
             
@@ -40,8 +32,8 @@ public class OnOffBlock : MonoBehaviour
         else
         {
             ChangeAllTiles(Off);
-            //tilemap.color = usu;
             col.isTrigger = true;
+            compositeCol.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer("Default");
             gameObject.tag = "Untagged";
             
@@ -75,8 +67,8 @@ public class OnOffBlock : MonoBehaviour
             if (OnOff)
             {
                 ChangeAllTiles(On);
-                //tilemap.color = koi;
                 col.isTrigger = false;
+                compositeCol.isTrigger = false;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
                 gameObject.tag = "Ground";
                 
@@ -84,8 +76,8 @@ public class OnOffBlock : MonoBehaviour
             else
             {
                 ChangeAllTiles(Off);
-                //tilemap.color = usu;
                 col.isTrigger = true;
+                compositeCol.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 gameObject.tag = "Untagged";
                 
@@ -97,8 +89,8 @@ public class OnOffBlock : MonoBehaviour
             if (OnOff)
             {
                 ChangeAllTiles(Off);
-                //tilemap.color = usu;
                 col.isTrigger = true;
+                compositeCol.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 gameObject.tag = "Untagged";
                 
@@ -106,8 +98,8 @@ public class OnOffBlock : MonoBehaviour
             else
             {
                 ChangeAllTiles(On);
-                //tilemap.color = koi;
                 col.isTrigger = false;
+                compositeCol.isTrigger = false;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
                 gameObject.tag = "Ground";
                 
