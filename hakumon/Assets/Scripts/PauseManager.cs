@@ -58,7 +58,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         pauseMenu.SetActive(false);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("1-1(Complete)");
     }
 
     public void Quit()

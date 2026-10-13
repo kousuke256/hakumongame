@@ -9,22 +9,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Kosuke Scene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 158840328d00e344bb8933e9f9ef4681
+  - enabled: 1
+    path: Assets/Scenes/1-1(Complete).unity
+    guid: de19a02e70010a048a124b832107389b
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: c73f41231ece687478093bb947cececf
   - enabled: 1
-    path: Assets/Scenes/Start.unity
-    guid: 084ac26fe91dd8447aecc4a7c51ea5f5
-  - enabled: 1
-    path: Assets/Scenes/Goal.unity
-    guid: d2b80defa5bf70048b5f31b02f1d31f2
-  - enabled: 0
-    path: Assets/Scenes/Boss.unity
-    guid: a7488fc15c6fd384e96340fe0e43d066
-  - enabled: 1
     path: Assets/Scenes/Zanki.unity
     guid: 0e1f7f7cd70b81644833f0280c92cdf8
-  - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 158840328d00e344bb8933e9f9ef4681
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

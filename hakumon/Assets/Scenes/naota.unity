@@ -645,7 +645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OnOffBlock
   OnOff: 1
   ToumeiDo: 0.1
-  PlayerScript: {fileID: 0}
+  PlayerScript: {fileID: 1438240936}
   On: {fileID: 11400000, guid: d1b6767c7c7876a4d8cfe76134891f57, type: 2}
   Off: {fileID: 11400000, guid: b6804ad04f7aab64bb3368b3f29a27c9, type: 2}
 --- !u!1 &283511920
@@ -2897,7 +2897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OnOffBlock
   OnOff: 0
   ToumeiDo: 0.1
-  PlayerScript: {fileID: 0}
+  PlayerScript: {fileID: 1438240936}
   On: {fileID: 11400000, guid: d1b6767c7c7876a4d8cfe76134891f57, type: 2}
   Off: {fileID: 11400000, guid: b6804ad04f7aab64bb3368b3f29a27c9, type: 2}
 --- !u!1 &815824414
@@ -4007,6 +4007,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+--- !u!114 &1438240936 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+  m_PrefabInstance: {fileID: 1438240935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c687daf80ba1cc34f94ed02649333479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!1 &1888398752
 GameObject:
   m_ObjectHideFlags: 0
