@@ -12385,6 +12385,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 687878086}
+        m_TargetAssemblyTypeName: PauseTextChangeColor, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 734717977}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: Retry
@@ -12580,6 +12592,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 738226168}
+        m_TargetAssemblyTypeName: PauseTextChangeColor, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 734717977}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: Quit
@@ -13565,6 +13589,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1163885390}
+        m_TargetAssemblyTypeName: PauseTextChangeColor, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 734717977}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: ReturnToTitle
@@ -17856,11 +17892,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.17
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17985,9 +18021,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.84313726}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.454902, g: 0.454902, b: 0.454902, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_PressedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.84313726}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.84313726}
+    m_DisabledColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.84313726}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -18006,6 +18042,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1911157241}
+        m_TargetAssemblyTypeName: PauseTextChangeColor, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 734717977}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: TogglePouse
@@ -18917,8 +18965,8 @@ SceneRoots:
   - {fileID: 734717978}
   - {fileID: 1811141752}
   - {fileID: 521662081}
-  - {fileID: 1320246851}
   - {fileID: 1867224342}
+  - {fileID: 1320246851}
   - {fileID: 1063993701}
   - {fileID: 760390635}
   - {fileID: 406473280}
