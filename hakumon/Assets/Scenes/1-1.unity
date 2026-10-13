@@ -1252,27 +1252,9 @@ CompositeCollider2D:
   m_EdgeRadius: 0
   m_ColliderPaths:
   - m_Collider: {fileID: 775583034}
-<<<<<<< HEAD
-    m_ColliderPaths:
-    - - X: 210000000
-        Y: 70000000
-      - X: 190000000
-        Y: 70000000
-      - X: 190000000
-        Y: 60000000
-      - X: 210000000
-        Y: 60000000
-  m_CompositePaths:
-    m_Paths:
-    - - {x: 20.999971, y: 6}
-      - {x: 20.999971, y: 7}
-      - {x: 19, y: 6.9999704}
-      - {x: 19.000029, y: 6}
-=======
     m_ColliderPaths: []
   m_CompositePaths:
     m_Paths: []
->>>>>>> cc72566651ca89a4fb2fb69924afcfce2a48634f
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -1368,31 +1350,7 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775583032}
   m_Enabled: 1
-<<<<<<< HEAD
-  m_Tiles:
-  - first: {x: 19, y: 6, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 20, y: 6, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-=======
   m_Tiles: {}
->>>>>>> cc72566651ca89a4fb2fb69924afcfce2a48634f
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - serializedVersion: 2
@@ -1410,11 +1368,7 @@ Tilemap:
     m_Data: {fileID: -2708583396551306362, guid: df06863a8db15984b92a136948c1a7a9, type: 3}
   m_TileMatrixArray:
   - serializedVersion: 2
-<<<<<<< HEAD
-    m_RefCount: 2
-=======
     m_RefCount: 0
->>>>>>> cc72566651ca89a4fb2fb69924afcfce2a48634f
     m_Data:
       e00: 1
       e01: 0
@@ -1434,11 +1388,7 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - serializedVersion: 2
-<<<<<<< HEAD
-    m_RefCount: 2
-=======
     m_RefCount: 0
->>>>>>> cc72566651ca89a4fb2fb69924afcfce2a48634f
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
