@@ -22,7 +22,15 @@ public class CreateBulletChangeGravity : MonoBehaviour
     {
         createEffect.Stop();
         timer = shootCoolTime - shootStartDelay;
-        canMove = true;
+        if (canMoveWhenInvisible)
+        {
+            canMove = true;
+        }
+        else
+        {
+            canMove = false;
+        }
+        
     }
 
     // 画面内にこいつがいる場合は動作を可能にして、画面外にいる場合は動作を不能にする
