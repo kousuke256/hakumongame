@@ -6,27 +6,20 @@ public class OnOffBlock : MonoBehaviour
     public bool OnOff;
     public float ToumeiDo;
     public Player PlayerScript;
+    public TileBase On;
+    public TileBase Off;
     private float oldGravityDirectionY = -1f;
     private Tilemap tilemap;
     private Color usu;
     private Color koi;
     private TilemapCollider2D col;
-        
+
 
 
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
         col = GetComponent<TilemapCollider2D>();
-
-        if (OnOff)
-        {
-            tilemap.color = Color.green;
-        }
-        else
-        {
-            tilemap.color = Color.blue;
-        }
 
         // 元の色を保存する
         koi = tilemap.color;
@@ -38,16 +31,34 @@ public class OnOffBlock : MonoBehaviour
         // 初期状態を設定する
         if (OnOff)
         {
+            ChangeAllTiles(On);
             col.isTrigger = false;
             gameObject.layer = LayerMask.NameToLayer("Ground");
             gameObject.tag = "Ground";
+            
         }
         else
         {
-            tilemap.color = usu;
+            ChangeAllTiles(Off);
+            //tilemap.color = usu;
             col.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer("Default");
             gameObject.tag = "Untagged";
+            
+        }
+    }
+
+    public void ChangeAllTiles(TileBase image)
+    {
+        BoundsInt bounds = tilemap.cellBounds;
+
+        foreach (Vector3Int position in bounds.allPositionsWithin)
+        {
+            // もともとタイルがある場所だけ変更する
+            if (tilemap.HasTile(position))
+            {
+                tilemap.SetTile(position, image);
+            }
         }
     }
 
@@ -63,37 +74,43 @@ public class OnOffBlock : MonoBehaviour
             // 下向きの重力に切り替えたら
             if (OnOff)
             {
-                tilemap.color = koi;
+                ChangeAllTiles(On);
+                //tilemap.color = koi;
                 col.isTrigger = false;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
                 gameObject.tag = "Ground";
+                
             }
             else
             {
-                tilemap.color = usu;
+                ChangeAllTiles(Off);
+                //tilemap.color = usu;
                 col.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 gameObject.tag = "Untagged";
+                
             }
-        
-
         }
         else
         {
             // 上向きの重力に切り替えたら
             if (OnOff)
             {
-                tilemap.color = usu;
+                ChangeAllTiles(Off);
+                //tilemap.color = usu;
                 col.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 gameObject.tag = "Untagged";
+                
             }
             else
             {
-                tilemap.color = koi;
+                ChangeAllTiles(On);
+                //tilemap.color = koi;
                 col.isTrigger = false;
                 gameObject.layer = LayerMask.NameToLayer("Ground");
                 gameObject.tag = "Ground";
+                
             }
         }
     }
