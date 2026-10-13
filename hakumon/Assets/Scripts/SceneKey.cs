@@ -15,7 +15,7 @@ public class SeceneKey : MonoBehaviour
 
             LifeManager.Instance.ShowLife();
 
-            SceneManager.LoadScene("1-1");
+            SceneManager.LoadScene("1-1(Complete)");
         }
     }
 }
