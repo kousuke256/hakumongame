@@ -34,6 +34,12 @@ public class LifeManager : MonoBehaviour
         UpdateLifeText();
     }
 
+    public void GetLife()
+    {
+        lifeCount++;
+        UpdateLifeText();
+    }
+
     // Update is called once per frame
     void UpdateLifeText()
     {
