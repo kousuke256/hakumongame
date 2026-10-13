@@ -1,12 +1,14 @@
 using UnityEngine;
-//注意！：シリアライズフィールドのPlaterでPlayerを選択
+
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private float limitX = 100f;
 
-    // 遅れの強さ（大きいほど遅れる）
+    // カメラが追従する際の遅れ
     [SerializeField] private float smoothTime = 0.3f;
+
+    // プレイヤーより右側を映す距離
+    [SerializeField] private float offsetX = 4f;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -14,10 +16,18 @@ public class CameraManager : MonoBehaviour
     {
         if (player == null) return;
 
-        float targetX = Mathf.Clamp(player.position.x+4f, 0f, limitX);
-        Vector3 targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
+        // X方向の追従（上限なし）
+        float targetX = Mathf.Max(
+            player.position.x + offsetX,
+            0f
+        );
 
-        // 遅れて追従する
+        Vector3 targetPos = new Vector3(
+            targetX,
+            transform.position.y,
+            transform.position.z
+        );
+
         transform.position = Vector3.SmoothDamp(
             transform.position,
             targetPos,
