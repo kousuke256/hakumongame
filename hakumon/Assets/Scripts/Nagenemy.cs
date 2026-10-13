@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
@@ -29,12 +30,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (player.position.x > transform.position.x)
         {
             // Playerが右にいる場合は右を向く
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
             // Playerが左にいる場合は左を向く
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -88,5 +89,40 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         GameObject bullet = Instantiate(bullet2Prefab, firePoint.position, quaternion.identity);
         bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, bulletGravityDirection, speed, theta);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // プレイヤーとの接触
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // 上から踏まれた場合
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (contact.normal.y < -0.5f)
+                {
+                    return;
+                }
+            }
+
+            if (LifeManager.Instance == null)
+            {
+                Debug.LogError("LifeManagerがありません！");
+                return;
+            }
+
+            LifeManager.Instance.LoseLife();
+
+            if (LifeManager.Instance.lifeCount <= 0)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
+            return;
+        }
     }
 }

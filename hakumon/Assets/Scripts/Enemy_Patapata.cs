@@ -1,63 +1,186 @@
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Patapata : MonoBehaviour
 {
     private Rigidbody2D enemyRb;
+    private Camera mainCamera;
 
-    [SerializeField] private float jumpPower = 30f;
-    [SerializeField,Header("0だと即ジャンプ")] private float coolTime = 0.5f; // クールタイム（0なら即ジャンプ）
+    [SerializeField] private float jumpPower = 5f;
+    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float cameraMargin = 1f;
 
-    private bool canDetect = false;
+    // -1：左、1：右
+    private int direction = -1;
+
     private bool isGrounded = false;
-    private float timer = 0f;
+    private bool isDead = false;
+    private bool wasInsideCamera = false;
 
     void Start()
     {
-        enemyRb = transform.parent.GetComponent<Rigidbody2D>();
+        enemyRb = GetComponentInParent<Rigidbody2D>();
+        mainCamera = Camera.main;
 
-        // 初期誤判定防止
-        Invoke(nameof(EnableDetect), 0.1f);
-    }
+        if (enemyRb == null || mainCamera == null)
+        {
+            Debug.LogError("Rigidbody2DまたはMainCameraがありません！");
+            enabled = false;
+            return;
+        }
 
-    void EnableDetect()
-    {
-        canDetect = true;
+        // Move Speedが負の場合は右向きで開始
+        if (moveSpeed < 0f)
+        {
+            direction = 1;
+        }
+
+        wasInsideCamera = IsInsideCamera();
     }
 
     void FixedUpdate()
     {
-        if (!canDetect) return;
+        if (isDead) return;
 
-        if (isGrounded)
+        bool insideCamera = IsInsideCamera();
+
+        if (insideCamera)
         {
-            timer += Time.fixedDeltaTime;
+            // 現在の進行方向に移動
+            enemyRb.linearVelocity = new Vector2(
+                direction * Mathf.Abs(moveSpeed),
+                enemyRb.linearVelocity.y
+            );
 
-            // クールタイムが終わったらジャンプ
-            if (timer >= coolTime)
+            if (!wasInsideCamera && isGrounded)
             {
-                enemyRb.linearVelocity = Vector2.zero; // 安定ジャンプのため速度リセット
-                enemyRb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                Jump();
+            }
+        }
+        else
+        {
+            // カメラ外では横移動停止
+            enemyRb.linearVelocity = new Vector2(
+                0f,
+                enemyRb.linearVelocity.y
+            );
+        }
 
-                timer = 0f;
-                isGrounded = false; // 空中に戻る
+        wasInsideCamera = insideCamera;
+    }
+
+    bool IsInsideCamera()
+    {
+        float halfWidth =
+            mainCamera.orthographicSize * mainCamera.aspect;
+
+        float cameraX = mainCamera.transform.position.x;
+        float enemyX = enemyRb.position.x;
+
+        float left = cameraX - halfWidth - cameraMargin;
+        float right = cameraX + halfWidth + cameraMargin;
+
+        return enemyX >= left && enemyX <= right;
+    }
+
+    void Jump()
+    {
+        enemyRb.linearVelocity = new Vector2(
+            enemyRb.linearVelocity.x,
+            0f
+        );
+
+        enemyRb.AddForce(
+            Vector2.up * jumpPower,
+            ForceMode2D.Impulse
+        );
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isDead) return;
+
+        // プレイヤーとの接触
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // 上から踏まれた場合
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (contact.normal.y < -0.5f)
+                {
+                    return;
+                }
+            }
+
+            if (LifeManager.Instance == null)
+            {
+                Debug.LogError("LifeManagerがありません！");
+                return;
+            }
+
+            isDead = true;
+            LifeManager.Instance.LoseLife();
+
+            if (LifeManager.Instance.lifeCount <= 0)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+            else
+            {
+                SceneManager.LoadScene(
+                    SceneManager.GetActiveScene().buildIndex
+                );
+            }
+
+            return;
+        }
+
+        // 壁との接触
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                // 横方向から壁に当たった場合
+                if (Mathf.Abs(contact.normal.x) > 0.5f)
+                {
+                    direction *= -1;
+
+                    enemyRb.linearVelocity = new Vector2(
+                        direction * Mathf.Abs(moveSpeed),
+                        enemyRb.linearVelocity.y
+                    );
+
+                    return;
+                }
+            }
+        }
+
+        // 地面との接触
+        if (!collision.gameObject.CompareTag("Ground"))
+        {
+            return;
+        }
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.5f && !isGrounded)
+            {
+                isGrounded = true;
+
+                if (IsInsideCamera())
+                {
+                    Jump();
+                }
+
+                return;
             }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if (!canDetect) return;
-
-        if (other.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            timer = 0f; // 着地した瞬間からクールタイム計測開始
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
         }

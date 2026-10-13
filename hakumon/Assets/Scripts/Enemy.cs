@@ -1,59 +1,77 @@
+
 using UnityEngine;
 
-//カメラの子オブジェクトでTagがBackGroundのオブジェクトに重なっていない場合は動かないように修正
 public class Enemy : MonoBehaviour
 {
-    [SerializeField,Header("移動速度")]
-    private float moveSpeed;
-    private bool canMove=false;
+    [SerializeField, Header("移動速度")]
+    private float moveSpeed = 2f;
+
+    [SerializeField, Header("画面外の移動許容距離")]
+    private float cameraMargin = 1f;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Camera mainCamera;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if(canMove) EnemyMove();
-    }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // カメラ範囲に入ったら動く
-        if (other.CompareTag("BackGround"))
+        if (rb == null || sr == null || mainCamera == null)
         {
-            canMove = true;
+            return;
         }
-    }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        // カメラ範囲から出たら止まる
-        if (other.CompareTag("BackGround"))
+        // カメラの表示範囲を確認
+        if (IsInsideCamera())
         {
-            canMove = false;
-        }
-    }
-    private void EnemyMove()
-    {
-        //移動方向を示す変数
-        float direction;
-        //キャラクターの向きで移動方向を設定
-        //反転してないとき1,反転させて時-1に
-        if(sr.flipX == false)
-        {
-            direction = 1;
+            EnemyMove();
         }
         else
         {
-            direction = -1;
+            // 画面外では横移動を停止
+            rb.linearVelocity = new Vector2(
+                0f,
+                rb.linearVelocity.y
+            );
         }
-        rb.linearVelocity = new Vector2(-direction*moveSpeed,rb.linearVelocity.y);
     }
-    
+
+    bool IsInsideCamera()
+    {
+        float halfWidth =
+            mainCamera.orthographicSize * mainCamera.aspect;
+
+        float cameraX = mainCamera.transform.position.x;
+        float enemyX = transform.position.x;
+
+        float left = cameraX - halfWidth - cameraMargin;
+        float right = cameraX + halfWidth + cameraMargin;
+
+        return enemyX >= left && enemyX <= right;
+    }
+
+    private void EnemyMove()
+    {
+        float direction;
+
+        if (sr.flipX == false)
+        {
+            direction = 1f;
+        }
+        else
+        {
+            direction = -1f;
+        }
+
+        rb.linearVelocity = new Vector2(
+            -direction * moveSpeed,
+            rb.linearVelocity.y
+        );
+    }
 }
