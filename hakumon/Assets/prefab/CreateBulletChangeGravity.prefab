@@ -4883,10 +4883,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CreateBulletChangeGravity
   shootStartDelay: 1
-  shootCoolTime: 5
+  shootCoolTime: 3.5
   BulletDirection: {x: -1, y: 0}
   speed: 4
-  effectDuration: 3
+  lifeTime: 7
+  effectDuration: 2.5
+  canMoveWhenInvisible: 0
   BulletChangeGravity: {fileID: 3071642558019014779, guid: e31ec7a1c552d66469be3d667bc82499, type: 3}
   createEffect: {fileID: 4508536948488161587}
   player: {fileID: 0}

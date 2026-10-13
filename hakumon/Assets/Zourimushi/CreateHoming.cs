@@ -6,6 +6,9 @@ public class CreateHoming : MonoBehaviour
 {
     public float shootStartDelay;
     public float shootCoolTime;
+    public float speed = 5f;
+    public float lifeTime = 8f;
+    public float turnSpeed = 90f;
     public float effectDuration;
     public Transform player;
     public Player playerScript;
@@ -57,6 +60,9 @@ public class CreateHoming : MonoBehaviour
 
         // 弾を生成する
         GameObject bullet = Instantiate(homingBullet, transform.position, Quaternion.identity);
+        bullet.GetComponent<BulletHoming>().speed = speed;
+        bullet.GetComponent<BulletHoming>().turnSpeed = turnSpeed;
+        bullet.GetComponent<BulletHoming>().lifeTime = lifeTime;
         bullet.GetComponent<BulletHoming>().player = player;
         bullet.GetComponent<BulletHoming>().playerScript = playerScript;
     }
