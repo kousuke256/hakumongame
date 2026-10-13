@@ -47,7 +47,7 @@ public class OnOffBlock : MonoBehaviour
             tilemap.color = usu;
             col.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer("Default");
-            gameObject.tag = "Default";
+            gameObject.tag = "Untagged";
         }
     }
 
@@ -73,7 +73,7 @@ public class OnOffBlock : MonoBehaviour
                 tilemap.color = usu;
                 col.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
-                gameObject.tag = "Default";
+                gameObject.tag = "Untagged";
             }
         
 
@@ -86,7 +86,7 @@ public class OnOffBlock : MonoBehaviour
                 tilemap.color = usu;
                 col.isTrigger = true;
                 gameObject.layer = LayerMask.NameToLayer("Default");
-                gameObject.tag = "Default";
+                gameObject.tag = "Untagged";
             }
             else
             {
