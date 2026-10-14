@@ -18,4 +18,9 @@ public class PauseTextChangeColor : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         text.color = normalColor;
     }
+
+    public void OnClick()
+    {
+        text.color = normalColor;
+    }
 }

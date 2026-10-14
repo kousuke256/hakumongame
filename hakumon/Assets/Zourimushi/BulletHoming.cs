@@ -2,12 +2,8 @@ using UnityEngine;
 
 public class BulletHoming : MonoBehaviour
 {
-    
-    [Header("弾の設定")]
     public float speed = 5f;
     public float lifeTime = 8f;
-
-    [Header("追尾の設定")]
     public float turnSpeed = 90f;
     private float timer = 0f;
     private Rigidbody2D rb;

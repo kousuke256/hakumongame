@@ -8,6 +8,7 @@ public class CreateBulletChangeGravity : MonoBehaviour
     public float shootCoolTime;
     public Vector2 BulletDirection;
     public float speed;
+    public float lifeTime = 8f;
     public float effectDuration;
     public bool canMoveWhenInvisible = false;
     public GameObject BulletChangeGravity;
@@ -76,6 +77,7 @@ public class CreateBulletChangeGravity : MonoBehaviour
         // 弾を生成する
         GameObject bullet = Instantiate(BulletChangeGravity, transform.position, Quaternion.identity);
         bullet.GetComponent<BulletChangeGravity>().Fire(BulletDirection, speed);
+        bullet.GetComponent<BulletChangeGravity>().lifeTime = lifeTime;
         bullet.GetComponent<BulletChangeGravity>().player = player;
         bullet.GetComponent<BulletChangeGravity>().playerScript = playerScript;
     }

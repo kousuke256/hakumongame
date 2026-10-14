@@ -4884,7 +4884,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NagenemyHoming
   shootStartDelay: 1
   shootCoolTime: 7
-  effectDuration: 3
+  speed: 3
+  lifeTime: 7
+  turnSpeed: 70
+  effectDuration: 2
   player: {fileID: 0}
   playerScript: {fileID: 0}
   homingBullet: {fileID: 5566076430621321598, guid: d38cbb7d3b47a3c43957db6157027e1c, type: 3}
