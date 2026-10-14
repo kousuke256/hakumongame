@@ -46,9 +46,10 @@ public class BulletChangeGravity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Fire(Vector2 bulletDirection, float speed)
+    public void Fire(Vector2 bulletDirection, float speed, float scale)
     {
         rb = GetComponent<Rigidbody2D>();
+        transform.localScale = new Vector3(scale, scale, 1f);
         rb.linearVelocity = bulletDirection.normalized * speed;
     }
 }

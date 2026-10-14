@@ -10,6 +10,7 @@ public class CreateBulletChangeGravity : MonoBehaviour
     public float speed;
     public float lifeTime = 8f;
     public float effectDuration;
+    public float scale = 2f;
     public bool canMoveWhenInvisible = false;
     public GameObject BulletChangeGravity;
     public ParticleSystem createEffect;
@@ -31,7 +32,6 @@ public class CreateBulletChangeGravity : MonoBehaviour
         {
             canMove = false;
         }
-        
     }
 
     // 画面内にこいつがいる場合は動作を可能にして、画面外にいる場合は動作を不能にする
@@ -76,7 +76,7 @@ public class CreateBulletChangeGravity : MonoBehaviour
 
         // 弾を生成する
         GameObject bullet = Instantiate(BulletChangeGravity, transform.position, Quaternion.identity);
-        bullet.GetComponent<BulletChangeGravity>().Fire(BulletDirection, speed);
+        bullet.GetComponent<BulletChangeGravity>().Fire(BulletDirection, speed, scale);
         bullet.GetComponent<BulletChangeGravity>().lifeTime = lifeTime;
         bullet.GetComponent<BulletChangeGravity>().player = player;
         bullet.GetComponent<BulletChangeGravity>().playerScript = playerScript;

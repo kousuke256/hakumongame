@@ -26,7 +26,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if(GetComponent<Rigidbody2D>().gravityScale < 0)
         {
             y=-1;
-            Debug.Log(transform.position);
         }
     }
 
