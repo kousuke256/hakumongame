@@ -11,6 +11,8 @@ public class BulletHoming : MonoBehaviour
     public LayerMask groundLayer;
     public Player playerScript;
     public Transform player;
+    public float scale;
+    private bool canFire = false;
 
     void Start()
     {
@@ -21,15 +23,20 @@ public class BulletHoming : MonoBehaviour
         if (player == null)
         return;
 
-        Vector2 direction = ((Vector2)player.position - rb.position).normalized;
-        rb.linearVelocity = direction * speed;
+        
     }
 
     void FixedUpdate()
     {
         // Playerが存在しなければ何もしない
-        if (player == null)
-        return;
+        if (!canFire)
+        {
+            Vector2 direction = ((Vector2)player.position - rb.position).normalized;
+            rb.linearVelocity = direction * speed;
+            transform.localScale = new Vector3(scale, scale, 1f);
+            return;
+        }
+        
 
         // lifeTime秒経過したら人生を終わらせる
         timer += Time.fixedDeltaTime;
@@ -71,5 +78,10 @@ public class BulletHoming : MonoBehaviour
         playerScript.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(playerScript.GetComponent<Rigidbody2D>().linearVelocity.x, 0);
 
         Destroy(gameObject);
+    }
+
+    public void Can()
+    {
+        canFire = true;
     }
 }
