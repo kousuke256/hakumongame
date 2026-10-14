@@ -14,12 +14,20 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public Transform firePoint;
     public GameObject bullet2Prefab;
     private bool canMove;
+    private float y = 1;
+    private bool isDead =false;
 
 
     void Start()
     {
         // shootStartDelay秒後に弾を投げ始めて、shootCoolTime秒間隔で投げる
         InvokeRepeating(nameof(Throw), shootStartDelay, shootCoolTime);
+
+        if(GetComponent<Rigidbody2D>().gravityScale < 0)
+        {
+            y=-1;
+            Debug.Log(transform.position);
+        }
     }
 
     void Update()
@@ -30,12 +38,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (player.position.x > transform.position.x)
         {
             // Playerが右にいる場合は右を向く
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, y, 1);
         }
         else
         {
             // Playerが左にいる場合は左を向く
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, y, 1);
         }
     }
 
@@ -97,13 +105,30 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // 上から踏まれた場合
-            foreach (ContactPoint2D contact in collision.contacts)
+            if (y == 1)
             {
-                if (contact.normal.y < -0.5f)
+                foreach (ContactPoint2D contact in collision.contacts)
                 {
-                    return;
+                    if (contact.normal.y < -0.5f)
+                    {
+                        return;
+                    }
                 }
             }
+            else
+            {
+                foreach (ContactPoint2D contact in collision.contacts)
+                {
+                    if (contact.normal.y > 0.5f)
+                    {
+                        return;
+                    }
+                }
+            }
+            if(isDead)
+            return;
+
+            isDead = true;
 
             if (LifeManager.Instance == null)
             {
