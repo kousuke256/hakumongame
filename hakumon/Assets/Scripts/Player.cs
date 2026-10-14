@@ -157,14 +157,29 @@ public class Player : MonoBehaviour
             // 接触面の向き
             ContactPoint2D contact = collision.GetContact(0);
             // 敵の上から踏んだ場合
-            if (contact.normal.y > 0.5f)
+            if(gravityDirection.y == -1)
             {
-                // 敵を倒す
-                Destroy(collision.gameObject);
-                // 踏みの反動
-                playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpPower);
+                if (contact.normal.y > 0.5f)
+                {
+                    // 敵を倒す
+                    Destroy(collision.gameObject);
+                    // 踏みの反動
+                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpPower);
+                }
+                canCutJump = true;
             }
-            canCutJump = true;
+            else
+            {
+                if (contact.normal.y < -0.5f)
+                {
+                    // 敵を倒す
+                    Destroy(collision.gameObject);
+                    // 踏みの反動
+                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, -jumpPower);
+                }
+                canCutJump = true;
+            }
+            
         }
     }
 
