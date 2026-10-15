@@ -3,7 +3,6 @@ using UnityEngine.Rendering.Universal;
 
 public class Reiza : MonoBehaviour
 {
-    public Vector2 direction;
     public bool existCoolTime;
     public float lifeTime;
     public float coolTime;
@@ -19,7 +18,6 @@ public class Reiza : MonoBehaviour
     void Start()
     {
         // 初期設定
-        transform.up = direction;
         if(existCoolTime)
         return;
 
@@ -34,8 +32,8 @@ public class Reiza : MonoBehaviour
             return;
         }
 
-        if(!canMove)
-        return;
+        //if(!canMove)
+        //return;
 
         timer += Time.fixedDeltaTime;
         // レーザー発射中ならlifeTimeのカウントをしていて、発射していないならcoolTimeのカウントをしている
@@ -79,12 +77,12 @@ public class Reiza : MonoBehaviour
         reizaaa.transform.localScale = new Vector3(1f, currentHit, 1f);
     }
 
-    void OnBecameVisible()
+    /*void OnBecameVisible()
     {
         canMove = true;
     }
     void OnBecameInvisible()
     {
         canMove = false;
-    }
+    }*/
 }
