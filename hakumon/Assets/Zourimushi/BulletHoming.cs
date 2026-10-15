@@ -23,6 +23,9 @@ public class BulletHoming : MonoBehaviour
         if (player == null)
         return;
 
+        Vector2 direction = ((Vector2)player.position - rb.position).normalized;
+        rb.linearVelocity = direction * speed;
+        transform.localScale = new Vector3(scale, scale, 1f);
         
     }
 
@@ -30,12 +33,7 @@ public class BulletHoming : MonoBehaviour
     {
         // Playerが存在しなければ何もしない
         if (!canFire)
-        {
-            Vector2 direction = ((Vector2)player.position - rb.position).normalized;
-            rb.linearVelocity = direction * speed;
-            transform.localScale = new Vector3(scale, scale, 1f);
-            return;
-        }
+        return;
         
 
         // lifeTime秒経過したら人生を終わらせる

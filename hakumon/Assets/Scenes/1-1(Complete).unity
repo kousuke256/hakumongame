@@ -11797,7 +11797,7 @@ MonoBehaviour:
   OnOff: 1
   PlayerScript: {fileID: 1240830801}
   On: {fileID: 11400000, guid: d1b6767c7c7876a4d8cfe76134891f57, type: 2}
-  Off: {fileID: 11400000, guid: b6804ad04f7aab64bb3368b3f29a27c9, type: 2}
+  Off: {fileID: 11400000, guid: ff611d8b976209a47915ec380c9476e5, type: 2}
 --- !u!1001 &571060326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13873,7 +13873,7 @@ MonoBehaviour:
   OnOff: 0
   PlayerScript: {fileID: 1240830801}
   On: {fileID: 11400000, guid: d1b6767c7c7876a4d8cfe76134891f57, type: 2}
-  Off: {fileID: 11400000, guid: b6804ad04f7aab64bb3368b3f29a27c9, type: 2}
+  Off: {fileID: 11400000, guid: ff611d8b976209a47915ec380c9476e5, type: 2}
 --- !u!213 &1489803965
 Sprite:
   serializedVersion: 2
@@ -17512,7 +17512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: jumpPower
-      value: 7.8
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_Name

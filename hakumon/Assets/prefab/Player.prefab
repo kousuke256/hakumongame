@@ -250,7 +250,7 @@ MonoBehaviour:
   airAcceleration: 10
   jumpPower: 8
   jumpCutMultiplier: 0.5
-  smallJumpTime: 0.12
+  smallJumpTime: 0.11
   mediumJumpTime: 0.32
   groundCheck: {fileID: 4416539200891091974}
   groundCheckRadius: 0.2
