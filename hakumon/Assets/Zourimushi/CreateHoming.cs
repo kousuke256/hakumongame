@@ -16,6 +16,7 @@ public class CreateHoming : MonoBehaviour
     public Player playerScript;
     public GameObject homingBullet;
     public ParticleSystem createEffect;
+    public LayerMask groundLayer;
     private float timer = 0f;
     private bool canMove;
 
@@ -60,13 +61,19 @@ public class CreateHoming : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         createEffect.Clear();
 
-        // 弾を生成する
-        GameObject bullet = Instantiate(homingBullet, transform.position, Quaternion.identity);
-        bullet.GetComponent<BulletHoming>().scale = scale;
-        bullet.GetComponent<BulletHoming>().speed = speed;
-        bullet.GetComponent<BulletHoming>().turnSpeed = turnSpeed;
-        bullet.GetComponent<BulletHoming>().lifeTime = lifeTime;
-        bullet.GetComponent<BulletHoming>().player = player;
-        bullet.GetComponent<BulletHoming>().playerScript = playerScript;
+        // 地面がなかったr生成する
+        if(!Physics2D.OverlapCircle(transform.position, 0.5f, groundLayer))
+        {
+            // 弾を生成する
+            GameObject bullet = Instantiate(homingBullet, transform.position, Quaternion.identity);
+            BulletHoming bulletScript = bullet.GetComponent<BulletHoming>();
+            bulletScript.scale = scale;
+            bulletScript.speed = speed;
+            bulletScript.turnSpeed = turnSpeed;
+            bulletScript.lifeTime = lifeTime;
+            bulletScript.player = player;
+            bulletScript.playerScript = playerScript;
+            bulletScript.canFire = true;
+        }
     }
 }

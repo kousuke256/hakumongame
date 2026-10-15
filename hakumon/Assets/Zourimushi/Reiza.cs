@@ -3,7 +3,6 @@ using UnityEngine.Rendering.Universal;
 
 public class Reiza : MonoBehaviour
 {
-    public Vector2 direction;
     public bool existCoolTime;
     public float lifeTime;
     public float coolTime;
@@ -19,7 +18,6 @@ public class Reiza : MonoBehaviour
     void Start()
     {
         // 初期設定
-        transform.up = direction;
         if(existCoolTime)
         return;
 
@@ -34,8 +32,8 @@ public class Reiza : MonoBehaviour
             return;
         }
 
-        if(!canMove)
-        return;
+        //if(!canMove)
+        //return;
 
         timer += Time.fixedDeltaTime;
         // レーザー発射中ならlifeTimeのカウントをしていて、発射していないならcoolTimeのカウントをしている
@@ -60,14 +58,13 @@ public class Reiza : MonoBehaviour
             // 発射する状態にする
             nowFired = true;
             first = true;
-            reizaaa.SetActive(true);
         }
     }
 
     void Fire()
     {
         // 発射位置からgroundまでの距離を測る
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 30f, stopLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.up * 0.01f, transform.up, 30f, stopLayer);
 
         // 発射位置からgroundまでの距離が変わっていないかつ、Fireメゾットの2回目以降の実行(cooltimeがあけて)だったらreturn
         if(currentHit == hit.distance && !first)
@@ -77,14 +74,17 @@ public class Reiza : MonoBehaviour
         
         // レーザーｎo大きさを変えru
         reizaaa.transform.localScale = new Vector3(1f, currentHit, 1f);
+        reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f);
+
+        reizaaa.SetActive(true);
     }
 
-    void OnBecameVisible()
+    /*void OnBecameVisible()
     {
         canMove = true;
     }
     void OnBecameInvisible()
     {
         canMove = false;
-    }
+    }*/
 }

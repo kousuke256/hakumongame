@@ -250,8 +250,8 @@ MonoBehaviour:
   airAcceleration: 10
   jumpPower: 8
   jumpCutMultiplier: 0.5
-  smallJumpTime: 0.15
-  mediumJumpTime: 0.35
+  smallJumpTime: 0.11
+  mediumJumpTime: 0.32
   groundCheck: {fileID: 4416539200891091974}
   groundCheckRadius: 0.2
   groundLayer:
@@ -259,5 +259,4 @@ MonoBehaviour:
     m_Bits: 8
   gravityPower: 9.8
   gravityDirection: {x: 0, y: -1}
-  deathOverlapDistance: 0.1
   groundCheckDistance: 0.45
