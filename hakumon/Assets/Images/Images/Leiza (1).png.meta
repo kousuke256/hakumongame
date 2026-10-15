@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9374c7f55fe5a374a8916bd9ed27d86d
+guid: 11042c35d25f3e64e86d55f901cc0ccd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2781447277927310832
-    second: "\u7121\u984C (2)_0"
+      213: 6403782364292096406
+    second: Leiza (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u7121\u984C (2)_0"
+      name: Leiza (1)_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 28
-        height: 18
+        width: 32
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 01a5aadff605669d0800000000000000
-      internalID: -2781447277927310832
+      spriteID: 691aa82b12eced850800000000000000
+      internalID: 6403782364292096406
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u7121\u984C (2)_0": -2781447277927310832
+      Leiza (1)_0: 6403782364292096406
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
