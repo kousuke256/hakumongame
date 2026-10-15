@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,102 +8,124 @@ public class OnOffBlock : MonoBehaviour
     public Player PlayerScript;
     public TileBase On;
     public TileBase Off;
-    private float oldGravityDirectionY = -1f;
+
     private Tilemap tilemap;
-    private TilemapCollider2D col;
-    private CompositeCollider2D compositeCol;
+    private TilemapCollider2D tileCollider;
+    private CompositeCollider2D compositeCollider;
+
+    private float oldGravityDirectionY;
 
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
-        col = GetComponent<TilemapCollider2D>();
-        compositeCol = GetComponent<CompositeCollider2D>();
+        tileCollider = GetComponent<TilemapCollider2D>();
+        compositeCollider = GetComponent<CompositeCollider2D>();
 
+        // Playerが未設定なら自動取得
+        if (PlayerScript == null)
+        {
+            PlayerScript = FindFirstObjectByType<Player>();
+        }
 
-        // 初期状態を設定する
-        if (OnOff)
+        if (PlayerScript == null)
+        {
+            Debug.LogError(
+                "OnOffBlock: Playerが見つかりません！",
+                this
+            );
+            enabled = false;
+            return;
+        }
+
+        if (tilemap == null)
+        {
+            Debug.LogError(
+                "OnOffBlock: Tilemapがありません！",
+                this
+            );
+            enabled = false;
+            return;
+        }
+
+        // 開始時の重力方向を取得
+        oldGravityDirectionY = PlayerScript.gravityDirection.y;
+
+        
+        UpdateBlock();
+    }
+
+    void Update()
+    {
+        if (PlayerScript == null) return;
+
+        float currentGravityY =
+            PlayerScript.gravityDirection.y;
+
+        // 重力方向が変わっていなければ何もしない
+        if (Mathf.Approximately(
+            oldGravityDirectionY,
+            currentGravityY
+        ))
+        {
+            return;
+        }
+
+        oldGravityDirectionY = currentGravityY;
+
+        // 重力反転時に切り替える
+        UpdateBlock();
+    }
+
+    void UpdateBlock()
+    {
+        bool reverseGravity =
+            PlayerScript.gravityDirection.y > 0f;
+
+        bool active = reverseGravity ? !OnOff : OnOff;
+
+        if (active)
         {
             ChangeAllTiles(On);
-            col.isTrigger = false;
-            compositeCol.isTrigger = false;
-            gameObject.layer = LayerMask.NameToLayer("Ground");
+
+            if (tileCollider != null)
+                tileCollider.isTrigger = false;
+
+            if (compositeCollider != null)
+                compositeCollider.isTrigger = false;
+
+            gameObject.layer =
+                LayerMask.NameToLayer("Ground");
+
             gameObject.tag = "Ground";
-            
         }
         else
         {
             ChangeAllTiles(Off);
-            col.isTrigger = true;
-            compositeCol.isTrigger = true;
-            gameObject.layer = LayerMask.NameToLayer("Default");
+
+            if (tileCollider != null)
+                tileCollider.isTrigger = true;
+
+            if (compositeCollider != null)
+                compositeCollider.isTrigger = true;
+
+            gameObject.layer =
+                LayerMask.NameToLayer("Default");
+
             gameObject.tag = "Untagged";
-            
         }
     }
 
     public void ChangeAllTiles(TileBase image)
     {
+        if (tilemap == null || image == null) return;
+
         BoundsInt bounds = tilemap.cellBounds;
 
         foreach (Vector3Int position in bounds.allPositionsWithin)
         {
-            // もともとタイルがある場所だけ変更する
             if (tilemap.HasTile(position))
             {
                 tilemap.SetTile(position, image);
-            }
-        }
-    }
-
-    void Update()
-    {
-        if(oldGravityDirectionY == PlayerScript.gravityDirection.y)
-        return;
-
-        oldGravityDirectionY = PlayerScript.gravityDirection.y;
-
-        if(oldGravityDirectionY == -1)
-        {
-            // 下向きの重力に切り替えたら
-            if (OnOff)
-            {
-                ChangeAllTiles(On);
-                col.isTrigger = false;
-                compositeCol.isTrigger = false;
-                gameObject.layer = LayerMask.NameToLayer("Ground");
-                gameObject.tag = "Ground";
-                
-            }
-            else
-            {
-                ChangeAllTiles(Off);
-                col.isTrigger = true;
-                compositeCol.isTrigger = true;
-                gameObject.layer = LayerMask.NameToLayer("Default");
-                gameObject.tag = "Untagged";
-                
-            }
-        }
-        else
-        {
-            // 上向きの重力に切り替えたら
-            if (OnOff)
-            {
-                ChangeAllTiles(Off);
-                col.isTrigger = true;
-                compositeCol.isTrigger = true;
-                gameObject.layer = LayerMask.NameToLayer("Default");
-                gameObject.tag = "Untagged";
-                
-            }
-            else
-            {
-                ChangeAllTiles(On);
-                col.isTrigger = false;
-                compositeCol.isTrigger = false;
-                gameObject.layer = LayerMask.NameToLayer("Ground");
-                gameObject.tag = "Ground";
-                
             }
         }
     }
