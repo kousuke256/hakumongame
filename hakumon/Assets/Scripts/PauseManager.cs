@@ -53,12 +53,12 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void ReturnToTitle()
+    public void ReturnToStageSelect()
     {
         Time.timeScale = 1f;
         isPaused = false;
         pauseMenu.SetActive(false);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("StageSelect");
     }
 
     public void Quit()
