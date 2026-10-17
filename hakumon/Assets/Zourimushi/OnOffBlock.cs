@@ -109,7 +109,7 @@ public class OnOffBlock : MonoBehaviour
                 compositeCollider.isTrigger = true;
 
             gameObject.layer =
-                LayerMask.NameToLayer("Default");
+                LayerMask.NameToLayer("Off");
 
             gameObject.tag = "Untagged";
         }
