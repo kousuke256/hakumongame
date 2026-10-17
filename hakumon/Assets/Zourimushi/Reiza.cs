@@ -69,7 +69,15 @@ public class Reiza : MonoBehaviour
         // 発射位置からgroundまでの距離が変わっていないかつ、Fireメゾットの2回目以降の実行(cooltimeがあけて)だったらreturn
         if(currentHit == hit.distance && !first)
         return;
-        currentHit = hit.distance;
+
+        if(hit.collider == null)
+        {
+            currentHit = 20f;
+        }
+        else
+        {
+            currentHit = hit.distance;
+        }
         first = false;
         
         // レーザーｎo大きさを変えru
