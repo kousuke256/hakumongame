@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     private float jumpCutTime = 100f;
     private float jumpCountUp = 0f;
     private bool jumpPressed;
+    private bool CanJump=true;
     private bool canCutJump;
     private float jumpBufferTime = 0.1f; // space入力の持続時間
     private float jumpBufferCounter;
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
         }
 
         //spaceKeyを押しているかどうか
-        if (Keyboard.current.spaceKey.isPressed)
+        if (Keyboard.current.spaceKey.isPressed&&CanJump)
         {
             jumpPressed = true;
         }
@@ -275,10 +276,21 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!collider.CompareTag("Bullet"))
+        if (collider.CompareTag("Bullet"))
+        {
+            Deth();
+        }
+        if (collider.CompareTag("Cloud"))
+        {
+            CanJump=false;
+        }
+        else
+        {
+            CanJump=true;
+        }
         return;
 
-        Deth();
+        
     }
 
     void Deth()

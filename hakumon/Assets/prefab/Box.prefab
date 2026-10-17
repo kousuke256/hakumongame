@@ -107,11 +107,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
+  m_Mass: 1.5
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: bd1e0d52a91eaf344992ab187e153bc2, type: 2}
+  m_Material: {fileID: 6200000, guid: 045578e1f6ae1984fa630db0df0bd3d6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f75bbdd4503cb74ab62f05d2cc4241e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Box
-  minHorizontalSpeed: 0
   maxHorizontalSpeed: 1
   horizontalAcceleration: 10
 --- !u!61 &701703419598726425
