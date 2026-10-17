@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float airAcceleration = 10f;
     private float move;
 
+    public bool canmove=true;
+
     [Header("ジャンプ")]
     public float jumpPower = 9.3f;
     public float jumpCutMultiplier = 0.4f; //小ジャンプになるときの挙動の感じを決める変数
@@ -106,6 +108,15 @@ public class Player : MonoBehaviour
         else
         {
             jumpPressed = false;
+        }
+
+        if (gravityDirection.y == -1 && transform.position.y<-8)
+        {
+            Deth();
+        }
+        if (gravityDirection.y == 1 && transform.position.y>8)
+        {
+            Deth();
         }
     }
 
