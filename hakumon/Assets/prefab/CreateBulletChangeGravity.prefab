@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.3254902, g: 0.8, b: 0.87058824, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1368,8 +1368,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1487,7 +1487,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -2714468213625341989, guid: aae08adb6e1c2e242aa8f204a0556692, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4888,6 +4888,7 @@ MonoBehaviour:
   speed: 4
   lifeTime: 7
   effectDuration: 2.5
+  scale: 2
   canMoveWhenInvisible: 0
   BulletChangeGravity: {fileID: 3071642558019014779, guid: e31ec7a1c552d66469be3d667bc82499, type: 3}
   createEffect: {fileID: 4508536948488161587}
