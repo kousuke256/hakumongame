@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
 
         // 重力
-        playerRb.AddForce(gravityDirection * gravityPower);
+        playerRb.AddForce(gravityDirection * gravityPower*playerRb.mass);
 
         //横移動
         if (isGrounded)
@@ -270,7 +270,7 @@ public class Player : MonoBehaviour
     public void gravitychange()
     {
         groundCheck.localPosition = gravityDirection * groundCheckDistance;
-        playerRb.AddForce(gravityDirection * 2f, ForceMode2D.Impulse);
+        playerRb.AddForce(gravityDirection * 2f*playerRb.mass, ForceMode2D.Impulse);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

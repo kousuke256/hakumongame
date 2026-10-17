@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 0.1
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -134,6 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f75bbdd4503cb74ab62f05d2cc4241e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Box
+  minHorizontalSpeed: 0
+  maxHorizontalSpeed: 1
+  horizontalAcceleration: 10
 --- !u!61 &701703419598726425
 BoxCollider2D:
   m_ObjectHideFlags: 0
