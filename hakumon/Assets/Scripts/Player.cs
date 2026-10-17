@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         {
             Deth();
         }
-        if (gravityDirection.y == 1 && transform.position.y<8)
+        if (gravityDirection.y == 1 && transform.position.y>8)
         {
             Deth();
         }
