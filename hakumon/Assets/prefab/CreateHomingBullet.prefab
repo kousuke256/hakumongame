@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.3254902, g: 0.59607846, b: 0.87058824, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -988,18 +988,18 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -1
-          outSlope: -1
-          tangentMode: 34
+          inSlope: -2
+          outSlope: -2
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -1
-          outSlope: -1
-          tangentMode: 34
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
@@ -1368,8 +1368,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1487,7 +1487,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -1311578726085746850, guid: 3271d3016aa01044b94b7ec764cff490, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4888,10 +4888,14 @@ MonoBehaviour:
   lifeTime: 7
   turnSpeed: 70
   effectDuration: 2
+  scale: 2
   player: {fileID: 0}
   playerScript: {fileID: 0}
   homingBullet: {fileID: 5566076430621321598, guid: d38cbb7d3b47a3c43957db6157027e1c, type: 3}
   createEffect: {fileID: 5137841859851513832}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!212 &4387666051802561043
 SpriteRenderer:
   serializedVersion: 3
