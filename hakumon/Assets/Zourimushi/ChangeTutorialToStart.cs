@@ -6,7 +6,7 @@ public class ChangeTutorialToStart : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("1-1(Complete)");
+            SceneManager.LoadScene("1-1");
         }
     }
 }
