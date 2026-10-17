@@ -64,7 +64,7 @@ public class Reiza : MonoBehaviour
     void Fire()
     {
         // 発射位置からgroundまでの距離を測る
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.up * 0.01f, transform.up, 30f, stopLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.up * 0.51f, transform.up, 30f, stopLayer);
 
         // 発射位置からgroundまでの距離が変わっていないかつ、Fireメゾットの2回目以降の実行(cooltimeがあけて)だったらreturn
         if(currentHit == hit.distance && !first)
@@ -82,7 +82,7 @@ public class Reiza : MonoBehaviour
         
         // レーザーｎo大きさを変えru
         reizaaa.transform.localScale = new Vector3(1f, currentHit, 1f);
-        reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f);
+        reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f + 0.5f);
 
         reizaaa.SetActive(true);
     }
