@@ -11975,7 +11975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   player: {fileID: 2025045774}
   smoothTime: 0.3
-  offsetX: 4
+  offsetX: 3.5
 --- !u!114 &1959324790
 MonoBehaviour:
   m_ObjectHideFlags: 0

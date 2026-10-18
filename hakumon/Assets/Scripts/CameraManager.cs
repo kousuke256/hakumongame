@@ -8,7 +8,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float smoothTime = 0.3f;
 
     // プレイヤーより右側を映す距離
-    [SerializeField] private float offsetX = 4f;
+    [SerializeField] private float offsetX = 2f;
 
     private Vector3 velocity = Vector3.zero;
 
