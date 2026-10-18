@@ -7,7 +7,7 @@ public class Title : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("Tutorial");
+            SceneManager.LoadScene("StageSelect");
         }
     }
 }
