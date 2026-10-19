@@ -6559,7 +6559,7 @@ MonoBehaviour:
   player: {fileID: 336082558}
   smoothTime: 0.3
   offsetX: 4
-  FirstX: 0
+  FirstX: -3
 --- !u!114 &356019425
 MonoBehaviour:
   m_ObjectHideFlags: 0
