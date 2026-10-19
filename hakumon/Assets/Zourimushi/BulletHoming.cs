@@ -7,7 +7,7 @@ public class BulletHoming : MonoBehaviour
     public float turnSpeed = 90f;
     private float timer = 0f;
     private Rigidbody2D rb;
-    private float groundCheckRadius = 0.4f;
+    private float groundCheckRadius = 0.45f;
     public LayerMask groundLayer;
     public Player playerScript;
     public Transform player;

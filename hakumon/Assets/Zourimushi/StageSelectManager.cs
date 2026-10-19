@@ -10,7 +10,7 @@ public class StageSelectManager : MonoBehaviour
     private Rigidbody2D[] stageRb;
 
     // 解放されている一番先のステージ番号
-    public static int unlockedStage = 4;
+    public static int unlockedStage = 5;
 
     void Start()
     {
@@ -100,6 +100,11 @@ public class StageSelectManager : MonoBehaviour
     public void Stage1D()
     {
         //SceneManager.LoadScene("1-4");
+    }
+
+    public void StageEx()
+    {
+        //SceneManager.LoadScene("ExStage");
     }
 
     public void ReturnToTitle()

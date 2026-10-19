@@ -1,16 +1,18 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LifeManager : MonoBehaviour
 {
     public int lifeCount = 3;
     public TextMeshProUGUI lifeText;
     public static LifeManager Instance;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject image;
 
     void Awake()
     {
-        // PauseManagerのオブジェクトが既にあるなら削除する（pauseManagerが何個も作られないようにする対策）
+        // シングルトン
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -22,10 +24,33 @@ public class LifeManager : MonoBehaviour
         // sceneが切り替わってもオブジェクトを消さないメゾット
         DontDestroyOnLoad(gameObject);
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
     void Start()
     {
         UpdateLifeText();
+    }
+
+    // シーンが切り替わったときに呼ばれる
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneManager.GetActiveScene().name == "StageSelect")
+        {
+            image.SetActive(false);
+        }
+        else
+        {
+            image.SetActive(true);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 
     public void LoseLife()

@@ -26,7 +26,7 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         // 現在のシーンがTitleならPauseManuを表示しない
-        if (SceneManager.GetActiveScene().name == "Menu")
+        if (SceneManager.GetActiveScene().name == "StageSelect")
         return;
 
         //escapeKeyが押されたらpauseMenuを開く
