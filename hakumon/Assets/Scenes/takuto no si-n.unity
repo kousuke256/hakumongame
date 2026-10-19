@@ -433,6 +433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LifeManager
   lifeCount: 3
   lifeText: {fileID: 1498507497}
+  image: {fileID: 0}
 --- !u!4 &106008507
 Transform:
   m_ObjectHideFlags: 0

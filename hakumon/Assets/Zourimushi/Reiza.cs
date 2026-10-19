@@ -1,3 +1,4 @@
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -13,12 +14,17 @@ public class Reiza : MonoBehaviour
     private float timer;
     private float currentHit;
     private bool canMove;
-    private bool first = true;
     private float positionX;
+    private bool first = true;
+    private Vector2 firePoint1;
+    private Vector2 firePoint2;
 
     void Start()
     {
         boxCol = reizaaa.GetComponent<BoxCollider2D>();
+
+        firePoint1 = transform.up * 0.5001f + transform.right * -0.01f;
+        firePoint2 = transform.up * 0.5001f + transform.right * 0.01f;
 
         // 初期設定
         if(existCoolTime)
@@ -67,28 +73,32 @@ public class Reiza : MonoBehaviour
     void Fire()
     {
         // 発射位置からgroundまでの距離を測る
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.up * 0.5001f, transform.up, 30f, stopLayer);
+        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)transform.position + firePoint1, transform.up, 30f, stopLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + firePoint2, transform.up, 30f, stopLayer);
 
         // 発射位置からgroundまでの距離が変わっていないかつ、Fireメゾットの2回目以降の実行(cooltimeがあけて)だったらreturn
-        if(currentHit == hit.distance && !first)
+        if(currentHit == hit1.distance || currentHit == hit2.distance && !first)
         return;
 
-        if(hit.collider == null)
+        if(hit1.collider == null)
         {
             currentHit = 16f;
             boxCol.size = new Vector2(boxCol.size.x, 1f);
         }
-        else if (hit.distance <= 1f)
+        else if (hit1.distance <= 1f)
         {
             boxCol.size = new Vector2(boxCol.size.x, 0.5f);
-            currentHit = hit.distance;
+            currentHit = hit1.distance;
         }
         else
         {
-            currentHit = hit.distance;
+            currentHit = hit1.distance;
             boxCol.size = new Vector2(boxCol.size.x, 1f);
         }
         first = false;
+
+        Vector2 a = (Vector2)transform.position + firePoint1;
+        Vector2 b = (Vector2)transform.position + firePoint2;
         
         // レーザーｎo大きさを変えru
         reizaaa.transform.localScale = new Vector3(1f, currentHit - 0.01f, 1f);
@@ -96,6 +106,17 @@ public class Reiza : MonoBehaviour
 
         reizaaa.SetActive(true);
     }
+
+    /*if(hit1.collider == null && hit2.collider == null)
+        {
+            currentHit = 16f;
+            boxCol.size = new Vector2(boxCol.size.x, 1f);
+        }
+        else if(hit1.collider == null || hit2.collider == null)
+        {
+            currentHit = Mathf.Max(hit1.distance, hit2.distance);
+            boxCol.size = new Vector2(boxCol.size.x, 1f);
+        }
 
     /*void OnBecameVisible()
     {
