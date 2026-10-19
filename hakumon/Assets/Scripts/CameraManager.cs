@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     // プレイヤーより右側を映す距離
     [SerializeField] private float offsetX = 2f;
 
+    [SerializeField] private float FirstX = 0f;
+
     private Vector3 velocity = Vector3.zero;
 
     private void LateUpdate()
@@ -19,7 +21,7 @@ public class CameraManager : MonoBehaviour
         // X方向の追従（上限なし）
         float targetX = Mathf.Max(
             player.position.x + offsetX,
-            0f
+            FirstX
         );
 
         Vector3 targetPos = new Vector3(
