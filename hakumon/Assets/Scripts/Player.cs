@@ -53,6 +53,15 @@ public class Player : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         playerRb.gravityScale = 0f;
+
+        LifeManager manager = LifeManager.Instance;
+        if (manager != null
+        && manager.hasSavePoint
+        && manager.savedSceneName ==
+              UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+        {
+            transform.position = manager.respawnPosition;
+        }
     }
 
     void Update()
