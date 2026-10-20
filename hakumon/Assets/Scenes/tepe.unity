@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LifeManager
   lifeCount: 3
   lifeText: {fileID: 945628335}
+  image: {fileID: 388464934}
   hasSavePoint: 0
   respawnPosition: {x: 0, y: 0, z: 0}
   savedSceneName: 

@@ -399,6 +399,9 @@ MonoBehaviour:
   lifeCount: 3
   lifeText: {fileID: 359811131}
   image: {fileID: 99493250}
+  hasSavePoint: 0
+  respawnPosition: {x: 0, y: 0, z: 0}
+  savedSceneName: 
 --- !u!4 &187993644
 Transform:
   m_ObjectHideFlags: 0
@@ -584,8 +587,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: canInterrupt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: existCoolTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: usuReizaDistance
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5331294936865575747, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: m_Name
@@ -781,6 +792,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: canInterrupt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: usuReizaDistance
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5331294936865575747, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: m_Name
       value: Leiza
@@ -11608,8 +11627,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: canInterrupt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: existCoolTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: usuReizaDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5331294936865575747, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: m_Name
@@ -11673,8 +11700,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: canInterrupt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: existCoolTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: usuReizaDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5331294936865575747, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: m_Name
@@ -11738,8 +11773,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: canInterrupt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: existCoolTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: usuReizaDistance
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5331294936865575747, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: m_Name

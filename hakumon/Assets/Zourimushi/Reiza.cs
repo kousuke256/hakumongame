@@ -108,7 +108,7 @@ public class Reiza : MonoBehaviour
         if(!canInterrupt)
         return;
 
-        if(currentHit > usuReizaDistance - 0.5f)
+        if(currentHit > usuReizaDistance - 1f)
         {
             usuReizaaa.SetActive(false);
             return;
