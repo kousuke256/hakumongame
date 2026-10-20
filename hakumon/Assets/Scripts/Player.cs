@@ -141,10 +141,7 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
         //canmove = Physics2D.OverlapCircle(transform.position,0.2f,groundLayer);
 
-        if (!canmove)
-        {
-            Deth();
-        }
+        
         // 重力
         playerRb.AddForce(gravityDirection * gravityPower*playerRb.mass);
 
