@@ -105,7 +105,7 @@ public class Reiza : MonoBehaviour
         reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f + 0.5f);
 
         // Colliderの大きさを設定
-        boxCol.size = new Vector2(boxCol.size.x, (currentHit / Mathf.Abs(reizaaa.transform.lossyScale.y)) - 0.4f);
+        boxCol.size = new Vector2(boxCol.size.x, (currentHit - 0.4f) / Mathf.Abs(reizaaa.transform.lossyScale.y));
 
         reizaaa.SetActive(true);
 
