@@ -82,55 +82,32 @@ public class Reiza : MonoBehaviour
         if((currentHit == hit1.distance || currentHit == hit2.distance) && !first)
         return;
 
-        /*if(hit1.collider == null)
+        // Raycastで当たった距離を決定
+        if (hit1.collider == null)
         {
             currentHit = 16f;
-            boxCol.size = new Vector2(boxCol.size.x, 1f);
         }
         else
         {
             currentHit = hit1.distance;
-            boxCol.size = new Vector2(boxCol.size.x, (currentHit - 0.01f) / Mathf.Abs(transform.lossyScale.y));
         }
-        first = false;
 
-        // レーザーｎo大きさを変えru
-        reizaaa.transform.localScale = new Vector3(1f, currentHit - 0.01f, 1f);
+        if(currentHit < 0.05f)
+        {
+            reizaaa.SetActive(false);
+            return; 
+        }
+
+        // 先にレーザーの見た目の大きさを変更
+        reizaaa.transform.localScale = new Vector3(1f, currentHit, 1f);
+
+        // レーザーの位置を変更
         reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f + 0.5f);
 
-        reizaaa.SetActive(true);*/
+        // Colliderの大きさを設定
+        boxCol.size = new Vector2(boxCol.size.x, (currentHit / Mathf.Abs(reizaaa.transform.lossyScale.y)) - 0.4f);
 
-        // Raycastで当たった距離を決定
-    if (hit1.collider == null)
-    {
-        currentHit = 16f;
-    }
-    else
-    {
-        currentHit = hit1.distance;
-    }
-
-    // レーザーの長さ
-    float laserLength = Mathf.Max(0f, currentHit - 0.01f);
-
-    // 先にレーザーの見た目の大きさを変更
-    reizaaa.transform.localScale = new Vector3(1f, laserLength, 1f);
-
-    // レーザーの位置を変更
-    reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f + 0.5f);
-
-    // Colliderの大きさを設定
-    float scaleY = Mathf.Abs(reizaaa.transform.lossyScale.y);
-
-    if (scaleY > 0.0001f)
-    {
-        boxCol.size = new Vector2(
-            boxCol.size.x,
-            laserLength / scaleY
-        );
-    }
-
-    reizaaa.SetActive(true);
+        reizaaa.SetActive(true);
 
         if(!canInterrupt)
         return;
