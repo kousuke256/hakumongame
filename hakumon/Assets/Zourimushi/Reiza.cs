@@ -7,14 +7,16 @@ public class Reiza : MonoBehaviour
     public bool existCoolTime;
     public float lifeTime;
     public float coolTime;
+    public bool canInterrupt = false; 
+    public float usuReizaDistance = 20f;
     public LayerMask stopLayer;
     public GameObject reizaaa;
+    public GameObject usuReizaaa;
     private BoxCollider2D boxCol;
     private bool nowFired = false;
     private float timer;
     private float currentHit;
     private bool canMove;
-    private float positionX;
     private bool first = true;
     private Vector2 firePoint1;
     private Vector2 firePoint2;
@@ -73,8 +75,8 @@ public class Reiza : MonoBehaviour
     void Fire()
     {
         // 発射位置からgroundまでの距離を測る
-        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)transform.position + firePoint1, transform.up, 30f, stopLayer);
-        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + firePoint2, transform.up, 30f, stopLayer);
+        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)transform.position + firePoint1, transform.up, 40f, stopLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + firePoint2, transform.up, 40f, stopLayer);
 
         // 発射位置からgroundまでの距離が変わっていないかつ、Fireメゾットの2回目以降の実行(cooltimeがあけて)だったらreturn
         if((currentHit == hit1.distance || currentHit == hit2.distance) && !first)
@@ -97,14 +99,25 @@ public class Reiza : MonoBehaviour
         }
         first = false;
 
-        Vector2 a = (Vector2)transform.position + firePoint1;
-        Vector2 b = (Vector2)transform.position + firePoint2;
-        
         // レーザーｎo大きさを変えru
         reizaaa.transform.localScale = new Vector3(1f, currentHit - 0.01f, 1f);
         reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f + 0.5f);
 
         reizaaa.SetActive(true);
+
+        if(!canInterrupt)
+        return;
+
+        if(currentHit > usuReizaDistance - 1f)
+        {
+            usuReizaaa.SetActive(false);
+            return;
+        }
+
+        usuReizaaa.transform.localScale = new Vector3(1f, usuReizaDistance - currentHit, 1f);
+        usuReizaaa.transform.localPosition = new Vector2(0f, (usuReizaDistance - currentHit) / 2f + currentHit + 0.5f);
+        usuReizaaa.SetActive(true);
+
     }
 
     /*if(hit1.collider == null && hit2.collider == null)

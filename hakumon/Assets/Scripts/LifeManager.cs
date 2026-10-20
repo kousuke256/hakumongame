@@ -1,11 +1,14 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LifeManager : MonoBehaviour
 {
     public int lifeCount = 3;
     public TextMeshProUGUI lifeText;
     public static LifeManager Instance;
+    public GameObject image;
     public bool hasSavePoint = false; // セーブに触れたか
     public Vector3 respawnPosition;  // 復活する位置
     public string savedSceneName;   // セーブしたステージ
@@ -25,11 +28,35 @@ public class LifeManager : MonoBehaviour
         // sceneが切り替わってもオブジェクトを消さないメゾット
         DontDestroyOnLoad(gameObject);
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
     void Start()
     {
         UpdateLifeText();
     }
+
+    // シーンが切り替わったときに呼ばれる
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneManager.GetActiveScene().name == "StageSelect")
+        {
+            image.SetActive(false);
+        }
+        else
+        {
+            image.SetActive(false);//////////////////////////////////////////////本当はtrueだけと文化祭寒中はfalseにしようと思う
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+    }
+    
 
     public void LoseLife()
     {

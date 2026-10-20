@@ -84,7 +84,7 @@ public class StageSelectManager : MonoBehaviour
 
     public void Stage1A()
     {
-        SceneManager.LoadScene("tutorial");
+        SceneManager.LoadScene("1-1");
     }
 
     public void Stage1B()
