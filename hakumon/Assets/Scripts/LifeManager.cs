@@ -45,7 +45,7 @@ public class LifeManager : MonoBehaviour
         }
         else
         {
-            image.SetActive(true);
+            image.SetActive(false);//////////////////////////////////////////////本当はtrueだけと文化祭寒中はfalseにしようと思う
         }
     }
 
