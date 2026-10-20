@@ -87,15 +87,10 @@ public class Reiza : MonoBehaviour
             currentHit = 16f;
             boxCol.size = new Vector2(boxCol.size.x, 1f);
         }
-        else if (hit1.distance <= 1f)
-        {
-            boxCol.size = new Vector2(boxCol.size.x, 0.5f);
-            currentHit = hit1.distance;
-        }
         else
         {
             currentHit = hit1.distance;
-            boxCol.size = new Vector2(boxCol.size.x, 1f);
+            boxCol.size = new Vector2(boxCol.size.x, (currentHit - 0.01f) / Mathf.Abs(transform.lossyScale.y));
         }
         first = false;
 
