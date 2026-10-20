@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - BackGround
   - Cloud
+  - On
   layers:
   - Default
   - TransparentFX

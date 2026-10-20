@@ -96,7 +96,7 @@ public class OnOffBlock : MonoBehaviour
             gameObject.layer =
                 LayerMask.NameToLayer("Ground");
 
-            gameObject.tag = "Ground";
+            gameObject.tag = "On";
         }
         else
         {

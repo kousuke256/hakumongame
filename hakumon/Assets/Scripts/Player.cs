@@ -139,7 +139,9 @@ public class Player : MonoBehaviour
 
         //接地判定, 下の1行はPlayerの子オブジェクトのGroundCheckの中心から半径0.2以内に、LayerがGroundのオブジェクトがあればisGroundがtrueになるというコード
         isGrounded = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
+        //canmove = Physics2D.OverlapCircle(transform.position,0.2f,groundLayer);
 
+        
         // 重力
         playerRb.AddForce(gravityDirection * gravityPower*playerRb.mass);
 
