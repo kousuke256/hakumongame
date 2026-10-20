@@ -9,7 +9,7 @@ public class SeceneChange : MonoBehaviour
     {
         if(other.CompareTag("Player"))  //相手がplayerか
         { 
-            SceneManager.LoadScene("1-2");  //ここにscenename BuildProfileに追加してからやってね
+            SceneManager.LoadScene("StageSelect");  //ここにscenename BuildProfileに追加してからやってね
         }
     }
 }

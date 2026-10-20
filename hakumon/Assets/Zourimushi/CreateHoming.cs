@@ -62,7 +62,7 @@ public class CreateHoming : MonoBehaviour
         createEffect.Clear();
 
         // 地面がなかったr生成する
-        if(!Physics2D.OverlapCircle(transform.position, 1f, groundLayer))
+        if(!Physics2D.OverlapCircle(transform.position, 0.8f, groundLayer))
         {
             // 弾を生成する
             GameObject bullet = Instantiate(homingBullet, transform.position, Quaternion.identity);
