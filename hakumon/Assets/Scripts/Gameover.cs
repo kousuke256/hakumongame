@@ -23,6 +23,7 @@ public class Gameover : MonoBehaviour
         // 残機が0以下ならGameOverへ
         if (LifeManager.Instance.lifeCount <= 0)
         {
+            LifeManager.Instance.hasSavePoint = false;
             SceneManager.LoadScene("GameOver");
         }
         else

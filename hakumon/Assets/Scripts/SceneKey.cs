@@ -13,6 +13,8 @@ public class SeceneKey : MonoBehaviour
         {
             LifeManager.Instance.ResetLife();
 
+            LifeManager.Instance.hasSavePoint = false;
+
             LifeManager.Instance.ShowLife();
 
             SceneManager.LoadScene("1-1");
