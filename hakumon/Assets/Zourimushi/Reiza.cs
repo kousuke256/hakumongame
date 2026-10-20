@@ -75,8 +75,8 @@ public class Reiza : MonoBehaviour
     void Fire()
     {
         // 発射位置からgroundまでの距離を測る
-        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)transform.position + firePoint1, transform.up, 30f, stopLayer);
-        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + firePoint2, transform.up, 30f, stopLayer);
+        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)transform.position + firePoint1, transform.up, 40f, stopLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + firePoint2, transform.up, 40f, stopLayer);
 
         // 発射位置からgroundまでの距離が変わっていないかつ、Fireメゾットの2回目以降の実行(cooltimeがあけて)だったらreturn
         if((currentHit == hit1.distance || currentHit == hit2.distance) && !first)
