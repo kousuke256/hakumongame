@@ -16,13 +16,17 @@ public class Goal : MonoBehaviour
         return;
 
         if(Keyboard.current.enterKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame)
-        SceneManager.LoadScene("StageSelect");  //ここにscenename BuildProfileに追加してからやってね
+        {
+            SceneManager.LoadScene("StageSelect");  //ここにscenename BuildProfileに追加してからやってね
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)  //触れたかをチェック
     {
         if(!other.CompareTag("Player"))
         return;  //相手がplayerか
 
+        showImage = true;
+        Time.timeScale = 0f;
         goalCanvas.SetActive(true);
         
     }
