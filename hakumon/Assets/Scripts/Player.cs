@@ -28,14 +28,14 @@ public class Player : MonoBehaviour
     private float jumpHoldTime = 0f;
     private float jumpCutTime = 100f;
     private float jumpCountUp = 0f;
-    private bool jumpPressed;
+    public bool jumpPressed;
     private bool CanJump=true;
     private bool canCutJump;
     private float jumpBufferTime = 0.1f; // space入力の持続時間
     private float jumpBufferCounter;
 
     [Header("設置判定")]
-    private bool isGrounded;
+    public bool isGrounded;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
 
@@ -49,11 +49,14 @@ public class Player : MonoBehaviour
     public float groundCheckDistance = 0.45f;
     private bool isDead = false;
    
+    private AudioSource audiosource;
+    public AudioClip JumpSound;
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         playerRb.gravityScale = 0f;
+        audiosource = GetComponent<AudioSource>();
 
         LifeManager manager = LifeManager.Instance;
         if (manager != null
@@ -230,6 +233,7 @@ public class Player : MonoBehaviour
             jumpCutTime = 100f;
             jumpBufferCounter = 0f;
             canCutJump = true;
+            audiosource.PlayOneShot(JumpSound);
         }
     }
 

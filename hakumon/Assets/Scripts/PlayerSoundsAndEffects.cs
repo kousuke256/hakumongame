@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.InputSystem;
 public class PlayerSoundsAndEffects : MonoBehaviour
 {
     AudioSource audioSource;
     public AudioClip GravitySound;
+
     private Vector2 oldPlayerGravitydirection = Vector2.down;
     public ParticleSystem gravityEffect;
     public Player playerScript;
@@ -33,6 +34,7 @@ public class PlayerSoundsAndEffects : MonoBehaviour
 
             PlayGravityEffect();
         }
+
     }
 
     void PlayGravityEffect()
