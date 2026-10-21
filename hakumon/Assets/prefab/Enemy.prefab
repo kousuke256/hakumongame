@@ -596,6 +596,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallChecker
   enemySr: {fileID: 5527587277660018430}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6956274662941241399
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +773,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.013894707, y: 0.027789533}
+  m_Offset: {x: 0.004570678, y: 0.027789533}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -780,5 +783,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.97221154, y: 0.94442093}
+  m_Size: {x: 0.9024534, y: 0.94442093}
   m_EdgeRadius: 0
