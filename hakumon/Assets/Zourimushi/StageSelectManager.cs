@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class StageSelectManager : MonoBehaviour
 {
+     private AudioSource audioSource;
+     public AudioClip Sampl;
     public GameObject[] stageSelectTexts;
     private Rigidbody2D[] stageSelectTextRb;
     public GameObject[] stageButtons;
@@ -15,6 +18,7 @@ public class StageSelectManager : MonoBehaviour
     void Start()
     {
         // 配列の範囲を超えないようにする
+        audioSource = GetComponent<AudioSource>();
         int count = Mathf.Min(unlockedStage, stageButtons.Length);
 
         // Rigidbody2Dの配列を用意
@@ -54,6 +58,7 @@ public class StageSelectManager : MonoBehaviour
                 stageRb[i].AddForce(powerStageBottun);
             }
             
+            
         }
 
         if (Keyboard.current.sKey.isPressed)
@@ -70,6 +75,7 @@ public class StageSelectManager : MonoBehaviour
                 stageRb[i].AddForce(powerStageBottun);
             }
             
+            
         }
     }
 
@@ -84,36 +90,87 @@ public class StageSelectManager : MonoBehaviour
 
     public void Stage1A()
     {
-        SceneManager.LoadScene("1-1");
+        StartCoroutine(stage1());
     }
 
     public void Stage1B()
     {
-        SceneManager.LoadScene("1-2");
+        StartCoroutine(stage2());
     }
 
     public void Stage1C()
     {
-        SceneManager.LoadScene("1-3");
+        StartCoroutine(stage3());
     }
 
     public void Stage1D()
     {
-        //SceneManager.LoadScene("1-4");
+        //StartCoroutine(stage4());
     }
 
     public void StageEx()
     {
-        //SceneManager.LoadScene("ExStage");
+        //StartCoroutine(stageex());
+        
     }
 
     public void ReturnToTitle()
     {
-        SceneManager.LoadScene("Title");
+        StartCoroutine(Returntitle());
     }
 
     public void Quit()
     {
         Application.Quit();
     }
+
+    IEnumerator stage1()
+     {
+         audioSource.PlayOneShot(Sampl);
+
+         yield return new WaitForSeconds(0.5f);
+         SceneManager.LoadScene("1-1");
+
+     }
+     IEnumerator stage2()
+     {
+         audioSource.PlayOneShot(Sampl);
+
+         yield return new WaitForSeconds(0.5f);
+         SceneManager.LoadScene("1-2");
+
+     }
+     IEnumerator stage3()
+     {
+         audioSource.PlayOneShot(Sampl);
+
+         yield return new WaitForSeconds(0.5f);
+         SceneManager.LoadScene("1-3");
+
+     }
+     IEnumerator stage4()
+     {
+         audioSource.PlayOneShot(Sampl);
+
+         yield return new WaitForSeconds(0.5f);
+         //SceneManager.LoadScene("1-4");
+
+     }
+     IEnumerator stageex()
+     {
+         audioSource.PlayOneShot(Sampl);
+
+         yield return new WaitForSeconds(0.5f);
+         //SceneManager.LoadScene("Ex");
+
+     }
+
+     IEnumerator Returntitle()
+     {
+         audioSource.PlayOneShot(Sampl);
+
+         yield return new WaitForSeconds(0.5f);
+         SceneManager.LoadScene("Title");
+
+     }
 }
