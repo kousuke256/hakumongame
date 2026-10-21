@@ -105,7 +105,7 @@ public class StageSelectManager : MonoBehaviour
 
     public void Stage1D()
     {
-        //StartCoroutine(stage4());
+        StartCoroutine(stage4());
     }
 
     public void StageEx()
@@ -153,7 +153,7 @@ public class StageSelectManager : MonoBehaviour
          audioSource.PlayOneShot(Sampl);
 
          yield return new WaitForSeconds(0.5f);
-         //SceneManager.LoadScene("1-4");
+         SceneManager.LoadScene("1-4");
 
      }
      IEnumerator stageex()
