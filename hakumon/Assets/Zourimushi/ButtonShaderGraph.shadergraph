@@ -28,15 +28,27 @@
             "m_Id": "20d449083f0945469bf0fa21d58591cb"
         },
         {
-            "m_Id": "47ed54eff28242128ad303d516b43fd9"
-        },
-        {
             "m_Id": "a3c0fb41f5d0484c9029b8cb9546fdfb"
         }
     ],
     "m_GroupDatas": [],
     "m_StickyNoteDatas": [],
-    "m_Edges": [],
+    "m_Edges": [
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "a3c0fb41f5d0484c9029b8cb9546fdfb"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "123542852db04247a34e083c5b8da6d1"
+                },
+                "m_SlotId": 0
+            }
+        }
+    ],
     "m_VertexContext": {
         "m_Position": {
             "x": 0.0,
@@ -46,8 +58,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 0.0,
-            "y": 200.0
+            "x": 0.0000020265579223632814,
+            "y": 182.0
         },
         "m_Blocks": [
             {
@@ -58,9 +70,6 @@
             },
             {
                 "m_Id": "20d449083f0945469bf0fa21d58591cb"
-            },
-            {
-                "m_Id": "47ed54eff28242128ad303d516b43fd9"
             }
         ]
     },
@@ -111,10 +120,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": 9.0,
+            "y": 278.0,
+            "width": 200.0,
+            "height": 41.0
         }
     },
     "m_Slots": [
@@ -201,40 +210,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "47ed54eff28242128ad303d516b43fd9",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.AlphaClipThreshold",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "dd1793a416f84f9983ac0fc0df8102f3"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.AlphaClipThreshold"
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "50df1097d22a4a19912967eb62e50ebe",
     "m_Id": 0,
@@ -278,8 +253,8 @@
     "m_PerRendererData": false,
     "m_customAttributes": [],
     "m_Value": {
-        "r": 0.41981130838394167,
-        "g": 0.8152633309364319,
+        "r": 0.5424528121948242,
+        "g": 0.7547010183334351,
         "b": 1.0,
         "a": 1.0
     },
@@ -402,10 +377,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 75.75482940673828,
-            "y": 288.4000244140625,
-            "width": 0.0,
-            "height": 0.0
+            "x": -210.0,
+            "y": 273.0,
+            "width": 133.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -448,9 +423,9 @@
     "m_StageCapability": 2,
     "m_CustomBinding": "",
     "m_Value": {
-        "x": 0.4906105101108551,
-        "y": 0.7529411911964417,
-        "z": 0.9905660152435303
+        "x": 0.37264150381088259,
+        "y": 0.586016058921814,
+        "z": 1.0
     },
     "m_DefaultValue": {
         "x": 0.5,
@@ -465,23 +440,5 @@
         "b": 0.5,
         "a": 1.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "dd1793a416f84f9983ac0fc0df8102f3",
-    "m_Id": 0,
-    "m_DisplayName": "Alpha Clip Threshold",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_HideConnector": false,
-    "m_ShaderOutputName": "AlphaClipThreshold",
-    "m_StageCapability": 2,
-    "m_CustomBinding": "",
-    "m_Value": 0.5,
-    "m_DefaultValue": 0.5,
-    "m_Labels": [],
-    "m_LiteralMode": false
 }
 

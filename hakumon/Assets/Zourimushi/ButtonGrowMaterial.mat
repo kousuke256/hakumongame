@@ -66,7 +66,7 @@ Material:
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _GrowColor: {r: 0.41981128, g: 0.8152633, b: 1, a: 1}
+    - _GrowColor: {r: 0.16470587, g: 0.8349353, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
