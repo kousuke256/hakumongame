@@ -17,6 +17,7 @@ public class Goal : MonoBehaviour
 
         if(Keyboard.current.enterKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame)
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene("StageSelect");  //ここにscenename BuildProfileに追加してからやってね
         }
     }
