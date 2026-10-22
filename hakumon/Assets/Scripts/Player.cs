@@ -139,7 +139,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(playerRb.linearVelocity.y);
         float targetSpeed;
         float acceleration;
 
