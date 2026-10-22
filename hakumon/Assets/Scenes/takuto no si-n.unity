@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e75d9c10fc62647af2431f15968dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeManager
-  lifeCount: 3
+  lifeCount: 100000000
   lifeText: {fileID: 701311514}
   image: {fileID: 1983344732}
   hasSavePoint: 0
@@ -2294,7 +2294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6172023694865557862, guid: 28d85055dfa8cbf45b3a0bf72a62d230, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3581,7 +3581,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.12
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5128,7 +5128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2106059595
 MonoBehaviour:
   m_ObjectHideFlags: 0
