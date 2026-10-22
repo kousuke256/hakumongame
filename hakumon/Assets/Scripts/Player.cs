@@ -70,6 +70,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {   
+        if(Time.timeScale == 0f)
+        return;
 
         //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
