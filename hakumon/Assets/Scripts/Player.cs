@@ -209,8 +209,14 @@ public class Player : MonoBehaviour
                 }
                 canCutJump = true;
             }
+
+            
             
         }
+        if (collision.collider.CompareTag("Deth"))
+            {
+                Deth();
+            }
     }
 
     private void Jump()
