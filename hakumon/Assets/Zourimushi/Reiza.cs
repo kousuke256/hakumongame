@@ -6,6 +6,7 @@ public class Reiza : MonoBehaviour
 {
     public bool existCoolTime;
     public float lifeTime;
+    public float firstCoolTime = 0f;
     public float coolTime;
     public bool canInterrupt = false; 
     public float usuReizaDistance = 20f;
@@ -29,8 +30,11 @@ public class Reiza : MonoBehaviour
         firePoint2 = transform.up * 0.5001f + transform.right * 0.01f;
 
         // 初期設定
-        if(existCoolTime)
-        return;
+        if (existCoolTime)
+        {
+            timer = firstCoolTime;
+            return;
+        }
 
         reizaaa.SetActive(true);
     }
@@ -46,37 +50,36 @@ public class Reiza : MonoBehaviour
         //if(!canMove)
         //return;
 
-        timer += Time.fixedDeltaTime;
-        // レーザー発射中ならlifeTimeのカウントをしていて、発射していないならcoolTimeのカウントをしている
-        if (nowFired)
+        timer -= Time.fixedDeltaTime;
+        if(timer <= 0f)
         {
-            Fire();
+            nowFired = !nowFired;
+            if (nowFired)
+            {
+                timer += lifeTime;
 
-            if(timer < lifeTime)
-            return;
-            timer -= lifeTime;
-
-            // 発射しない状態にする
-            nowFired = false;
-            reizaaa.SetActive(false);
+                // 発射する状態にする
+                first = true;
+            }
+            else
+            {
+                timer += coolTime;
+                // 発射しない状態にする
+                reizaaa.SetActive(false);
+            }
         }
-        else
-        {
-            if(timer < coolTime)
-            return;
-            timer -= coolTime;
 
-            // 発射する状態にする
-            nowFired = true;
-            first = true;
-        }
+        if(!nowFired)
+        return;
+
+        Fire();
     }
 
     void Fire()
     {
         // 発射位置からgroundまでの距離を測る
-        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)transform.position + firePoint1, transform.up, 40f, stopLayer);
-        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + firePoint2, transform.up, 40f, stopLayer);
+        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)transform.position + firePoint1, transform.up, 50f, stopLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + firePoint2, transform.up, 50f, stopLayer);
 
         // 発射位置からgroundまでの距離が変わっていないかつ、Fireメゾットの2回目以降の実行(cooltimeがあけて)だったらreturn
         if((currentHit == hit1.distance || currentHit == hit2.distance) && !first)
@@ -85,7 +88,7 @@ public class Reiza : MonoBehaviour
         // Raycastで当たった距離を決定
         if (hit1.collider == null)
         {
-            currentHit = 16f;
+            currentHit = 20f;
         }
         else
         {
