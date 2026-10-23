@@ -24,7 +24,7 @@ public class Bullet2 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Ground") || collider.CompareTag("On") || collider.CompareTag("Off"))
+        if (collider.CompareTag("Ground") || collider.CompareTag("On"))
         {
             Destroy(gameObject);
         }
