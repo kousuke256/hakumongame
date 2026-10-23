@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     public Vector2 gravityDirection = Vector2.down;
 
     // groundCheckのlocalPositionをいじる変数。いつか重力の向きが変わったらスクリプトの向きを変えるプログラムを作るから将来なくなる変数
-    public float groundCheckDistance = 0.45f;
+    public float groundCheckDistance = 0.6f;
     private bool isDead = false;
    
     private AudioSource audiosource;
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
         float acceleration;
 
         //接地判定, 下の1行はPlayerの子オブジェクトのGroundCheckの中心から半径0.2以内に、LayerがGroundのオブジェクトがあればisGroundがtrueになるというコード
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.575f, 0.15f), 0f, groundLayer);
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.575f, 0.1f), 0f, groundLayer);
         //canmove = Physics2D.OverlapCircle(transform.position,0.2f,groundLayer);
 
         
@@ -295,7 +295,26 @@ public class Player : MonoBehaviour
 
     public void gravitychange()
     {
-        groundCheck.localPosition = gravityDirection * groundCheckDistance;
+        if (gravityDirection.y == 1)
+        {
+            groundCheck.localPosition =
+            new Vector3(
+                groundCheck.localPosition.x,
+                0.6f,
+                groundCheck.localPosition.z
+            );
+        }
+        else
+        {
+            groundCheck.localPosition =
+            new Vector3(
+                groundCheck.localPosition.x,
+                -0.6f,
+                groundCheck.localPosition.z
+            );
+        }
+        //groundCheck.localPosition = gravityDirection * groundCheckDistance;
+
         playerRb.AddForce(gravityDirection * 2f*playerRb.mass, ForceMode2D.Impulse);
     }
 
@@ -335,4 +354,15 @@ public class Player : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
     }
+    private void OnDrawGizmos()
+{
+    if (groundCheck == null) return;
+
+    Gizmos.color = Color.green;
+
+    Gizmos.DrawWireCube(
+        groundCheck.position,
+        new Vector3(0.575f, 0.1f, 0)
+    );
+}
 }
