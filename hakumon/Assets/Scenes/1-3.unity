@@ -11911,6 +11911,14 @@ PrefabInstance:
       propertyPath: groundTilemap
       value: 
       objectReference: {fileID: 142180482}
+    - target: {fileID: 8002657602299473947, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: m_Size.y
+      value: 1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8002657602299473947, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_Name
       value: Player
