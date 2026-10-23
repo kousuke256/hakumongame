@@ -2403,7 +2403,7 @@ MonoBehaviour:
   - {fileID: 831195232}
   eventTriggerX:
   - -100
-  - 35.5
+  - 15
 --- !u!4 &870906167
 Transform:
   m_ObjectHideFlags: 0
