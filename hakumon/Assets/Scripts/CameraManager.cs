@@ -12,6 +12,8 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private float FirstX = 0f;
 
+    [SerializeField] private float MaxX = 500f;
+
     private Vector3 velocity = Vector3.zero;
 
     private void LateUpdate()
@@ -19,10 +21,12 @@ public class CameraManager : MonoBehaviour
         if (player == null) return;
 
         // X方向の追従（上限なし）
-        float targetX = Mathf.Max(
+        float targetX = Mathf.Min(
+            MaxX,
+            Mathf.Max(
             player.position.x + offsetX,
             FirstX
-        );
+        ));
 
         Vector3 targetPos = new Vector3(
             targetX,
