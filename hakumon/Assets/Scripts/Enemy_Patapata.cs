@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,7 @@ public class Patapata : MonoBehaviour
     [SerializeField] private float jumpPower = 5f;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float cameraMargin = 1f;
+
     [SerializeField] private float jumpCooldown = 0.2f;
     private float jumpCooldownTimer = 0f;
 
@@ -32,7 +32,6 @@ public class Patapata : MonoBehaviour
             return;
         }
 
-        // Move Speedが負の場合は右向きで開始
         if (moveSpeed < 0f)
         {
             direction = 1;
@@ -46,31 +45,29 @@ public class Patapata : MonoBehaviour
         if (isDead) return;
 
         if (jumpCooldownTimer > 0f)
-    {
-        jumpCooldownTimer -= Time.fixedDeltaTime;
-    }
+        {
+            jumpCooldownTimer -= Time.fixedDeltaTime;
+        }
 
         bool insideCamera = IsInsideCamera();
 
         if (insideCamera)
         {
-            // 現在の進行方向に移動
             enemyRb.linearVelocity = new Vector2(
                 direction * Mathf.Abs(moveSpeed),
                 enemyRb.linearVelocity.y
             );
 
-            if (!wasInsideCamera
-    && isGrounded
-    && Mathf.Abs(enemyRb.linearVelocity.y) < 0.05f
-    && jumpCooldownTimer <= 0f)
-{
-    Jump();
-}
+            if (//!wasInsideCamera
+                 isGrounded
+                && Mathf.Abs(enemyRb.linearVelocity.y) < 0.05f
+                && jumpCooldownTimer <= 0f)
+            {
+                Jump();
+            }
         }
         else
         {
-            // カメラ外では横移動停止
             enemyRb.linearVelocity = new Vector2(
                 0f,
                 enemyRb.linearVelocity.y
@@ -96,6 +93,8 @@ public class Patapata : MonoBehaviour
 
     void Jump()
     {
+        jumpCooldownTimer = jumpCooldown;
+
         enemyRb.linearVelocity = new Vector2(
             enemyRb.linearVelocity.x,
             0f
@@ -111,10 +110,9 @@ public class Patapata : MonoBehaviour
     {
         if (isDead) return;
 
-        // プレイヤーとの接触
+        // プレイヤーと接触
         if (collision.gameObject.CompareTag("Player"))
         {
-            // 上から踏まれた場合
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 if (contact.normal.y < -0.5f)
@@ -130,6 +128,7 @@ public class Patapata : MonoBehaviour
             }
 
             isDead = true;
+
             LifeManager.Instance.LoseLife();
 
             if (LifeManager.Instance.lifeCount <= 0)
@@ -146,27 +145,7 @@ public class Patapata : MonoBehaviour
             return;
         }
 
-        // 壁との接触
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                // 横方向から壁に当たった場合
-                if (Mathf.Abs(contact.normal.x) > 0.5f)
-                {
-                    direction *= -1;
-
-                    enemyRb.linearVelocity = new Vector2(
-                        direction * Mathf.Abs(moveSpeed),
-                        enemyRb.linearVelocity.y
-                    );
-
-                    return;
-                }
-            }
-        }
-
-        // 地面との接触
+        // Ground以外は無視
         if (!collision.gameObject.CompareTag("Ground"))
         {
             return;
@@ -174,11 +153,26 @@ public class Patapata : MonoBehaviour
 
         foreach (ContactPoint2D contact in collision.contacts)
         {
+            // 壁
+            if (Mathf.Abs(contact.normal.x) > 0.9f)
+            {
+                direction *= -1;
+
+                enemyRb.linearVelocity = new Vector2(
+                    direction * Mathf.Abs(moveSpeed),
+                    enemyRb.linearVelocity.y
+                );
+
+                return;
+            }
+
+            // 地面
             if (contact.normal.y > 0.5f && !isGrounded)
             {
                 isGrounded = true;
 
-                if (IsInsideCamera())
+                if (IsInsideCamera()
+                    && jumpCooldownTimer <= 0f)
                 {
                     Jump();
                 }

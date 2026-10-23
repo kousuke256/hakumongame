@@ -798,6 +798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9f5c0e725fb9149a4b6c813f4f99ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Patapata
-  jumpPower: 5
+  jumpPower: 30
   moveSpeed: 2
   cameraMargin: 1
+  jumpCooldown: 0.2
