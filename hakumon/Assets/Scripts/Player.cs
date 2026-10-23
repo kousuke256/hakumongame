@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
         float acceleration;
 
         //接地判定, 下の1行はPlayerの子オブジェクトのGroundCheckの中心から半径0.2以内に、LayerがGroundのオブジェクトがあればisGroundがtrueになるというコード
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.575f, 0.1f), 0f, groundLayer);
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.575f, 0.08f), 0f, groundLayer);
         //canmove = Physics2D.OverlapCircle(transform.position,0.2f,groundLayer);
 
         
