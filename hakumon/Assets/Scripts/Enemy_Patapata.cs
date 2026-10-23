@@ -10,6 +10,8 @@ public class Patapata : MonoBehaviour
     [SerializeField] private float jumpPower = 5f;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float cameraMargin = 1f;
+    [SerializeField] private float jumpCooldown = 0.2f;
+    private float jumpCooldownTimer = 0f;
 
     // -1：左、1：右
     private int direction = -1;
@@ -43,6 +45,11 @@ public class Patapata : MonoBehaviour
     {
         if (isDead) return;
 
+        if (jumpCooldownTimer > 0f)
+    {
+        jumpCooldownTimer -= Time.fixedDeltaTime;
+    }
+
         bool insideCamera = IsInsideCamera();
 
         if (insideCamera)
@@ -53,10 +60,13 @@ public class Patapata : MonoBehaviour
                 enemyRb.linearVelocity.y
             );
 
-            if (!wasInsideCamera && isGrounded)
-            {
-                Jump();
-            }
+            if (!wasInsideCamera
+    && isGrounded
+    && Mathf.Abs(enemyRb.linearVelocity.y) < 0.05f
+    && jumpCooldownTimer <= 0f)
+{
+    Jump();
+}
         }
         else
         {
