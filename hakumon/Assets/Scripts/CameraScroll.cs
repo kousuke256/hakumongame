@@ -8,10 +8,17 @@ public class AutoScrollCamera : MonoBehaviour
     [Header("画面外の死亡判定")]
     [SerializeField] private float tileSize = 1f;
     [SerializeField] private float outsideTiles = 2f;
+    [SerializeField] private Transform player;
     private Camera cam;
     private BoxCollider2D deathArea;
     private void Start()
     {
+        if (player != null)
+        {
+            Vector3 position = transform.position;
+            position.x = player.position.x;
+            transform.position = position;
+        }
         cam = GetComponent<Camera>();
         // 左側の死亡エリアを自動作成
         GameObject area = new GameObject("ScrollDeathArea");
