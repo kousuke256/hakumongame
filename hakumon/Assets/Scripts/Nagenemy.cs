@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Nagenemy : MonoBehaviour
 {
     [Header("弾の情報")]
     public float shootStartDelay;
