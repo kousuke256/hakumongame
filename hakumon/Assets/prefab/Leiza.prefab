@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Reiza
   existCoolTime: 0
   lifeTime: 3
+  firstCoolTime: 0
   coolTime: 2
   canInterrupt: 0
   usuReizaDistance: 20
