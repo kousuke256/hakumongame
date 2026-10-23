@@ -9516,7 +9516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7275995448262926718, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: jumpPower
-      value: 8
+      value: 8.03
       objectReference: {fileID: 0}
     - target: {fileID: 8111342785288202620, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_Name
@@ -9617,7 +9617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeceneChange
   lifeManager: {fileID: 0}
-  goalCanvas: {fileID: 1449677669}
+  goalCanvas: {fileID: 0}
 --- !u!58 &1037996201
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9753,8 +9753,7 @@ Transform:
   m_LocalPosition: {x: 123, y: 4, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1449677670}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1041019495
@@ -13160,3 +13159,4 @@ SceneRoots:
   - {fileID: 1326171739}
   - {fileID: 362946550}
   - {fileID: 982337222}
+  - {fileID: 1037996204}

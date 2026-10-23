@@ -204,7 +204,7 @@ MonoBehaviour:
   groundAcceleration: 20
   airAcceleration: 10
   canmove: 1
-  jumpPower: 8
+  jumpPower: 8.02
   jumpCutMultiplier: 0.5
   smallJumpTime: 0.13
   mediumJumpTime: 0.32
