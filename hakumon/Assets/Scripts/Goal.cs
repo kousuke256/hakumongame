@@ -9,6 +9,12 @@ public class Goal : MonoBehaviour
     public LifeManager lifeManager;
     public GameObject goalCanvas;
     private bool showImage = false;
+    private AudioClip clearSound;
+
+    private void Awake()
+    {
+
+    }
 
     void Update()
     {
