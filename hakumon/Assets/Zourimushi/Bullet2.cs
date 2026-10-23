@@ -24,10 +24,7 @@ public class Bullet2 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!collider.CompareTag("Ground"))
-        return;
-        
-        if (transform.position.y * bulletDirecitonY < 4.5f)
+        if (collider.CompareTag("Ground") || collider.CompareTag("On") || collider.CompareTag("Off"))
         {
             Destroy(gameObject);
         }
