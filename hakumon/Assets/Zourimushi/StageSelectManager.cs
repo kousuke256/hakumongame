@@ -20,7 +20,11 @@ public class StageSelectManager : MonoBehaviour
         // Stage1のチュートリアルの表示履歴をリセット
         for (int i = 0; i < 3; i++)
         {
-            PlayerPrefs.DeleteKey("TutorialSeen_Stage1_" + i);
+            PlayerPrefs.DeleteKey("TutorialSeen_1-1_" + i);
+        }
+        for (int i = 0; i < 2; i++)
+        {
+            PlayerPrefs.DeleteKey("TutorialSeen_1-2_" + i);
         }
 
         // 配列の範囲を超えないようにする
