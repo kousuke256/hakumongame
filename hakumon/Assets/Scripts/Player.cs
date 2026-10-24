@@ -343,6 +343,20 @@ public class Player : MonoBehaviour
         return;
         
         isDead = true;
+        AudioClip deathSound = Resources.Load<AudioClip>("DeathSound");
+        if (deathSound != null)
+        {
+            GameObject soundObject = new GameObject("DeathSound");
+            DontDestroyOnLoad(soundObject);
+            AudioSource source = soundObject.AddComponent<AudioSource>();
+            source.playOnAwake = false;
+            source.clip = deathSound;
+            source.volume = 0.7f;
+            source.spatialBlend = 0f;
+            source.loop = false;
+            source.Play();
+            Destroy(soundObject, deathSound.length + 0.1f);
+        }
         LifeManager.Instance.LoseLife();
 
             if (LifeManager.Instance.lifeCount <= 0)
