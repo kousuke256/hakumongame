@@ -6674,6 +6674,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1908539312}
+    - target: {fileID: 4467937084875290212, guid: dc6ce249aeb20a848b25d021aad3d945, type: 3}
+      propertyPath: shootCoolTime
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7337002516251190389, guid: dc6ce249aeb20a848b25d021aad3d945, type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.17
