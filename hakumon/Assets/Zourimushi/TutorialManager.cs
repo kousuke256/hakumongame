@@ -51,11 +51,7 @@ public class TutorialManager : MonoBehaviour
                 Keyboard.current != null &&
                 Keyboard.current.enterKey.wasPressedThisFrame;
 
-            bool mousePressed =
-                Mouse.current != null &&
-                Mouse.current.leftButton.wasPressedThisFrame;
-
-            if (enterPressed || mousePressed)
+            if (enterPressed)
             {
                 // 表示を消して、表示済みとして保存する
                 eventCanvas[i].SetActive(false);
