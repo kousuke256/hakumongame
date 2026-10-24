@@ -15151,6 +15151,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoalCircle
       objectReference: {fileID: 0}
+    - target: {fileID: 6841487052842929909, guid: 91744fecb5ab3ea488590c30abff50ef, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7567506467931666788, guid: bcf85acadd8d0b04bbda5ffc84cf85ba, type: 3}
+    - target: {fileID: 6841487052842929909, guid: 91744fecb5ab3ea488590c30abff50ef, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841487052842929909, guid: 91744fecb5ab3ea488590c30abff50ef, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841487052842929909, guid: 91744fecb5ab3ea488590c30abff50ef, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6972151034047459380, guid: 91744fecb5ab3ea488590c30abff50ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 123
