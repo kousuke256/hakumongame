@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e75d9c10fc62647af2431f15968dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeManager
-  lifeCount: 3
+  lifeCount: 1000
   lifeText: {fileID: 359811131}
   image: {fileID: 99493250}
   hasSavePoint: 0

@@ -11172,6 +11172,7 @@ MonoBehaviour:
   smoothTime: 0.3
   offsetX: 3.5
   FirstX: -17
+  MaxX: 500
 --- !u!114 &1161967816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11495,7 +11496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e75d9c10fc62647af2431f15968dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeManager
-  lifeCount: 3
+  lifeCount: 1000
   lifeText: {fileID: 2011445268}
   image: {fileID: 736139807}
   hasSavePoint: 0
