@@ -275,11 +275,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 43.49
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4101,11 +4101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df933906e48acc644aafe1fe0a39338c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoScrollCamera
+  player: {fileID: 1908539313}
   scrollSpeed: 2
   maxX: 500
   tileSize: 1
   outsideTiles: 2
-  player: {fileID: 1908539313}
 --- !u!114 &892634494
 MonoBehaviour:
   m_ObjectHideFlags: 0
