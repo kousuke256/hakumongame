@@ -26,6 +26,10 @@ public class StageSelectManager : MonoBehaviour
         {
             PlayerPrefs.DeleteKey("TutorialSeen_1-2_" + i);
         }
+        for (int i = 0; i < 1; i++)
+        {
+            PlayerPrefs.DeleteKey("TutorialSeen_1-3_" + i);
+        }
 
         // 配列の範囲を超えないようにする
         audioSource = GetComponent<AudioSource>();
