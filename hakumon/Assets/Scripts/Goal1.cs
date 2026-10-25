@@ -23,6 +23,7 @@ public class Goal1 : MonoBehaviour
 
         if(Keyboard.current.enterKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame)
         {
+            ShowPanelOnReturn.showPanel = true;
             Time.timeScale = 1f;
             SceneManager.LoadScene("Endroll");  //ここにscenename BuildProfileに追加してからやってね
         }

@@ -8,13 +8,17 @@ public class StageSelectManager : MonoBehaviour
      private AudioSource audioSource;
      public AudioClip Sampl;
      public AudioClip Sample;
+     public GameObject returnPanel;
+     public GameObject warningPanel;
     public GameObject[] stageSelectTexts;
     private Rigidbody2D[] stageSelectTextRb;
     public GameObject[] stageButtons;
     private Rigidbody2D[] stageRb;
+    private bool showWarningCanvas = false;
 
     // 解放されている一番先のステージ番号
     public static int unlockedStage = 5;
+
 
     void Start()
     {
@@ -55,14 +59,38 @@ public class StageSelectManager : MonoBehaviour
         {
             stageRb[i] = stageButtons[i].GetComponent<Rigidbody2D>();
         }
+
+        // 他のシーンから戻ってきた場合だけ表示
+        if (ShowPanelOnReturn.showPanel)
+        {
+            returnPanel.SetActive(true);
+
+            // 一度表示したらフラグをリセット
+            ShowPanelOnReturn.showPanel = false;
+
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            returnPanel.SetActive(false);
+        }
     }
 
     void Update()
     {
+        if (Keyboard.current.enterKey.isPressed && returnPanel.activeSelf)
+        {
+            returnPanel.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+        if(Time.timeScale == 0f)
+        return;
+
         if (Keyboard.current.wKey.isPressed)
         {
             audioSource.PlayOneShot(Sample);
-            Vector2 powerStageBottun = Vector2.up * 2f;
+            Vector2 powerStageBottun = Vector2.up * 0.8f;
 
             for (int i = 0; i < stageSelectTexts.Length; i++)
             {
@@ -79,7 +107,7 @@ public class StageSelectManager : MonoBehaviour
 
         if (Keyboard.current.sKey.isPressed)
         {
-            Vector2 powerStageBottun = Vector2.down * 2f;
+            Vector2 powerStageBottun = Vector2.down * 0.8f;
 
             audioSource.PlayOneShot(Sample);
 
@@ -92,9 +120,9 @@ public class StageSelectManager : MonoBehaviour
                 stageRb[i].gravityScale = 1;
                 stageRb[i].AddForce(powerStageBottun);
             }
-            
-            
         }
+
+        
     }
 
     // ステージをクリアしたときに呼び出す
@@ -128,8 +156,10 @@ public class StageSelectManager : MonoBehaviour
 
     public void StageEx()
     {
-        StartCoroutine(stageex());
-        
+        audioSource.PlayOneShot(Sampl);
+         warningPanel.SetActive(true);
+         showWarningCanvas = true;
+         Time.timeScale = 0f;
     }
 
     public void ReturnToTitle()
@@ -174,14 +204,26 @@ public class StageSelectManager : MonoBehaviour
          SceneManager.LoadScene("1-4");
 
      }
-     IEnumerator stageex()
-     {
-         audioSource.PlayOneShot(Sampl);
 
-         yield return new WaitForSeconds(0.5f);
-         SceneManager.LoadScene("ExStage");
+     public void StageExYesda()
+    {
+        StartCoroutine(stageExYes());
+    }
+    IEnumerator stageExYes()
+    {
+        Time.timeScale = 1f;
+        audioSource.PlayOneShot(Sampl);
 
-     }
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("ExStage");
+    }
+
+    public void StageExNo()
+    {
+        Time.timeScale = 1f;
+        warningPanel.SetActive(false);
+    }
+
 
      IEnumerator Returntitle()
      {
