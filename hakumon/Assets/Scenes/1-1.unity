@@ -12384,6 +12384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SeceneChange
   lifeManager: {fileID: 0}
   goalCanvas: {fileID: 525168534}
+  bgmAudioSource: {fileID: 1614502759}
 --- !u!58 &747152044
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17304,7 +17305,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 134
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.y
