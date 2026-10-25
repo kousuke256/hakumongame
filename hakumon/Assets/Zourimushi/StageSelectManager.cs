@@ -7,6 +7,7 @@ public class StageSelectManager : MonoBehaviour
 {
      private AudioSource audioSource;
      public AudioClip Sampl;
+     public AudioClip Sample;
     public GameObject[] stageSelectTexts;
     private Rigidbody2D[] stageSelectTextRb;
     public GameObject[] stageButtons;
@@ -60,6 +61,7 @@ public class StageSelectManager : MonoBehaviour
     {
         if (Keyboard.current.wKey.isPressed)
         {
+            audioSource.PlayOneShot(Sample);
             Vector2 powerStageBottun = Vector2.up * 2f;
 
             for (int i = 0; i < stageSelectTexts.Length; i++)
@@ -78,6 +80,8 @@ public class StageSelectManager : MonoBehaviour
         if (Keyboard.current.sKey.isPressed)
         {
             Vector2 powerStageBottun = Vector2.down * 2f;
+
+            audioSource.PlayOneShot(Sample);
 
             for (int i = 0; i < stageSelectTexts.Length; i++)
             {
@@ -124,7 +128,7 @@ public class StageSelectManager : MonoBehaviour
 
     public void StageEx()
     {
-        //StartCoroutine(stageex());
+        StartCoroutine(stageex());
         
     }
 
@@ -175,7 +179,7 @@ public class StageSelectManager : MonoBehaviour
          audioSource.PlayOneShot(Sampl);
 
          yield return new WaitForSeconds(0.5f);
-         //SceneManager.LoadScene("Ex");
+         SceneManager.LoadScene("ExStage");
 
      }
 

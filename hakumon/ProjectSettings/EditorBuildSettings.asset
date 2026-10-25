@@ -38,5 +38,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Endroll.unity
     guid: 8cfa947b90bec6e429c9eeaac910c6ce
+  - enabled: 1
+    path: Assets/Scenes/ExStage.unity
+    guid: 62a155e9d47f70b449d0abc6e24842f1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
