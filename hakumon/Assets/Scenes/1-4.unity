@@ -8492,7 +8492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoScrollCamera
   player: {fileID: 1746108741}
-  scrollSpeed: 2
+  scrollSpeed: 1.5
   maxX: 500
   tileSize: 1
   outsideTiles: 2
