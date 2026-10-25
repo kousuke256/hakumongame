@@ -56,6 +56,8 @@ MonoBehaviour:
   player: {fileID: 0}
   firePoint: {fileID: 11491459643926593}
   bullet2Prefab: {fileID: 4379194192510411036, guid: b41d46a2ff65f6b43a890ddd12131b0b, type: 3}
+  normalSprite: {fileID: -6374015589800860373, guid: ef044fe6e3013504ca58f0c77813e703, type: 3}
+  AttackSprite: {fileID: -5602354264441792256, guid: 82d4772d2ea317b478fff78183e0c033, type: 3}
 --- !u!212 &5423587802227058632
 SpriteRenderer:
   serializedVersion: 3
