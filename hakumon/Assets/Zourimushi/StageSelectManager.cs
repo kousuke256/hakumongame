@@ -10,7 +10,6 @@ public class StageSelectManager : MonoBehaviour
      public AudioClip Sample;
      public GameObject returnPanel;
      public GameObject warningPanel;
-     public GameObject PressWCanvas;
     public GameObject[] stageSelectTexts;
     private Rigidbody2D[] stageSelectTextRb;
     public GameObject[] stageButtons;
@@ -78,17 +77,11 @@ public class StageSelectManager : MonoBehaviour
     }
 
     void Update()
-    {
-        if (Keyboard.current.enterKey.wasPressedThisFrame && PressWCanvas.activeSelf)
-        {
-            PressWCanvas.SetActive(false);
-            Time.timeScale = 1f;
-        }
-        
+    {   
         if (Keyboard.current.enterKey.wasPressedThisFrame && returnPanel.activeSelf)
         {
             returnPanel.SetActive(false);
-            PressWCanvas.SetActive(true);
+            Time.timeScale = 1f;
         }
 
         if(Time.timeScale == 0f)
