@@ -91,6 +91,20 @@ public class StreatEnmy : MonoBehaviour
         Quaternion.identity
     );
 
+    SpriteRenderer bulletSr =
+        bullet.GetComponent<SpriteRenderer>();
+
+    Vector3 originalScale = bullet.transform.localScale;
+
+    if (bulletSr != null)
+    {
+        Color c = bulletSr.color;
+        c.a = 0f;
+        bulletSr.color = c;
+    }
+
+    bullet.transform.localScale = originalScale * 0.8f;
+
     float chargeTime = 1f;
     float timer = 0f;
 
@@ -106,10 +120,35 @@ public class StreatEnmy : MonoBehaviour
         bullet.transform.position =
             transform.position + offset;
 
+        float t = timer / chargeTime;
+
+        if (bulletSr != null)
+        {
+            Color c = bulletSr.color;
+            c.a = t;
+            bulletSr.color = c;
+        }
+
+        bullet.transform.localScale =
+            Vector3.Lerp(
+                originalScale * 0.8f,
+                originalScale,
+                t
+            );
+
         timer += Time.deltaTime;
 
         yield return null;
     }
+
+    if (bulletSr != null)
+    {
+        Color c = bulletSr.color;
+        c.a = 1f;
+        bulletSr.color = c;
+    }
+
+    bullet.transform.localScale = originalScale;
 
     Vector2 distance = player.position - firePoint.position;
     Vector2 playerVelocity = playerRb.linearVelocity;
