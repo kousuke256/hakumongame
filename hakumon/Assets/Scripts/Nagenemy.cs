@@ -90,6 +90,20 @@ public class Nagenemy : MonoBehaviour
         Quaternion.identity
     );
 
+    SpriteRenderer bulletSr =
+        bullet.GetComponent<SpriteRenderer>();
+
+    Vector3 originalScale = bullet.transform.localScale;
+
+    if (bulletSr != null)
+    {
+        Color c = bulletSr.color;
+        c.a = 0f;
+        bulletSr.color = c;
+    }
+
+    bullet.transform.localScale = originalScale * 0.8f;
+
     float chargeTime = 1f;
     float timer = 0f;
 
@@ -105,10 +119,35 @@ public class Nagenemy : MonoBehaviour
         bullet.transform.position =
             transform.position + offset;
 
+        float t = timer / chargeTime;
+
+        if (bulletSr != null)
+        {
+            Color c = bulletSr.color;
+            c.a = t;
+            bulletSr.color = c;
+        }
+
+        bullet.transform.localScale =
+            Vector3.Lerp(
+                originalScale * 0.8f,
+                originalScale,
+                t
+            );
+
         timer += Time.deltaTime;
 
         yield return null;
     }
+
+    if (bulletSr != null)
+    {
+        Color c = bulletSr.color;
+        c.a = 1f;
+        bulletSr.color = c;
+    }
+
+    bullet.transform.localScale = originalScale;
 
     float speed;
     int bulletDirectionX = 1;
@@ -123,7 +162,9 @@ public class Nagenemy : MonoBehaviour
     }
 
     float theta = Mathf.Atan(
-        (differenceY + Mathf.Sqrt(differenceX * differenceX + differenceY * differenceY))
+        (differenceY + Mathf.Sqrt(
+            differenceX * differenceX +
+            differenceY * differenceY))
         / differenceX
     );
 
@@ -146,9 +187,13 @@ public class Nagenemy : MonoBehaviour
 
     speed =
         differenceX / math.cos(theta)
-        * math.sqrt(5 / math.abs(differenceX * tan - differenceY));
+        * math.sqrt(
+            5 / math.abs(differenceX * tan - differenceY)
+        );
 
-    speed = bulletMaxSpeed < speed ? bulletMaxSpeed : speed;
+    speed = bulletMaxSpeed < speed
+        ? bulletMaxSpeed
+        : speed;
 
     bullet.transform.position = firePoint.position;
 
