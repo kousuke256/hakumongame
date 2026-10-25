@@ -637,6 +637,10 @@ PrefabInstance:
       value: GravityBloclManeger
       objectReference: {fileID: 0}
     - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2025045774}
+    - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: moveSpeed
       value: -1.5
       objectReference: {fileID: 0}
