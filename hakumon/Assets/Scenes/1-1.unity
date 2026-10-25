@@ -15708,7 +15708,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1614502761}
-  - component: {fileID: 1614502760}
   - component: {fileID: 1614502759}
   m_Layer: 0
   m_Name: Audio Source
@@ -15814,19 +15813,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1614502760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614502758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82260f96847bf7d49a485f89c19fd462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BGM
-  Sample: {fileID: 8300000, guid: 7286a82b1c63232409bf066cac014772, type: 3}
 --- !u!4 &1614502761
 Transform:
   m_ObjectHideFlags: 0
@@ -17318,11 +17304,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.z
