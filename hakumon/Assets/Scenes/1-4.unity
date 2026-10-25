@@ -13315,7 +13315,7 @@ GameObject:
   - component: {fileID: 2125503237}
   - component: {fileID: 2125503236}
   - component: {fileID: 2125503235}
-  - component: {fileID: 2125503234}
+  - component: {fileID: 2125503239}
   m_Layer: 0
   m_Name: GoalCircle
   m_TagString: Untagged
@@ -13323,20 +13323,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2125503234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2125503233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57b8c81b419ed4940b27612c7eb51ea5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SeceneChange
-  lifeManager: {fileID: 0}
-  goalCanvas: {fileID: 1980150022}
 --- !u!58 &2125503235
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13476,6 +13462,20 @@ Transform:
   - {fileID: 1980150026}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2125503239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125503233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5a525c73b8c3b4db02ccec42ae58cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Goal1
+  lifeManager: {fileID: 0}
+  goalCanvas: {fileID: 1980150022}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
