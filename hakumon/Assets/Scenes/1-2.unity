@@ -990,15 +990,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 772666740938621350, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.6608818
       objectReference: {fileID: 0}
     - target: {fileID: 772666740938621350, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.83508205
+      objectReference: {fileID: 0}
+    - target: {fileID: 772666740938621350, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 772666740938621350, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0104
       objectReference: {fileID: 0}
     - target: {fileID: 772666740938621350, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: 2.3825
       objectReference: {fileID: 0}
     - target: {fileID: 1714048145636375332, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1133,7 +1141,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8099423852117571244, guid: f282e1bcf569a8c458953e2c79c961bd, type: 3}
+  m_Sprite: {fileID: 5218823490559287709, guid: fb922176fd115c143a1add340a1ae5f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1178,17 +1186,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.010962486, y: -0.8688753}
+  m_Offset: {x: 0.010963917, y: 0.011814177}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.560001, y: 4.3621287}
+    oldSize: {x: 7.814815, y: 1}
     newSize: {x: 20.310001, y: 4.0519776}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 20.331926, y: 2.5607781}
+  m_Size: {x: 7.793007, y: 0.96331596}
   m_EdgeRadius: 0
 --- !u!1001 &452065614
 PrefabInstance:
