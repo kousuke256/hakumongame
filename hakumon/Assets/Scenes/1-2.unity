@@ -11062,8 +11062,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.21616268, g: 0.7106918, b: 0.12738807, a: 1}
+  m_Sprite: {fileID: -7567506467931666788, guid: bcf85acadd8d0b04bbda5ffc84cf85ba, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12791,7 +12791,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1326171739}
-  - component: {fileID: 1326171738}
   - component: {fileID: 1326171737}
   m_Layer: 0
   m_Name: Audio Source
@@ -12897,19 +12896,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1326171738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326171736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82260f96847bf7d49a485f89c19fd462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BGM
-  Sample: {fileID: 8300000, guid: 7286a82b1c63232409bf066cac014772, type: 3}
 --- !u!4 &1326171739
 Transform:
   m_ObjectHideFlags: 0
