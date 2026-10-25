@@ -9847,9 +9847,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GravityBlock
   playerScript: {fileID: 1746108742}
+  player: {fileID: 1746108741}
   rail: {fileID: 1969524961}
+  visibleMinX: 70
+  visibleMaxX: 100
   moveSpeed: -3
-  hirameki: 1
 --- !u!50 &1031908503
 Rigidbody2D:
   serializedVersion: 5

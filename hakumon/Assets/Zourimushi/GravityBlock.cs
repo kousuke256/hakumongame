@@ -3,14 +3,15 @@ using UnityEngine;
 public class GravityBlock : MonoBehaviour
 {
     public Player playerScript;
+    public Transform player;
     public Transform rail;
+    public float visibleMinX = 0f;
+    public float visibleMaxX = 100f;
     public float moveSpeed = 3f;
     private float railHeight;
     private float minY = -5f;
     private float maxY = 5f;
-    public bool hirameki  = true;
     private Rigidbody2D rb;
-    private bool canMove = true;
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class GravityBlock : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!canMove && !hirameki)
+        if(player.position.x < visibleMinX || visibleMaxX < player.position.x)
         return;
 
         // Playerの重力方向を取得する
@@ -48,13 +49,4 @@ public class GravityBlock : MonoBehaviour
             rb.MovePosition(new Vector2(rail.position.x, newY));
         }
     }
-
-    /*void OnBecameVisible()
-    {
-        canMove = true;
-    }
-    void OnBecameInvisible()
-    {
-        canMove = false;
-    }*/
 }
