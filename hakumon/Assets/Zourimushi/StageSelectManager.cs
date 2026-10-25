@@ -10,11 +10,11 @@ public class StageSelectManager : MonoBehaviour
      public AudioClip Sample;
      public GameObject returnPanel;
      public GameObject warningPanel;
+     public GameObject PressWCanvas;
     public GameObject[] stageSelectTexts;
     private Rigidbody2D[] stageSelectTextRb;
     public GameObject[] stageButtons;
     private Rigidbody2D[] stageRb;
-    private bool showWarningCanvas = false;
 
     // 解放されている一番先のステージ番号
     public static int unlockedStage = 5;
@@ -23,11 +23,11 @@ public class StageSelectManager : MonoBehaviour
     void Start()
     {
         // Stage1のチュートリアルの表示履歴をリセット
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             PlayerPrefs.DeleteKey("TutorialSeen_1-1_" + i);
         }
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             PlayerPrefs.DeleteKey("TutorialSeen_1-2_" + i);
         }
@@ -63,6 +63,7 @@ public class StageSelectManager : MonoBehaviour
         // 他のシーンから戻ってきた場合だけ表示
         if (ShowPanelOnReturn.showPanel)
         {
+            Debug.Log("A");
             returnPanel.SetActive(true);
 
             // 一度表示したらフラグをリセット
@@ -78,10 +79,16 @@ public class StageSelectManager : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.enterKey.isPressed && returnPanel.activeSelf)
+        if (Keyboard.current.enterKey.wasPressedThisFrame && PressWCanvas.activeSelf)
+        {
+            PressWCanvas.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        
+        if (Keyboard.current.enterKey.wasPressedThisFrame && returnPanel.activeSelf)
         {
             returnPanel.SetActive(false);
-            Time.timeScale = 1f;
+            PressWCanvas.SetActive(true);
         }
 
         if(Time.timeScale == 0f)
@@ -158,7 +165,6 @@ public class StageSelectManager : MonoBehaviour
     {
         audioSource.PlayOneShot(Sampl);
          warningPanel.SetActive(true);
-         showWarningCanvas = true;
          Time.timeScale = 0f;
     }
 
