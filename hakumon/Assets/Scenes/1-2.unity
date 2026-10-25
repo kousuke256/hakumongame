@@ -641,6 +641,10 @@ PrefabInstance:
       value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
+      propertyPath: visibleMinX
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 2025045770}
@@ -1033,8 +1037,20 @@ PrefabInstance:
       value: GravityBloclManeger (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2025045774}
+    - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: moveSpeed
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
+      propertyPath: visibleMaxX
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
+      propertyPath: visibleMinX
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4277777517486198389, guid: a444a3c88ce7fdf4a87124ff57c11f78, type: 3}
       propertyPath: playerScript
