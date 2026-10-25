@@ -555,7 +555,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 50}
+  m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861876343
 MonoBehaviour:
@@ -577,101 +577,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In a distant corner of the galaxy, beyond the reach of ordinary travelers,
-    there was a world known only to a few explorers. The planet was covered by endless
-    deserts of red stone and silver dust. Ancient structures stood among the dunes,
-    their origins forgotten by history. Some believed they were built by a civilization
-    far older than any recorded in modern archives.
-
-    
-
-    For centuries, the
-    people of nearby systems avoided the planet. Strange signals emerged from beneath
-    the surface, repeating patterns that no scientist could fully decipher. Expeditions
-    were sent, but many returned with more questions than answers. Stories spread
-    about hidden chambers, mysterious machines, and a source of power unlike anything
-    ever discovered.
-
-    
-
-    One day, a young engineer received a fragment of
-    data recovered from a forgotten satellite. At first glance the information seemed
-    meaningless. However, after weeks of analysis, a message appeared within the
-    signal. The message spoke of a device buried deep underground. According to the
-    fragment, the device had the ability to manipulate gravity itself.
-
-    
-
-    The
-    engineer assembled a small team of adventurers, researchers, and pilots. Together
-    they prepared a vessel capable of surviving the harsh environment of the desert
-    world. Their mission was simple: locate the device before it could fall into
-    the wrong hands.
-
-    
-
-    As the journey began, unexpected challenges emerged.
-    Powerful storms blocked their path. Ancient security systems activated without
-    warning. Hidden passages revealed themselves only for a brief moment before vanishing
-    again. Every step forward required courage, patience, and cooperation.
-
-    
-
-    Despite
-    the dangers, the team continued. Deep beneath the surface they discovered evidence
-    of a lost civilization. Massive halls stretched across impossible distances.
-    Mechanical structures operated silently after thousands of years. Symbols carved
-    into stone walls described an era when gravity technology transformed every aspect
-    of life.
-
-    
-
-    The deeper they traveled, the more they realized the true
-    importance of the device. It had not been created as a weapon. Instead, it was
-    designed to stabilize an entire planetary system. Long ago, a catastrophic event
-    threatened multiple worlds. The ancient civilization used the device to prevent
-    disaster, sacrificing much in the process.
-
-    
-
-    However, not everyone
-    shared the same goals. A rival organization had followed the expedition across
-    the stars. They sought the device for power and control. Their arrival turned
-    a scientific mission into a race against time.
-
-    
-
-    In the final chamber,
-    surrounded by glowing energy and impossible machines, the team reached the center
-    of the complex. The device remained active after countless centuries. Brilliant
-    light filled the room as forgotten systems awakened one by one. The fate of the
-    discovery rested on a single decision.
-
-    
-
-    The engineer stepped forward
-    and examined the controls. Knowledge from the recovered signal guided each action.
-    Slowly, carefully, the system was restored to its intended purpose. Energy stabilized.
-    Ancient warnings disappeared. The enormous structure began operating as its creators
-    had intended.
-
-    
-
-    When the mission finally ended, the team returned
-    home with new understanding. The technology would be studied responsibly. The
-    lessons of the lost civilization would not be forgotten. Across the galaxy, hope
-    spread as news of the discovery reached distant worlds.
-
-    
-
-    And so a
-    new chapter began. Explorers looked toward the stars with renewed curiosity.
-    Scientists searched for answers to questions once thought impossible. Adventurers
-    prepared for journeys into unknown regions of space. The future remained uncertain,
-    but the possibilities were endless.'
+  m_text: "\n\n\n\n\u53CD\u91CD\u529B\u8005\n~AntiGravitian~\n\n\n-TeamE-\n\n\nOYAMA
+    Teppei\n\nKAWAHARA Naotaro\n\nSUGAWARA Kosuke\n\nHARADA Takuto\n\n\nThnk you
+    for playing!!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b55209a1b1ca9e84e898262975099384, type: 2}
+  m_sharedMaterial: {fileID: -5924120335998635894, guid: b55209a1b1ca9e84e898262975099384, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -695,14 +606,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
