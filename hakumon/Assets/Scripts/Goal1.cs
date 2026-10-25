@@ -8,15 +8,14 @@ public class Goal1 : MonoBehaviour
 {
     public LifeManager lifeManager;
     public GameObject goalCanvas;
-    public AudioSource bgmAudioSource; // ★追加：BGMのAudioSourceをアサインする変数
+    public AudioSource bgmAudioSource;
     private bool showImage = false;
     private AudioClip clearSound;
-    private static bool goalProcessing = false; // ★追加：二重処理防止フラグ
+    private static bool goalProcessing = false;
 
     private void Awake()
     {
         goalProcessing = false;
-        // Resourcesフォルダからクリア音を読み込む（Resources/StageClearSound.wav など）
         clearSound = Resources.Load<AudioClip>("StageClearSound");
     }
 
@@ -31,13 +30,13 @@ public class Goal1 : MonoBehaviour
         {
             ShowPanelOnReturn.showPanel = true;
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Endroll"); // ここにscenename BuildProfileに追加してからやってね
+            SceneManager.LoadScene("Endroll");
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) // 触れたかをチェック
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return; // 相手がplayerか
+        if (!other.CompareTag("Player")) return;
         if (showImage || goalProcessing) return;
 
         if (goalCanvas == null)
@@ -49,17 +48,13 @@ public class Goal1 : MonoBehaviour
         showImage = true;
         goalProcessing = true;
 
-        // ★追加：BGMを停止
         StopBGM();
-
-        // ★追加：クリア音を再生
         PlayClearSound();
 
         Time.timeScale = 0f;
         goalCanvas.SetActive(true);
     }
 
-    // ★追加：BGM停止処理
     private void StopBGM()
     {
         if (bgmAudioSource != null)
@@ -68,7 +63,6 @@ public class Goal1 : MonoBehaviour
         }
         else
         {
-            // Inspectorで未設定の場合、"BGM" タグがついたオブジェクトから自動検索して停止
             GameObject bgmObj = GameObject.FindWithTag("BGM");
             if (bgmObj != null)
             {
@@ -81,7 +75,6 @@ public class Goal1 : MonoBehaviour
         }
     }
 
-    // ★追加：クリア音再生処理
     private void PlayClearSound()
     {
         if (clearSound == null)
@@ -100,24 +93,8 @@ public class Goal1 : MonoBehaviour
         source.loop = false;
         source.Play();
 
-        // ポーズ中（Time.timeScale = 0）でも音が消えないよう監視して削除
+        // Goal.cs 側で定義されている ClearSoundCleanup をそのまま自動で参照して使います
         ClearSoundCleanup cleanup = soundObject.AddComponent<ClearSoundCleanup>();
         cleanup.Begin(clearSound.length);
-    }
-}
-
-// クリア音再生用オブジェクトの自動削除クラス（Goal1.csの末尾に一緒に入れてOK）
-public class ClearSoundCleanup : MonoBehaviour
-{
-    public void Begin(float duration)
-    {
-        StartCoroutine(DeleteAfterPlayback(duration));
-    }
-
-    private IEnumerator DeleteAfterPlayback(float duration)
-    {
-        // Time.timeScale = 0 でポーズされていても時間が進む処理
-        yield return new WaitForSecondsRealtime(duration + 0.1f);
-        Destroy(gameObject);
     }
 }
