@@ -198,7 +198,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -10
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6828413310531622141, guid: 625b77cf469533040b8f60c72f41be45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7916,7 +7916,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 549374157}
-  - component: {fileID: 549374156}
   - component: {fileID: 549374155}
   m_Layer: 0
   m_Name: Audio Source
@@ -8022,19 +8021,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &549374156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 549374154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82260f96847bf7d49a485f89c19fd462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BGM
-  Sample: {fileID: 8300000, guid: 7286a82b1c63232409bf066cac014772, type: 3}
 --- !u!4 &549374157
 Transform:
   m_ObjectHideFlags: 0
@@ -8205,6 +8191,10 @@ PrefabInstance:
       propertyPath: bullet2Prefab
       value: 
       objectReference: {fileID: 4379194192510411036, guid: b41d46a2ff65f6b43a890ddd12131b0b, type: 3}
+    - target: {fileID: 268384005512957027, guid: e037e5e9ab779394b90933a6af2f4cd0, type: 3}
+      propertyPath: shootCoolTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 268384005512957027, guid: e037e5e9ab779394b90933a6af2f4cd0, type: 3}
       propertyPath: bulletMaxSpeed
       value: 30
@@ -9403,6 +9393,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5137722004264443636, guid: b47def9f1e5944b45915321c90d5c1b5, type: 3}
+      propertyPath: m_Mass
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 8288763333182240612, guid: b47def9f1e5944b45915321c90d5c1b5, type: 3}
       propertyPath: m_Name
       value: Enemy 1 (1)
@@ -10431,13 +10425,7 @@ Tilemap:
   - serializedVersion: 2
     m_RefCount: 0
     m_Data: {fileID: 11400000, guid: e7361b62c6c7b8240bd48cfd96d83c85, type: 2}
-  m_TileSpriteArray:
-  - serializedVersion: 2
-    m_RefCount: 0
-    m_Data: {fileID: 2438874062880913077, guid: a71595db4cffa7b44ae09dbd25e626e0, type: 3}
-  - serializedVersion: 2
-    m_RefCount: 0
-    m_Data: {fileID: 943564679106039951, guid: ab5b5092f198d8244966191a0de9c29c, type: 3}
+  m_TileSpriteArray: []
   m_TileMatrixArray:
   - serializedVersion: 2
     m_RefCount: 33
@@ -10552,7 +10540,7 @@ PrefabInstance:
       objectReference: {fileID: 1746108743}
     - target: {fileID: 4649064911287511539, guid: da64c82d693d77545bbd01a3ec9c9750, type: 3}
       propertyPath: bullet1Speed
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4649064911287511539, guid: da64c82d693d77545bbd01a3ec9c9750, type: 3}
       propertyPath: playerScript
@@ -11905,7 +11893,7 @@ PrefabInstance:
       objectReference: {fileID: 1746108742}
     - target: {fileID: 4649064911287511539, guid: da64c82d693d77545bbd01a3ec9c9750, type: 3}
       propertyPath: shootCoolTime
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
