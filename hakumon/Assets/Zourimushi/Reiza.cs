@@ -102,7 +102,7 @@ public class Reiza : MonoBehaviour
         }
 
         // 先にレーザーの見た目の大きさを変更
-        reizaaa.transform.localScale = new Vector3(0.95f, currentHit, 1f);
+        reizaaa.transform.localScale = new Vector3(1f, currentHit, 1f);
 
         // レーザーの位置を変更
         reizaaa.transform.localPosition = new Vector2(0f, currentHit / 2f + 0.5f);
