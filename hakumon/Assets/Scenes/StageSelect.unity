@@ -3991,6 +3991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageSelect
   Sampl: {fileID: 8300000, guid: c4e7e040fdf8e27429dd287791ea7532, type: 3}
+  Sample: {fileID: 8300000, guid: ae604f3131078644c9555f0999ba6880, type: 3}
   stageSelectTexts:
   - {fileID: 524602563}
   - {fileID: 1687721251}
