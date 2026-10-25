@@ -49,12 +49,12 @@ public class GravityBlock : MonoBehaviour
         }
     }
 
-    void OnBecameVisible()
+    /*void OnBecameVisible()
     {
         canMove = true;
     }
     void OnBecameInvisible()
     {
         canMove = false;
-    }
+    }*/
 }
