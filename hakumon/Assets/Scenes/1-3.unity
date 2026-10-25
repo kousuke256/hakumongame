@@ -9538,6 +9538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SeceneChange
   lifeManager: {fileID: 0}
   goalCanvas: {fileID: 148468568}
+  bgmAudioSource: {fileID: 813763468}
 --- !u!58 &564769587
 CircleCollider2D:
   m_ObjectHideFlags: 0
