@@ -12689,8 +12689,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -220, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -300, y: 250}
+  m_SizeDelta: {x: 700, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &808475558
 MonoBehaviour:
@@ -12712,7 +12712,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u91CD\u529B\u53CD\u8EE2\u7389\n\n\u91CD\u529B\u53CD\u8EE2\u7389\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u304C\u3076\u3064\u304B\u308B\u3068\u91CD\u529B\u304C\u73FE\u5728\u306E\u91CD\u529B\u3068\u9006\u5411\u304D\u306B\u306A\u308A\u307E\u3059\u3002\n\u3046\u307E\u304F\u3076\u3064\u304B\u308B\u3053\u3068\u3067\u7A7A\u4E2D\u3067\u91CD\u529B\u3092\u5207\u308A\u66FF\u3048\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002"
+  m_text: "\u91CD\u529B\u53CD\u8EE2\u7389\n\n\n\u91CD\u529B\u53CD\u8EE2\u7389\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u304C\u3076\u3064\u304B\u308B\u3068\u91CD\u529B\u304C\u73FE\u5728\u306E\u91CD\u529B\u3068\u9006\u5411\u304D\u306B\u306A\u308A\u307E\u3059\u3002\n\n\u4E0A\u624B\u304F\u3076\u3064\u304B\u308B\u3053\u3068\u3067\u3001\u7A7A\u4E2D\u3067\u91CD\u529B\u3092\u5207\u308A\u66FF\u3048\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b55209a1b1ca9e84e898262975099384, type: 2}
   m_sharedMaterial: {fileID: -5924120335998635894, guid: b55209a1b1ca9e84e898262975099384, type: 2}
@@ -17087,8 +17087,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -220, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -300, y: 250}
+  m_SizeDelta: {x: 700, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1821093100
 MonoBehaviour:
@@ -17110,7 +17110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u8AAC\u660E\u6587"
+  m_text: "OnOff\u30D6\u30ED\u30C3\u30AF\n\n\nOnOff\u30D6\u30ED\u30C3\u30AF\u306F\u91CD\u529B\u306E\u5411\u304D\u306B\u5FDC\u3058\u3066\n\u6D88\u3048\u305F\u308A\u3001\u73FE\u308C\u305F\u308A\u3057\u307E\u3059\u3002\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b55209a1b1ca9e84e898262975099384, type: 2}
   m_sharedMaterial: {fileID: -5924120335998635894, guid: b55209a1b1ca9e84e898262975099384, type: 2}
@@ -17282,11 +17282,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: 113
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.z
