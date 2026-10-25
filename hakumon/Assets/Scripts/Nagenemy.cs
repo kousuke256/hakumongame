@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
@@ -13,44 +14,52 @@ public class Nagenemy : MonoBehaviour
     public Transform player;
     public Transform firePoint;
     public GameObject bullet2Prefab;
+
+    [Header("見た目")]
+    public Sprite normalSprite;
+    public Sprite AttackSprite;
+
+    [Header("弾を持つ位置")]
+    public Vector3 holdOffset = new Vector3(-0.5f, 0.5f, 0f);
+
     private bool canMove;
     private float y = 1;
-    private bool isDead =false;
+    private bool isDead = false;
 
+    private SpriteRenderer sr;
 
     void Start()
     {
-        // shootStartDelay秒後に弾を投げ始めて、shootCoolTime秒間隔で投げる
+        sr = GetComponent<SpriteRenderer>();
+
         InvokeRepeating(nameof(Throw), shootStartDelay, shootCoolTime);
 
-        if(GetComponent<Rigidbody2D>().gravityScale < 0)
+        if (GetComponent<Rigidbody2D>().gravityScale < 0)
         {
-            y=-1;
+            y = -1;
         }
     }
 
     void Update()
     {
-        if(!canMove)
-        return;
+        if (!canMove)
+            return;
 
         if (player.position.x > transform.position.x)
         {
-            // Playerが右にいる場合は右を向く
             transform.localScale = new Vector3(-1, y, 1);
         }
         else
         {
-            // Playerが左にいる場合は左を向く
             transform.localScale = new Vector3(1, y, 1);
         }
     }
 
-    // 画面内にこいつがいる場合は動作を可能にして、画面外にいる場合は動作を不能にする
     void OnBecameVisible()
     {
         canMove = true;
     }
+
     void OnBecameInvisible()
     {
         canMove = false;
@@ -58,52 +67,105 @@ public class Nagenemy : MonoBehaviour
 
     void Throw()
     {
-        if(!canMove)
-        return;
+        if (!canMove)
+            return;
 
-        // これ以降のプログラムはほぼ弾道の計算がメイン
-        /* おおまかな仕組みを説明すると、playerの位置に弾が届く最小速度にの発射角度を求めた後、
-        その弾道の最高到達点が天井にぶつからないように発射角度を低くしていく。
-        そして、その発射角度の場合どのくらいの初速度が必要かを計算してbullet2のshootメゾットに渡している */
-        float speed;
-        int bulletDirectionX = 1;
-
-        // playerと球の発射位置の距離を求める
-        float differenceX = player.position.x - firePoint.position.x;
-        float differenceY = bulletGravityDirection * (player.position.y - firePoint.position.y);
-        if(differenceX < 0)
-        {
-            differenceX *= -1f;
-            bulletDirectionX = -1;
-        }
-
-        // playerの位置に弾が届く最小速度にの発射角度を求める
-        float theta = Mathf.Atan((differenceY + Mathf.Sqrt(differenceX * differenceX + differenceY * differenceY)) / differenceX);
-        float tan = math.tan(theta);
-        float maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
-
-        //天井に当たらないように発射角度を3度ずつ下げてく
-        while(firePoint.position.y * bulletGravityDirection + maxHeight > ceiling)
-        {
-            theta -= Mathf.Deg2Rad * 3f;
-            tan = math.tan(theta);
-            maxHeight = differenceX * differenceX * tan * tan / (4 * (differenceX * tan - differenceY));
-        }
-
-        // 速度を求める
-        speed = (differenceX / math.cos(theta) * math.sqrt(5 / math.abs(differenceX * tan - differenceY)));
-        speed = bulletMaxSpeed < speed ? bulletMaxSpeed : speed;
-
-        GameObject bullet = Instantiate(bullet2Prefab, firePoint.position, quaternion.identity);
-        bullet.GetComponent<Bullet2>().Shoot(bulletDirectionX, bulletGravityDirection, speed, theta);
+        StartCoroutine(ThrowRoutine());
     }
+
+   IEnumerator ThrowRoutine()
+{
+    sr.sprite = AttackSprite;
+
+    Vector3 offset = holdOffset;
+
+    if (transform.localScale.x < 0)
+    {
+        offset.x *= -1f;
+    }
+
+    GameObject bullet = Instantiate(
+        bullet2Prefab,
+        transform.position + offset,
+        Quaternion.identity
+    );
+
+    float chargeTime = 1f;
+    float timer = 0f;
+
+    while (timer < chargeTime)
+    {
+        offset = holdOffset;
+
+        if (transform.localScale.x < 0)
+        {
+            offset.x *= -1f;
+        }
+
+        bullet.transform.position =
+            transform.position + offset;
+
+        timer += Time.deltaTime;
+
+        yield return null;
+    }
+
+    float speed;
+    int bulletDirectionX = 1;
+
+    float differenceX = player.position.x - firePoint.position.x;
+    float differenceY = bulletGravityDirection * (player.position.y - firePoint.position.y);
+
+    if (differenceX < 0)
+    {
+        differenceX *= -1f;
+        bulletDirectionX = -1;
+    }
+
+    float theta = Mathf.Atan(
+        (differenceY + Mathf.Sqrt(differenceX * differenceX + differenceY * differenceY))
+        / differenceX
+    );
+
+    float tan = math.tan(theta);
+
+    float maxHeight =
+        differenceX * differenceX * tan * tan
+        / (4 * (differenceX * tan - differenceY));
+
+    while (firePoint.position.y * bulletGravityDirection + maxHeight > ceiling)
+    {
+        theta -= Mathf.Deg2Rad * 3f;
+
+        tan = math.tan(theta);
+
+        maxHeight =
+            differenceX * differenceX * tan * tan
+            / (4 * (differenceX * tan - differenceY));
+    }
+
+    speed =
+        differenceX / math.cos(theta)
+        * math.sqrt(5 / math.abs(differenceX * tan - differenceY));
+
+    speed = bulletMaxSpeed < speed ? bulletMaxSpeed : speed;
+
+    bullet.transform.position = firePoint.position;
+
+    bullet.GetComponent<Bullet2>().Shoot(
+        bulletDirectionX,
+        bulletGravityDirection,
+        speed,
+        theta
+    );
+
+    sr.sprite = normalSprite;
+}
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // プレイヤーとの接触
         if (collision.gameObject.CompareTag("Player"))
         {
-            // 上から踏まれた場合
             if (y == 1)
             {
                 foreach (ContactPoint2D contact in collision.contacts)
@@ -124,8 +186,9 @@ public class Nagenemy : MonoBehaviour
                     }
                 }
             }
-            if(isDead)
-            return;
+
+            if (isDead)
+                return;
 
             isDead = true;
 
@@ -150,3 +213,5 @@ public class Nagenemy : MonoBehaviour
         }
     }
 }
+
+ 
