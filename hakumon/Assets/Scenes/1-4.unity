@@ -13080,6 +13080,10 @@ PrefabInstance:
       propertyPath: canInterrupt
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3268485078966062911, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
+      propertyPath: usuReizaDistance
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5331294936865575747, guid: 5dff3c643b72d3a4d8d8d1b4955a86a7, type: 3}
       propertyPath: m_Name
       value: Leiza (1)
