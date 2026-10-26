@@ -29,6 +29,9 @@ public class PauseManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "StageSelect")
         return;
 
+        if(!ShowPauseMenu.showPauseMenu)
+        return;
+
         //escapeKeyが押されたらpauseMenuを開く
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {

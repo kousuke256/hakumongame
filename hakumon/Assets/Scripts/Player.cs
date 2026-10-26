@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         playerRb.gravityScale = 0f;
         audiosource = GetComponent<AudioSource>();
+        // pauseMenuをひょuじ可能にする
+        ShowPauseMenu.showPauseMenu = true;
 
         LifeManager manager = LifeManager.Instance;
         if (manager != null

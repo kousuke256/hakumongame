@@ -52,6 +52,7 @@ public class Goal1 : MonoBehaviour
         PlayClearSound();
 
         Time.timeScale = 0f;
+        ShowPauseMenu.showPauseMenu = false;
         goalCanvas.SetActive(true);
     }
 
