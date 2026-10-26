@@ -29,6 +29,9 @@ public class PauseManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "StageSelect")
         return;
 
+        if (SceneManager.GetActiveScene().name == "Title")
+        return;
+
         if(!ShowPauseMenu.showPauseMenu)
         return;
 
