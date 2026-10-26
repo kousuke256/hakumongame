@@ -875,8 +875,8 @@ MonoBehaviour:
     Teppei\n\nKAWAHARA Naotaro\n\nSUGAWARA Kosuke\n\nHARADA Takuto\n\n\nThank you
     for playing!!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c94ee83c77f47654e82ec57d49349cca, type: 2}
-  m_sharedMaterial: {fileID: -2439810346990527467, guid: c94ee83c77f47654e82ec57d49349cca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 92997c92393ac1343b1b107d2c5df8ef, type: 2}
+  m_sharedMaterial: {fileID: 4016349639876393161, guid: 92997c92393ac1343b1b107d2c5df8ef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
