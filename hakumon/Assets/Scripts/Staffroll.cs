@@ -65,11 +65,7 @@ public class Staffroll : MonoBehaviour
                 }
             }
 
-            if (Mouse.current != null &&
-                Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                StartCoroutine(StartGame());
-            }
+            
         }
 
         transform.position += transform.up * speed * Time.deltaTime;
