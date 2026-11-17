@@ -45,12 +45,25 @@ public class Player : MonoBehaviour
     public float gravityPower = 9.8f;
     public Vector2 gravityDirection = Vector2.down;
 
+    [Header("空中重力変換アイテム")]
+    public bool AirGravityChange = false;
+
     // groundCheckのlocalPositionをいじる変数。いつか重力の向きが変わったらスクリプトの向きを変えるプログラムを作るから将来なくなる変数
     public float groundCheckDistance = 0.6f;
     private bool isDead = false;
    
     private AudioSource audiosource;
     public AudioClip JumpSound;
+
+    public bool TryGetAirGravityItem()
+    {
+        //すでに持っているなら拾わない
+        if (AirGravityChange)
+            return false;
+
+        AirGravityChange = true;
+        return true;
+    }
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -89,23 +102,40 @@ public class Player : MonoBehaviour
             move = -1;
             sr.flipX = true ;
         }
-        
+
 
 
         //重力操作
-        if(isGrounded)
+        // 重力操作
+        if (isGrounded || AirGravityChange)
         {
+            Vector2 nextGravity = gravityDirection;
             if (Keyboard.current.wKey.wasPressedThisFrame)
             {
-                gravityDirection = Vector2.up;
-                sr.flipY = true;
-                gravitychange();
+                nextGravity = Vector2.up;
             }
             else if (Keyboard.current.sKey.wasPressedThisFrame)
             {
-                gravityDirection = Vector2.down;
-                sr.flipY = false;
+                nextGravity = Vector2.down;
+            }
+            // 今と違う向きに変更するときだけ実行
+            if (nextGravity != gravityDirection)
+            {
+                // 空中で使ったときだけアイテムを消費
+                if (!isGrounded)
+                {
+                    AirGravityChange = false;
+                }
+                gravityDirection = nextGravity;
+                sr.flipY = gravityDirection.y > 0f;
+                // 前のジャンプの処理をリセット
+                canCutJump = false;
+                jumpCountUp = 0f;
+                jumpHoldTime = 0f;
+                jumpCutTime = 100f;
                 gravitychange();
+                // 重力変更直後の古い接地判定を解除
+                isGrounded = false;
             }
         }
 
