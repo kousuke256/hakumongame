@@ -48,6 +48,13 @@ public class Player : MonoBehaviour
     [Header("空中重力変換アイテム")]
     public bool AirGravityChange = false;
 
+    [Header("滑る床")]
+
+    public float slipperyAcceleration = 3f;
+    public float slipperyDeceleration = 0.5f;
+    private bool onSlipperyFloor;
+
+
     // groundCheckのlocalPositionをいじる変数。いつか重力の向きが変わったらスクリプトの向きを変えるプログラムを作るから将来なくなる変数
     public float groundCheckDistance = 0.6f;
     private bool isDead = false;
@@ -175,34 +182,129 @@ public class Player : MonoBehaviour
         float acceleration;
 
         //接地判定, 下の1行はPlayerの子オブジェクトのGroundCheckの中心から半径0.2以内に、LayerがGroundのオブジェクトがあればisGroundがtrueになるというコード
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.575f, 0.1f), 0f, groundLayer);
+        // 足元にある床を取得
+
+        Collider2D ground = Physics2D.OverlapBox(
+
+            groundCheck.position,
+
+            new Vector2(0.575f, 0.1f),
+
+            0f,
+
+            groundLayer
+
+        );
+
+        // 接地しているか
+
+        isGrounded = ground != null;
+
+        // Iceタグの床なら滑る
+
+        onSlipperyFloor =
+
+            ground != null &&
+
+            ground.CompareTag("Ice");
+
         //canmove = Physics2D.OverlapCircle(transform.position,0.2f,groundLayer);
 
-        
-        // 重力
-        playerRb.AddForce(gravityDirection * gravityPower*playerRb.mass);
+        //重力をかける
+        playerRb.AddForce(
+            gravityDirection * gravityPower * playerRb.mass
+        );
 
-        //横移動
+        // 横移動
+
         if (isGrounded)
+
         {
+
             targetSpeed = move * moveSpeed;
-            acceleration = groundAcceleration;
-        }
-        else
-        {
-            targetSpeed = move * airMoveSpeed;
-            if(move == 0)
+
+            if (onSlipperyFloor)
+
             {
-                acceleration = 1f;
+
+                if (move == 0f)
+
+                {
+
+                    // キーを離したとき：ゆっくり止まる
+
+                    acceleration = slipperyDeceleration;
+
+                }
+
+                else
+
+                {
+
+                    // キーを押したとき：ゆっくり加速・切り返し
+
+                    acceleration = slipperyAcceleration;
+
+                }
+
             }
+
             else
+
             {
-                acceleration = airAcceleration;
+
+                // 普通の床
+
+                acceleration = groundAcceleration;
+
             }
+
         }
 
-        float newx = Mathf.MoveTowards(playerRb.linearVelocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
-        playerRb.linearVelocity = new Vector2(newx, playerRb.linearVelocity.y);
+        else
+
+        {
+
+            // 空中の移動
+
+            targetSpeed = move * airMoveSpeed;
+
+            if (move == 0f)
+
+            {
+
+                acceleration = 1f;
+
+            }
+
+            else
+
+            {
+
+                acceleration = airAcceleration;
+
+            }
+
+        }
+
+        float newx = Mathf.MoveTowards(
+
+            playerRb.linearVelocity.x,
+
+            targetSpeed,
+
+            acceleration * Time.fixedDeltaTime
+
+        );
+
+        playerRb.linearVelocity = new Vector2(
+
+            newx,
+
+            playerRb.linearVelocity.y
+
+        );
+
 
         //ジャンプ
         Jump();
