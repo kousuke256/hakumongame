@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GChanger : MonoBehaviour
@@ -12,7 +13,7 @@ public class GChanger : MonoBehaviour
 
         Player1 playerScript = collision.GetComponent<Player1>();
 
-        playerScript.gravitychange(changeGDirection);
+        playerScript.gravitychange(changeGDirection.normalized);
         Destroy(gameObject);
     }
 }
