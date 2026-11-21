@@ -98,8 +98,8 @@ public class Player1 : MonoBehaviour
         //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
 
-        //
-        if(pra){//
+        
+        /*if(pra){//
 
         if (Keyboard.current.dKey.isPressed)
         {
@@ -113,9 +113,9 @@ public class Player1 : MonoBehaviour
             sr.flipX = true ;
         }
 
-        //
-        }else{//
-        //
+        
+        }else{
+        */
 
         if(gravityDirection.x == 0)
         {
@@ -146,8 +146,8 @@ public class Player1 : MonoBehaviour
             }
         }
 
-        }//
-        //
+        //}
+        
 
         // 重力操作
         if (isGrounded || AirGravityChange)
@@ -175,22 +175,22 @@ public class Player1 : MonoBehaviour
             if(gravityDirection.x == 0)
             {
 
-                if (Keyboard.current.wKey.wasPressedThisFrame)
+                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
                 {
                     nextGDirection = Vector2.up;
                 }
-                else if (Keyboard.current.sKey.wasPressedThisFrame)
+                else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
                 {
                     nextGDirection = Vector2.down;
                 }
             }
             else
             {
-                if (Keyboard.current.aKey.wasPressedThisFrame)
+                if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
                 {
                     nextGDirection = Vector2.left;
                 }
-                else if (Keyboard.current.dKey.wasPressedThisFrame)
+                else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
                 {
                     nextGDirection = Vector2.right;
                 }
@@ -293,11 +293,11 @@ public class Player1 : MonoBehaviour
         /* 移動 */
 
         float targetSpeed;
-        if (pra)
+        /*if (pra)
         {
             targetSpeed = gravityDirection.x == -1? -move * moveSpeed : move * moveSpeed;
         }
-        else
+        else*/
         {
             targetSpeed = move * moveSpeed;
         }
