@@ -62,7 +62,7 @@ public class BulletHoming : MonoBehaviour
         return;
 
 
-        // playerにあたったらplayerの重力を反転させて球を削除
+        /*// playerにあたったらplayerの重力を反転させて球を削除
         if(playerScript.gravityDirection.y == -1)
         {
             player.GetComponent<SpriteRenderer>().flipY = true;
@@ -71,8 +71,8 @@ public class BulletHoming : MonoBehaviour
         {
             player.GetComponent<SpriteRenderer>().flipY = false;
         }
-        playerScript.gravityDirection.y *= -1;
-        playerScript.gravitychange();
+        playerScript.gravityDirection.y *= -1;*/
+        playerScript.gravitychange(-playerScript.gravityDirection);
         playerScript.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(playerScript.GetComponent<Rigidbody2D>().linearVelocity.x, 0);
 
         Destroy(gameObject);

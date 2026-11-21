@@ -24,8 +24,6 @@ public class Player : MonoBehaviour
 
     private float move;
 
-    public bool canmove = true;
-
     [Header("ジャンプ")]
 
     public float jumpPower = 9.3f;
@@ -79,8 +77,6 @@ public class Player : MonoBehaviour
     public float slipperyDeceleration = 0.5f;
 
     private bool onSlipperyFloor;
-
-    public float groundCheckDistance = 0.6f;
 
     private bool isDead = false;
 
@@ -148,92 +144,52 @@ public class Player : MonoBehaviour
 
             return;
 
-        // 横移動の入力
+        //横移動の方向の取得、変数moveでplayerの進む向きを変えている
+        move = 0;
 
-        move = 0f;
-
-        if (Keyboard.current.dKey.isPressed)
-
+        if(gravityDirection.x == 0)
         {
+            if (Keyboard.current.dKey.isPressed)
+            {
+                move++;
+                sr.flipX = false ;
+            }
 
-            move = 1f;
-
-            sr.flipX = false;
-
+            if (Keyboard.current.aKey.isPressed)
+            {
+                move--;
+                sr.flipX = true ;
+            }
         }
-
-        if (Keyboard.current.aKey.isPressed)
-
+        else
         {
+            if (Keyboard.current.wKey.isPressed)
+            {
+                move++;
+                sr.flipX = false ;
+            }
 
-            move = -1f;
-
-            sr.flipX = true;
-
+            if (Keyboard.current.sKey.isPressed)
+            {
+                move--;
+                sr.flipX = true ;
+            }
         }
 
         // 重力操作
-
         if (isGrounded || AirGravityChange)
-
         {
-
-            Vector2 nextGravity = gravityDirection;
-
-            if (Keyboard.current.wKey.wasPressedThisFrame)
-
+            if (Keyboard.current.shiftKey.wasPressedThisFrame)
             {
-
-                nextGravity = Vector2.up;
-
-            }
-
-            else if (Keyboard.current.sKey.wasPressedThisFrame)
-
-            {
-
-                nextGravity = Vector2.down;
-
-            }
-
-            // 今と違う向きに変更するときだけ実行
-
-            if (nextGravity != gravityDirection)
-
-            {
-
                 // 空中で使ったときだけアイテムを消費
-
                 if (!isGrounded)
-
                 {
-
                     AirGravityChange = false;
-
                 }
 
-                gravityDirection = nextGravity;
-
-                sr.flipY = gravityDirection.y > 0f;
-
-                // 前のジャンプ処理をリセット
-
-                canCutJump = false;
-
-                jumpCountUp = 0f;
-
-                jumpHoldTime = 0f;
-
-                jumpCutTime = 100f;
-
-                gravitychange();
-
-                // 重力変更前の接地判定を解除
-
-                isGrounded = false;
+                gravitychange(-gravityDirection);
 
             }
-
         }
 
         // ジャンプ入力を短時間記憶
@@ -330,13 +286,7 @@ public class Player : MonoBehaviour
 
         {
 
-            ringDashTime = Mathf.Max(
-
-                0f,
-
-                ringDashTime - Time.fixedDeltaTime
-
-            );
+            ringDashTime = Mathf.Max(0f, ringDashTime - Time.fixedDeltaTime);
 
             isGrounded = false;
 
@@ -350,125 +300,71 @@ public class Player : MonoBehaviour
 
         }
 
-        float targetSpeed;
-
-        float acceleration;
 
         // 足元にある床を取得
 
-        Collider2D ground = Physics2D.OverlapBox(
-
-            groundCheck.position,
-
-            new Vector2(0.575f, 0.1f),
-
-            0f,
-
-            groundLayer
-
-        );
+        Collider2D ground = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.575f, 0.1f), 0f, groundLayer);
 
         isGrounded = ground != null;
 
         // Iceタグの床なら滑る
 
-        onSlipperyFloor =
-
-            ground != null && ground.CompareTag("Ice");
+        onSlipperyFloor = ground != null && ground.CompareTag("Ice");
 
         // 重力
 
-        playerRb.AddForce(
+        playerRb.AddForce(gravityDirection * gravityPower * playerRb.mass);
 
-            gravityDirection * gravityPower * playerRb.mass
-
-        );
-
-        // 横移動
-
+        /* 加速度を決める */
+        float acceleration;
         if (isGrounded)
-
         {
-
-            targetSpeed = move * moveSpeed;
-
             if (onSlipperyFloor)
-
             {
-
                 if (move == 0f)
-
                 {
-
-                    // 氷の上でキーを離したとき
-
+                    // キーを離したとき：ゆっくり止まる
                     acceleration = slipperyDeceleration;
-
                 }
-
                 else
-
                 {
-
-                    // 氷の上で加速・切り返し
-
+                    // キーを押したとき：ゆっくり加速・切り返し
                     acceleration = slipperyAcceleration;
-
                 }
-
             }
-
             else
-
             {
-
+                // 普通の床
                 acceleration = groundAcceleration;
-
             }
-
         }
-
         else
-
         {
-
-            targetSpeed = move * airMoveSpeed;
-
+            // 空中の移動
             if (move == 0f)
-
             {
-
                 acceleration = 1f;
-
             }
-
             else
-
             {
-
                 acceleration = airAcceleration;
-
             }
+        }  
 
+        /* 移動 */
+
+        float targetSpeed = move * moveSpeed;
+
+        if(gravityDirection.x == 0)
+        {
+            float newx = Mathf.MoveTowards(playerRb.linearVelocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
+            playerRb.linearVelocity = new Vector2(newx, playerRb.linearVelocity.y);
         }
-
-        float newx = Mathf.MoveTowards(
-
-            playerRb.linearVelocity.x,
-
-            targetSpeed,
-
-            acceleration * Time.fixedDeltaTime
-
-        );
-
-        playerRb.linearVelocity = new Vector2(
-
-            newx,
-
-            playerRb.linearVelocity.y
-
-        );
+        else
+        {
+            float newY = Mathf.MoveTowards(playerRb.linearVelocity.y, targetSpeed, acceleration * Time.fixedDeltaTime);
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, newY);
+        }
 
         Jump();
 
@@ -692,50 +588,24 @@ public class Player : MonoBehaviour
 
     }
 
-    public void gravitychange()
-
+    public void gravitychange(Vector2 nextGravityDirection)
     {
+        // 前のジャンプの処理をリセット
+        canCutJump = false;
+        jumpCountUp = 0f;
+        jumpHoldTime = 0f;
+        jumpCutTime = 100f;
 
-        if (gravityDirection.y == 1)
+        gravityDirection = nextGravityDirection;
+        transform.up = -gravityDirection;
 
-        {
+        // 重力変更直後の古い接地判定を解除
+        isGrounded = false;
 
-            groundCheck.localPosition = new Vector3(
+        if(!isGrounded)
+        return;
 
-                groundCheck.localPosition.x,
-
-                0.6f,
-
-                groundCheck.localPosition.z
-
-            );
-
-        }
-
-        else
-
-        {
-
-            groundCheck.localPosition = new Vector3(
-
-                groundCheck.localPosition.x,
-
-                -0.6f,
-
-                groundCheck.localPosition.z
-
-            );
-
-        }
-
-        playerRb.AddForce(
-
-            gravityDirection * 2f * playerRb.mass,
-
-            ForceMode2D.Impulse
-
-        );
-
+        playerRb.AddForce(gravityDirection * 2f*playerRb.mass, ForceMode2D.Impulse);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

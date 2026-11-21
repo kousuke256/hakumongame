@@ -8,7 +8,6 @@ using UnityEngine.Tilemaps;
 
 public class Player1 : MonoBehaviour
 {
-    public bool pra;
     private Rigidbody2D playerRb;
     private SpriteRenderer sr;
     
@@ -92,25 +91,6 @@ public class Player1 : MonoBehaviour
         //横移動の方向の取得、変数moveでplayerの進む向きを変えている
         move = 0;
 
-        
-        /*if(pra){//
-
-        if (Keyboard.current.dKey.isPressed)
-        {
-            move++;
-            sr.flipX = false ;
-        }
-
-        if (Keyboard.current.aKey.isPressed)
-        {
-            move--;
-            sr.flipX = true ;
-        }
-
-        
-        }else{
-        */
-
         if(gravityDirection.x == 0)
         {
             if (Keyboard.current.dKey.isPressed)
@@ -139,16 +119,11 @@ public class Player1 : MonoBehaviour
                 sr.flipX = true ;
             }
         }
-
-        //}
         
 
         // 重力操作
         if (isGrounded || AirGravityChange)
         {
-            //
-            if(pra){//
-
             if (Keyboard.current.shiftKey.wasPressedThisFrame)
             {
                 // 空中で使ったときだけアイテムを消費
@@ -160,44 +135,6 @@ public class Player1 : MonoBehaviour
                 gravitychange(-gravityDirection);
 
             }
-
-            //
-            }else{//
-            //
-
-            Vector2 nextGDirection = new Vector2(0,0);
-            if(gravityDirection.x == 0)
-            {
-
-                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-                {
-                    nextGDirection = Vector2.up;
-                }
-                else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-                {
-                    nextGDirection = Vector2.down;
-                }
-            }
-            else
-            {
-                if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-                {
-                    nextGDirection = Vector2.left;
-                }
-                else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-                {
-                    nextGDirection = Vector2.right;
-                }
-            }
-
-            if(gravityDirection == -nextGDirection)
-            {
-                gravitychange(nextGDirection);
-            }
-
-            }//
-            //
-
         }
 
         //ジャンプ判定を記憶

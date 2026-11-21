@@ -226,7 +226,7 @@ public class Boss : MonoBehaviour
             player.GetComponent<SpriteRenderer>().flipY = false;
         }
         playerScript.gravityDirection.y *= -1;
-        playerScript.gravitychange();
+        //playerScript.gravitychange();
         playerRb.linearVelocity = new Vector2(0, 0);
     }
 

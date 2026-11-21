@@ -3551,7 +3551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d000f08f9c4fa46bd4d88071e15b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
-  pra: 1
   moveSpeed: 4
   groundAcceleration: 20
   airAcceleration: 10
