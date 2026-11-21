@@ -632,10 +632,7 @@ public class Player : MonoBehaviour
         // 重力変更直後の古い接地判定を解除
         isGrounded = false;
 
-        if(!isGrounded)
-        return;
-
-        playerRb.AddForce(gravityDirection * 2f*playerRb.mass, ForceMode2D.Impulse);
+        playerRb.AddForce(gravityDirection * 2f * playerRb.mass, ForceMode2D.Impulse);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

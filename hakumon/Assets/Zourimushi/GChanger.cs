@@ -11,7 +11,7 @@ public class GChanger : MonoBehaviour
         if(!collision.gameObject.CompareTag("Player"))
         return;
 
-        Player1 playerScript = collision.GetComponent<Player1>();
+        Player playerScript = collision.GetComponent<Player>();
 
         playerScript.gravitychange(changeGDirection.normalized);
         Destroy(gameObject);
