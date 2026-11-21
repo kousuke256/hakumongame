@@ -62,9 +62,9 @@ public class WarpPortal : MonoBehaviour
 
         if (rb == null) return;
 
-        Player player = rb.GetComponent<Player>();
+        //Player player = rb.GetComponent<Player>();
 
-        if (player == null) return;
+        //if (player == null) return;
 
         // 移動先が未設定、または自分自身なら何もしない
 
