@@ -3555,7 +3555,6 @@ MonoBehaviour:
   moveSpeed: 4
   groundAcceleration: 20
   airAcceleration: 10
-  canmove: 1
   jumpPower: 8.2
   jumpCutMultiplier: 0.5
   smallJumpTime: 0.13
@@ -3563,7 +3562,6 @@ MonoBehaviour:
   jumpPressed: 0
   isGrounded: 0
   groundCheck: {fileID: 4416539200341952092}
-  groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -3572,7 +3570,6 @@ MonoBehaviour:
   AirGravityChange: 0
   slipperyAcceleration: 3
   slipperyDeceleration: 0.5
-  groundCheckDistance: 0.6
   JumpSound: {fileID: 0}
 --- !u!19719996 &8366406558690054513
 TilemapCollider2D:
