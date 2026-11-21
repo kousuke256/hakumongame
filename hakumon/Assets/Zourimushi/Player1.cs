@@ -18,7 +18,6 @@ public class Player1 : MonoBehaviour
     public float airAcceleration = 8f;
     private float move;
 
-    public bool canmove=true;
 
     [Header("ジャンプ")]
     public float jumpPower = 8.2f;
@@ -37,7 +36,6 @@ public class Player1 : MonoBehaviour
     [Header("設置判定")]
     public bool isGrounded;
     public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
 
     public LayerMask groundLayer;
     
@@ -53,10 +51,6 @@ public class Player1 : MonoBehaviour
     public float slipperyAcceleration = 3f;
     public float slipperyDeceleration = 0.5f;
     private bool onSlipperyFloor;
-
-
-    // groundCheckのlocalPositionをいじる変数。いつか重力の向きが変わったらスクリプトの向きを変えるプログラムを作るから将来なくなる変数
-    public float groundCheckDistance = 0.6f;
     private bool isDead = false;
    
     private AudioSource audiosource;
