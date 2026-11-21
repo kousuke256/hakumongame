@@ -152,27 +152,57 @@ public class Player : MonoBehaviour
             if (Keyboard.current.dKey.isPressed)
             {
                 move++;
-                sr.flipX = false ;
+                if(gravityDirection.y == -1)
+                {
+                    sr.flipX = false;
+                }
+                else
+                {
+                    sr.flipX = true;
+                }
+                
             }
 
             if (Keyboard.current.aKey.isPressed)
             {
                 move--;
-                sr.flipX = true ;
+                if(gravityDirection.y == -1)
+                {
+                    sr.flipX = true;
+                }
+                else
+                {
+                    sr.flipX = false;
+                }
             }
+
         }
         else
         {
             if (Keyboard.current.wKey.isPressed)
             {
                 move++;
-                sr.flipX = false ;
+                if(gravityDirection.y == -1)
+                {
+                    sr.flipX = false;
+                }
+                else
+                {
+                    sr.flipX = true;
+                }
             }
 
             if (Keyboard.current.sKey.isPressed)
             {
                 move--;
-                sr.flipX = true ;
+                if(gravityDirection.y == -1)
+                {
+                    sr.flipX = true;
+                }
+                else
+                {
+                    sr.flipX = false;
+                }
             }
         }
 
