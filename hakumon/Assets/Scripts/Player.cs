@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
 
     public float moveSpeed = 4f;
 
-    public float airMoveSpeed = 3f;
-
     public float groundAcceleration = 20f;
 
     public float airAcceleration = 10f;
@@ -46,9 +44,10 @@ public class Player : MonoBehaviour
 
     private bool canCutJump;
 
-    private float jumpBufferTime = 0.1f;
+    private float bufferTime = 0.08f;
 
     private float jumpBufferCounter;
+    private float gChangeBufferCounter;
 
     [Header("接地判定")]
 
@@ -56,7 +55,6 @@ public class Player : MonoBehaviour
 
     public Transform groundCheck;
 
-    public float groundCheckRadius = 0.2f;
 
     public LayerMask groundLayer;
 
@@ -206,43 +204,28 @@ public class Player : MonoBehaviour
             }
         }
 
-        // 重力操作
-        if (isGrounded || AirGravityChange)
+        // shift入力を短時間記憶
+        if (Keyboard.current.shiftKey.wasPressedThisFrame)
         {
-            if (Keyboard.current.shiftKey.wasPressedThisFrame)
-            {
-                // 空中で使ったときだけアイテムを消費
-                if (!isGrounded)
-                {
-                    AirGravityChange = false;
-                }
-
-                gravitychange(-gravityDirection);
-
-            }
+            gChangeBufferCounter = bufferTime;
         }
+        else
+        {
+            gChangeBufferCounter -= Time.deltaTime;
+        }
+
 
         // ジャンプ入力を短時間記憶
-
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
-
         {
-
-            jumpBufferCounter = jumpBufferTime;
-
+            jumpBufferCounter = bufferTime;
         }
-
         else
-
         {
-
             jumpBufferCounter -= Time.deltaTime;
-
         }
 
-        jumpPressed =
-
-            Keyboard.current.spaceKey.isPressed && CanJump;
+        jumpPressed = Keyboard.current.spaceKey.isPressed && CanJump;
 
         // 画面外で死亡
 
@@ -394,6 +377,20 @@ public class Player : MonoBehaviour
         {
             float newY = Mathf.MoveTowards(playerRb.linearVelocity.y, targetSpeed, acceleration * Time.fixedDeltaTime);
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, newY);
+        }
+
+        // 重力操作
+        if ((isGrounded || AirGravityChange) && gChangeBufferCounter > 0f)
+        {
+            gChangeBufferCounter = 0f;
+
+            // 空中で使ったときだけアイテムを消費
+            if (!isGrounded)
+            {
+                AirGravityChange = false;
+            }
+
+            gravitychange(-gravityDirection);
         }
 
         Jump();
