@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Kaenemy : MonoBehaviour
 
 {
 
     public Player player;
-
+    private bool canMove;
+    private float y = 1;
+    private bool isDead = false;
     public GravityWave wavePrefab;
 
     [Header("何秒ごとに波を出すか")]
@@ -42,4 +45,31 @@ public class Kaenemy : MonoBehaviour
 
     }
 
+
+    void OnCollisionEnter2D(Collision2D collision)
+
+    {
+
+        if (!collision.gameObject.CompareTag("Player")) return;
+
+        foreach (ContactPoint2D contact in collision.contacts)
+
+        {
+
+            // 踏まれたときはプレイヤーを倒さない
+
+            if (y == 1 && contact.normal.y < -0.5f) return;
+
+            if (y != 1 && contact.normal.y > 0.5f) return;
+
+        }
+
+        player.Deth();
+
+    }
+
 }
+
+
+
+
