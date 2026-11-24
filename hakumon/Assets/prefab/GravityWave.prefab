@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GravityWave
   speed: 8
   maxRadius: 12
-  pointCount: 64
+  pointCount: 128
   width: 0.3
   waveColor: {r: 0, g: 0, b: 1, a: 1}
   coreColor: {r: 0, g: 1, b: 1, a: 1}
