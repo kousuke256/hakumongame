@@ -12,6 +12,13 @@ public class Kaenemy : MonoBehaviour
 
     public GravityWave wavePrefab;
 
+    [Header("最初の波を出すまでの秒数")]
+
+    [Min(0f)] public float startDelay = 1f;
+
+    private bool isFirstWave = true;
+
+
     [Header("何秒ごとに波を出すか")]
 
     [Min(0.1f)] public float interval = 3f;
@@ -36,8 +43,9 @@ public class Kaenemy : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer >= interval)
+        float waitTime = isFirstWave ? startDelay : interval;
 
+        if (timer >= waitTime)
         {
 
             // 敵の位置に波を1個出す
@@ -61,7 +69,7 @@ public class Kaenemy : MonoBehaviour
             wave.SetPlayer(player);
 
             timer = 0f;
-
+            isFirstWave = false;
         }
 
     }
