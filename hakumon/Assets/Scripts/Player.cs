@@ -251,44 +251,6 @@ public class Player : MonoBehaviour
 
     // 【追加】DashRingから呼ばれる
 
-    public void StartRingDash(
-
-        Vector2 direction,
-
-        float speed,
-
-        float duration
-
-    )
-
-    {
-
-        if (isDead || playerRb == null)
-
-            return;
-
-        ringDashVelocity = direction.normalized * speed;
-
-        ringDashTime = duration;
-
-        // ジャンプの減速処理がダッシュに干渉しないようにする
-
-        canCutJump = false;
-
-        jumpCountUp = 0f;
-
-        jumpHoldTime = 0f;
-
-        jumpCutTime = 100f;
-
-        jumpBufferCounter = 0f;
-
-        isGrounded = false;
-
-        playerRb.linearVelocity = ringDashVelocity;
-
-    }
-
     void FixedUpdate()
 
     {
@@ -469,6 +431,46 @@ public class Player : MonoBehaviour
 
     }
 
+    
+
+    public void StartRingDash(
+
+        Vector2 direction,
+
+        float speed,
+
+        float duration
+
+    )
+
+    {
+
+        if (isDead || playerRb == null)
+
+            return;
+
+        ringDashVelocity = direction.normalized * speed;
+
+        ringDashTime = duration;
+
+        // ジャンプの減速処理がダッシュに干渉しないようにする
+
+        canCutJump = false;
+
+        jumpCountUp = 0f;
+
+        jumpHoldTime = 0f;
+
+        jumpCutTime = 100f;
+
+        jumpBufferCounter = 0f;
+
+        isGrounded = false;
+
+        playerRb.linearVelocity = ringDashVelocity;
+
+    }
+
     private void Jump()
 
     {
@@ -626,6 +628,7 @@ public class Player : MonoBehaviour
         gravityDirection = nextGravityDirection;
         transform.up = -gravityDirection;
 
+        sr.flipX = !sr.flipX;
         // 重力変更直後の古い接地判定を解除
         isGrounded = false;
 
