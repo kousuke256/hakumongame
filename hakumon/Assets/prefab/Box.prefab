@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6947466469066934862}
   - component: {fileID: 3356960249285824617}
   - component: {fileID: 133035710394257310}
+  - component: {fileID: -6450940103342994717}
   - component: {fileID: 701703419598726425}
   m_Layer: 3
   m_Name: Box
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Box
   maxHorizontalSpeed: 1
   horizontalAcceleration: 10
+--- !u!114 &-6450940103342994717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057536497054345752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bd5e7b798a22944baf52df42906ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PushBox
 --- !u!61 &701703419598726425
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -174,7 +187,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
