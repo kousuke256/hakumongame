@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 178868951}
   - component: {fileID: 178868950}
   m_Layer: 3
-  m_Name: Ice
+  m_Name: 05Ice
   m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1152,7 +1152,7 @@ GameObject:
   - component: {fileID: 1828415545}
   - component: {fileID: 1828415544}
   m_Layer: 0
-  m_Name: Slime
+  m_Name: 06Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1891,7 +1891,7 @@ GameObject:
   - component: {fileID: 4946416203833464735}
   - component: {fileID: 1308597780703746929}
   m_Layer: 3
-  m_Name: OffBlock
+  m_Name: 04OffBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2413,7 +2413,7 @@ GameObject:
   - component: {fileID: 5043186941126391545}
   - component: {fileID: 7248404099103124990}
   m_Layer: 3
-  m_Name: OnBlock
+  m_Name: 03OnBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2433,7 +2433,7 @@ GameObject:
   - component: {fileID: 5539800742579925096}
   - component: {fileID: 2697440713811747155}
   m_Layer: 0
-  m_Name: Deth (1)
+  m_Name: 02Deth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3136,7 +3136,7 @@ GameObject:
   - component: {fileID: 436452567786762895}
   - component: {fileID: 2676703658344796061}
   m_Layer: 3
-  m_Name: Cloud
+  m_Name: 07Cloud
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3306,7 +3306,7 @@ GameObject:
   - component: {fileID: 6886329862691303801}
   - component: {fileID: 3479633690583121027}
   m_Layer: 3
-  m_Name: Ground (1)
+  m_Name: 01Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -88,6 +88,8 @@ public class Player : MonoBehaviour
 
     private Vector2 ringDashVelocity;
 
+    public event System.Action OnGravityFlipped;
+
     public bool TryGetAirGravityItem()
 
     {
@@ -625,6 +627,7 @@ public class Player : MonoBehaviour
         jumpHoldTime = 0f;
         jumpCutTime = 100f;
 
+        Vector2 before = gravityDirection;
         gravityDirection = nextGravityDirection;
         transform.up = -gravityDirection;
 
@@ -633,6 +636,10 @@ public class Player : MonoBehaviour
         isGrounded = false;
 
         playerRb.AddForce(gravityDirection * 2f * playerRb.mass, ForceMode2D.Impulse);
+        if (before != gravityDirection)
+        {
+            OnGravityFlipped?.Invoke();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
