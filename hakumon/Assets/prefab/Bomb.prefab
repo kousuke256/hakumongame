@@ -55,7 +55,7 @@ MonoBehaviour:
   countText: {fileID: 2134101740091981871}
   blastRadius: 2.5
   crackedWallMap: {fileID: 0}
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 1543166452930774742, guid: d5dd5f009eae745419ead264ec1779b1, type: 3}
   explosionSound: {fileID: 8300000, guid: 794cb604441b1474baa565c0ee47ace5, type: 3}
   normalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   zeroColor: {r: 1, g: 0, b: 0, a: 1}
