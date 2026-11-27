@@ -26,6 +26,8 @@ public class Bomb : MonoBehaviour
 
     public GameObject explosionEffect; // なくても動く
 
+    public AudioClip explosionSound;
+
     [Header("数字の色")]
 
     public Color normalColor = Color.cyan;
@@ -129,6 +131,11 @@ public class Bomb : MonoBehaviour
         if (explosionEffect != null)
 
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
+        if (explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position);
+        }
 
         Destroy(gameObject);
 
