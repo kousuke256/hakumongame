@@ -1305,7 +1305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463929221636607300, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.040613
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 2463929221636607300, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1350,6 +1350,10 @@ PrefabInstance:
     - target: {fileID: 3851306073392614951, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: startCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851306073392614951, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
+      propertyPath: blastRadius
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3851306073392614951, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: crackedWallMap
@@ -7687,7 +7691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.3
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3894616423855169647, guid: 90b9c2dfba755f745982bac307466ea1, type: 3}
       propertyPath: m_LocalPosition.z
