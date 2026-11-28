@@ -133,11 +133,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6091534008511213255, guid: e620111c0433b6e46bc60ececa2f44cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.19493
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 6091534008511213255, guid: e620111c0433b6e46bc60ececa2f44cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.097091
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 6091534008511213255, guid: e620111c0433b6e46bc60ececa2f44cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -196,6 +196,18 @@ PrefabInstance:
       propertyPath: destination
       value: 
       objectReference: {fileID: 1157086842}
+    - target: {fileID: 3306558075899000883, guid: 81544aadcd6f9134e83e243e755e2557, type: 3}
+      propertyPath: lineColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306558075899000883, guid: 81544aadcd6f9134e83e243e755e2557, type: 3}
+      propertyPath: lineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306558075899000883, guid: 81544aadcd6f9134e83e243e755e2557, type: 3}
+      propertyPath: lineColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8228935630335830632, guid: 81544aadcd6f9134e83e243e755e2557, type: 3}
       propertyPath: m_Name
       value: GateB (1)
@@ -259,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463929221636607300, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.52
+      value: 2.56
       objectReference: {fileID: 0}
     - target: {fileID: 2463929221636607300, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -303,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 1320486574}
     - target: {fileID: 3851306073392614951, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: startCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3851306073392614951, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: crackedWallMap
@@ -476,6 +488,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Switch
       objectReference: {fileID: 0}
+    - target: {fileID: 5246815419199517028, guid: 00e040b18131f3f478a534842f10a5b3, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246815419199517028, guid: 00e040b18131f3f478a534842f10a5b3, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6314956991471780055, guid: 00e040b18131f3f478a534842f10a5b3, type: 3}
       propertyPath: targetGate
       value: 
@@ -578,6 +598,18 @@ PrefabInstance:
       propertyPath: destination
       value: 
       objectReference: {fileID: 2019536178}
+    - target: {fileID: 1906785784830166610, guid: ce61735803ade9742b01ecb20d5cb497, type: 3}
+      propertyPath: lineColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906785784830166610, guid: ce61735803ade9742b01ecb20d5cb497, type: 3}
+      propertyPath: lineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906785784830166610, guid: ce61735803ade9742b01ecb20d5cb497, type: 3}
+      propertyPath: lineColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7968341627865781764, guid: ce61735803ade9742b01ecb20d5cb497, type: 3}
       propertyPath: m_Name
       value: GateA (1)
@@ -6319,11 +6351,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2463929221636607300, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.12
+      value: 25.36
       objectReference: {fileID: 0}
     - target: {fileID: 2463929221636607300, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.52
+      value: 2.59
       objectReference: {fileID: 0}
     - target: {fileID: 2463929221636607300, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6367,7 +6399,7 @@ PrefabInstance:
       objectReference: {fileID: 1320486574}
     - target: {fileID: 3851306073392614951, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: startCount
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3851306073392614951, guid: 20ec42891482d5143b7318edb96a853c, type: 3}
       propertyPath: crackedWallMap
@@ -8243,13 +8275,13 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1312771290}
   - {fileID: 1978515761}
   - {fileID: 1641949548}
   - {fileID: 608928913}
   - {fileID: 1106951090}
   - {fileID: 664557974}
   - {fileID: 1913673994}
-  - {fileID: 1312771290}
   - {fileID: 1204665328}
   - {fileID: 1385149609}
   - {fileID: 902405611}

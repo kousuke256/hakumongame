@@ -16,6 +16,11 @@ public class Gate : MonoBehaviour
 
     public Player player;
 
+    [Header("電気線の色")]
+
+    public Color coreColor = Color.white;
+    public Color lineColor = Color.cyan;
+
     // true：通電中。触れると死亡
 
     // false：通電していない。通れる
@@ -270,13 +275,13 @@ public class Gate : MonoBehaviour
 
         {
 
-            line.startColor = Color.cyan;
+            line.startColor = lineColor;
 
-            line.endColor = Color.cyan;
+            line.endColor = lineColor;
 
-            coreLine.startColor = Color.white;
+            coreLine.startColor = coreColor;
 
-            coreLine.endColor = Color.white;
+            coreLine.endColor = coreColor;
 
         }
 
