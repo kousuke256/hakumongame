@@ -51,7 +51,7 @@ public class Box : MonoBehaviour
         else
         {
             // プレイヤー非接触時：即座に横速度をゼロにする
-            newXVelocity = 0f;
+            newXVelocity = rb.linearVelocity.x;     //追加
         }
 
         rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
@@ -100,7 +100,9 @@ public class Box : MonoBehaviour
         {
             isTouchingPlayer = false;
             // 離れた瞬間に物理計算上の横速度も0にする
-            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+
+
+            //rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);←削除
         }
     }
 }
